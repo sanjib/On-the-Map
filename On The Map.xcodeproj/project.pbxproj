@@ -15,6 +15,9 @@
 		206D4E7D1B227BDB00BE18B9 /* On_The_MapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206D4E7C1B227BDB00BE18B9 /* On_The_MapTests.swift */; };
 		206D4E8A1B227F0700BE18B9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206D4E891B227F0700BE18B9 /* LoginViewController.swift */; };
 		206D4E8F1B22895600BE18B9 /* RoundStyleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206D4E8E1B22895600BE18B9 /* RoundStyleButton.swift */; };
+		206D4E901B228DA000BE18B9 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 206D4E8B1B227FC900BE18B9 /* Roboto-Medium.ttf */; };
+		206D4E911B228DA000BE18B9 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 206D4E8C1B227FC900BE18B9 /* Roboto-Regular.ttf */; };
+		206D4E921B228DA000BE18B9 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 206D4E8D1B227FC900BE18B9 /* Roboto-Thin.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -228,6 +231,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				206D4E901B228DA000BE18B9 /* Roboto-Medium.ttf in Resources */,
+				206D4E911B228DA000BE18B9 /* Roboto-Regular.ttf in Resources */,
+				206D4E921B228DA000BE18B9 /* Roboto-Thin.ttf in Resources */,
 				206D4E6C1B227BDB00BE18B9 /* Main.storyboard in Resources */,
 				206D4E711B227BDB00BE18B9 /* LaunchScreen.xib in Resources */,
 				206D4E6E1B227BDB00BE18B9 /* Images.xcassets in Resources */,
