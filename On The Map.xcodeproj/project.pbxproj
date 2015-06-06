@@ -14,6 +14,7 @@
 		206D4E711B227BDB00BE18B9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 206D4E6F1B227BDB00BE18B9 /* LaunchScreen.xib */; };
 		206D4E7D1B227BDB00BE18B9 /* On_The_MapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206D4E7C1B227BDB00BE18B9 /* On_The_MapTests.swift */; };
 		206D4E8A1B227F0700BE18B9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206D4E891B227F0700BE18B9 /* LoginViewController.swift */; };
+		206D4E8F1B22895600BE18B9 /* RoundStyleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206D4E8E1B22895600BE18B9 /* RoundStyleButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,7 @@
 		206D4E8B1B227FC900BE18B9 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		206D4E8C1B227FC900BE18B9 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		206D4E8D1B227FC900BE18B9 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
+		206D4E8E1B22895600BE18B9 /* RoundStyleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoundStyleButton.swift; path = Views/RoundStyleButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 		206D4E871B227EB500BE18B9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				206D4E8E1B22895600BE18B9 /* RoundStyleButton.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 			files = (
 				206D4E8A1B227F0700BE18B9 /* LoginViewController.swift in Sources */,
 				206D4E691B227BDB00BE18B9 /* ViewController.swift in Sources */,
+				206D4E8F1B22895600BE18B9 /* RoundStyleButton.swift in Sources */,
 				206D4E671B227BDB00BE18B9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
