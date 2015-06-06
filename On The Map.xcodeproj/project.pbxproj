@@ -13,6 +13,7 @@
 		206D4E6E1B227BDB00BE18B9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 206D4E6D1B227BDB00BE18B9 /* Images.xcassets */; };
 		206D4E711B227BDB00BE18B9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 206D4E6F1B227BDB00BE18B9 /* LaunchScreen.xib */; };
 		206D4E7D1B227BDB00BE18B9 /* On_The_MapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206D4E7C1B227BDB00BE18B9 /* On_The_MapTests.swift */; };
+		206D4E8A1B227F0700BE18B9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206D4E891B227F0700BE18B9 /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,10 @@
 		206D4E761B227BDB00BE18B9 /* On The MapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "On The MapTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		206D4E7B1B227BDB00BE18B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		206D4E7C1B227BDB00BE18B9 /* On_The_MapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = On_The_MapTests.swift; sourceTree = "<group>"; };
+		206D4E891B227F0700BE18B9 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = Controllers/LoginViewController.swift; sourceTree = "<group>"; };
+		206D4E8B1B227FC900BE18B9 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		206D4E8C1B227FC900BE18B9 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		206D4E8D1B227FC900BE18B9 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +82,9 @@
 		206D4E631B227BDB00BE18B9 /* On The Map */ = {
 			isa = PBXGroup;
 			children = (
+				206D4E861B227EAD00BE18B9 /* Models */,
+				206D4E871B227EB500BE18B9 /* Views */,
+				206D4E881B227EBB00BE18B9 /* Controllers */,
 				206D4E661B227BDB00BE18B9 /* AppDelegate.swift */,
 				206D4E681B227BDB00BE18B9 /* ViewController.swift */,
 				206D4E6A1B227BDB00BE18B9 /* Main.storyboard */,
@@ -90,6 +98,9 @@
 		206D4E641B227BDB00BE18B9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				206D4E8B1B227FC900BE18B9 /* Roboto-Medium.ttf */,
+				206D4E8C1B227FC900BE18B9 /* Roboto-Regular.ttf */,
+				206D4E8D1B227FC900BE18B9 /* Roboto-Thin.ttf */,
 				206D4E651B227BDB00BE18B9 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -110,6 +121,28 @@
 				206D4E7B1B227BDB00BE18B9 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		206D4E861B227EAD00BE18B9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		206D4E871B227EB500BE18B9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		206D4E881B227EBB00BE18B9 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				206D4E891B227F0700BE18B9 /* LoginViewController.swift */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,6 +245,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				206D4E8A1B227F0700BE18B9 /* LoginViewController.swift in Sources */,
 				206D4E691B227BDB00BE18B9 /* ViewController.swift in Sources */,
 				206D4E671B227BDB00BE18B9 /* AppDelegate.swift in Sources */,
 			);
