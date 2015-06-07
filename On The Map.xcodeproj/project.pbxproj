@@ -18,6 +18,9 @@
 		206D4E901B228DA000BE18B9 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 206D4E8B1B227FC900BE18B9 /* Roboto-Medium.ttf */; };
 		206D4E911B228DA000BE18B9 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 206D4E8C1B227FC900BE18B9 /* Roboto-Regular.ttf */; };
 		206D4E921B228DA000BE18B9 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 206D4E8D1B227FC900BE18B9 /* Roboto-Thin.ttf */; };
+		206D4E941B22A38F00BE18B9 /* CommonAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206D4E931B22A38F00BE18B9 /* CommonAPIClient.swift */; };
+		206D4E961B22A3C200BE18B9 /* UdacityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206D4E951B22A3C200BE18B9 /* UdacityClient.swift */; };
+		206D4E981B22A3F000BE18B9 /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206D4E971B22A3F000BE18B9 /* ParseClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +49,9 @@
 		206D4E8C1B227FC900BE18B9 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		206D4E8D1B227FC900BE18B9 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
 		206D4E8E1B22895600BE18B9 /* RoundStyleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoundStyleButton.swift; path = Views/RoundStyleButton.swift; sourceTree = "<group>"; };
+		206D4E931B22A38F00BE18B9 /* CommonAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommonAPIClient.swift; path = Models/CommonAPIClient.swift; sourceTree = "<group>"; };
+		206D4E951B22A3C200BE18B9 /* UdacityClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UdacityClient.swift; path = Models/UdacityClient.swift; sourceTree = "<group>"; };
+		206D4E971B22A3F000BE18B9 /* ParseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParseClient.swift; path = Models/ParseClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +137,9 @@
 		206D4E861B227EAD00BE18B9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				206D4E931B22A38F00BE18B9 /* CommonAPIClient.swift */,
+				206D4E951B22A3C200BE18B9 /* UdacityClient.swift */,
+				206D4E971B22A3F000BE18B9 /* ParseClient.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -256,6 +265,9 @@
 			files = (
 				206D4E8A1B227F0700BE18B9 /* LoginViewController.swift in Sources */,
 				206D4E691B227BDB00BE18B9 /* ViewController.swift in Sources */,
+				206D4E981B22A3F000BE18B9 /* ParseClient.swift in Sources */,
+				206D4E961B22A3C200BE18B9 /* UdacityClient.swift in Sources */,
+				206D4E941B22A38F00BE18B9 /* CommonAPIClient.swift in Sources */,
 				206D4E8F1B22895600BE18B9 /* RoundStyleButton.swift in Sources */,
 				206D4E671B227BDB00BE18B9 /* AppDelegate.swift in Sources */,
 			);

@@ -2,8 +2,8 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Roboto-Medium.ttf">
@@ -34,7 +34,7 @@
                                 <rect key="frame" x="24" y="544" width="552" height="36"/>
                                 <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="36" id="g3v-Y2-zg4"/>
+                                    <constraint firstAttribute="height" constant="36" id="DD6-T5-mqi"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="15"/>
                                 <state key="normal" title="Sign in with Facebook">
@@ -55,19 +55,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" alpha="0.74999999999999978" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BEq-dN-pYB">
-                                        <rect key="frame" x="8" y="39" width="552" height="36"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="36" id="ZEV-Dl-zd0"/>
-                                        </constraints>
+                                        <rect key="frame" x="8" y="39" width="552" height="30"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" alpha="0.74999999999999978" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m6h-1j-wGY">
-                                        <rect key="frame" x="8" y="83" width="552" height="36"/>
+                                        <rect key="frame" x="8" y="83" width="552" height="30"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="36" id="5ZC-u6-EqC"/>
-                                        </constraints>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
@@ -75,7 +69,7 @@
                                         <rect key="frame" x="8" y="127" width="552" height="36"/>
                                         <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="36" id="SYq-zB-cUL"/>
+                                            <constraint firstAttribute="height" constant="36" id="pkk-hW-NSk"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="17"/>
                                         <state key="normal" title="Login">
@@ -100,48 +94,39 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="BEq-dN-pYB" secondAttribute="trailing" constant="8" id="62U-ZO-2ME"/>
-                                    <constraint firstAttribute="trailing" secondItem="m6h-1j-wGY" secondAttribute="trailing" constant="8" id="7VO-Ec-bn1"/>
-                                    <constraint firstItem="BEq-dN-pYB" firstAttribute="top" secondItem="10J-E5-cT5" secondAttribute="bottom" constant="7.5" id="CUS-4N-hpb"/>
-                                    <constraint firstItem="m6h-1j-wGY" firstAttribute="leading" secondItem="IJo-3C-tbA" secondAttribute="leading" constant="8" id="FGM-pV-Huw"/>
-                                    <constraint firstItem="XrQ-6a-39X" firstAttribute="top" secondItem="dxg-hT-hlJ" secondAttribute="bottom" constant="8" id="Fgx-s5-AHo"/>
-                                    <constraint firstItem="BEq-dN-pYB" firstAttribute="leading" secondItem="IJo-3C-tbA" secondAttribute="leading" constant="8" id="GIE-70-RFM"/>
-                                    <constraint firstAttribute="trailing" secondItem="dxg-hT-hlJ" secondAttribute="trailing" constant="8" id="HoW-T7-CRZ"/>
-                                    <constraint firstAttribute="centerX" secondItem="10J-E5-cT5" secondAttribute="centerX" id="ITA-VA-mxD"/>
-                                    <constraint firstItem="dxg-hT-hlJ" firstAttribute="top" secondItem="m6h-1j-wGY" secondAttribute="bottom" constant="8" id="N4I-Sc-dVp"/>
-                                    <constraint firstAttribute="centerX" secondItem="XrQ-6a-39X" secondAttribute="centerX" id="ReR-Kl-Jkc"/>
-                                    <constraint firstItem="10J-E5-cT5" firstAttribute="top" secondItem="IJo-3C-tbA" secondAttribute="top" constant="8" id="XDT-ya-wlM"/>
-                                    <constraint firstItem="dxg-hT-hlJ" firstAttribute="leading" secondItem="IJo-3C-tbA" secondAttribute="leading" constant="8" id="kTy-Nl-RCs"/>
-                                    <constraint firstItem="m6h-1j-wGY" firstAttribute="top" secondItem="BEq-dN-pYB" secondAttribute="bottom" constant="8" id="rjg-vM-RbE"/>
-                                    <constraint firstAttribute="height" constant="207" id="zre-OG-aGB"/>
+                                    <constraint firstAttribute="centerX" secondItem="XrQ-6a-39X" secondAttribute="centerX" id="3ni-mK-ZkU"/>
+                                    <constraint firstAttribute="trailing" secondItem="dxg-hT-hlJ" secondAttribute="trailing" constant="8" id="7jS-OA-uCF"/>
+                                    <constraint firstItem="10J-E5-cT5" firstAttribute="top" secondItem="IJo-3C-tbA" secondAttribute="top" constant="8" id="Hxb-ED-7h5"/>
+                                    <constraint firstItem="m6h-1j-wGY" firstAttribute="leading" secondItem="IJo-3C-tbA" secondAttribute="leading" constant="8" id="Jxr-QG-lsZ"/>
+                                    <constraint firstAttribute="centerX" secondItem="10J-E5-cT5" secondAttribute="centerX" constant="-0.25" id="KXb-dp-tKf"/>
+                                    <constraint firstAttribute="height" constant="207" id="Srn-Cc-u2E"/>
+                                    <constraint firstItem="dxg-hT-hlJ" firstAttribute="leading" secondItem="IJo-3C-tbA" secondAttribute="leading" constant="8" id="ar2-CX-7kd"/>
+                                    <constraint firstItem="dxg-hT-hlJ" firstAttribute="top" secondItem="m6h-1j-wGY" secondAttribute="bottom" constant="14" id="g8f-LP-d72"/>
+                                    <constraint firstItem="XrQ-6a-39X" firstAttribute="top" secondItem="dxg-hT-hlJ" secondAttribute="bottom" constant="8" id="mGX-L7-67U"/>
+                                    <constraint firstAttribute="trailing" secondItem="BEq-dN-pYB" secondAttribute="trailing" constant="8" id="mjs-T5-T50"/>
+                                    <constraint firstItem="BEq-dN-pYB" firstAttribute="top" secondItem="10J-E5-cT5" secondAttribute="bottom" constant="7.5" id="mqV-F4-qk4"/>
+                                    <constraint firstItem="m6h-1j-wGY" firstAttribute="top" secondItem="BEq-dN-pYB" secondAttribute="bottom" constant="14" id="ooo-1j-eQo"/>
+                                    <constraint firstItem="BEq-dN-pYB" firstAttribute="leading" secondItem="IJo-3C-tbA" secondAttribute="leading" constant="8" id="rD2-6l-273"/>
+                                    <constraint firstAttribute="trailing" secondItem="m6h-1j-wGY" secondAttribute="trailing" constant="8" id="xbv-tN-I3L"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="udacity" translatesAutoresizingMaskIntoConstraints="NO" id="963-DH-98E">
-                                <rect key="frame" x="208" y="20" width="184" height="184"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="963-DH-98E" secondAttribute="height" multiplier="1:1" id="NaD-dm-spN"/>
-                                </constraints>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="udacity" translatesAutoresizingMaskIntoConstraints="NO" id="zoO-aC-K8h">
+                                <rect key="frame" x="172" y="84" width="256" height="120"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.50196081399917603" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="IJo-3C-tbA" firstAttribute="top" secondItem="963-DH-98E" secondAttribute="bottom" constant="-8" id="BCT-1K-eB6"/>
-                            <constraint firstAttribute="centerX" secondItem="963-DH-98E" secondAttribute="centerX" id="EoT-nV-fK5"/>
-                            <constraint firstItem="IJo-3C-tbA" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="Mlx-GT-RWQ"/>
-                            <constraint firstAttribute="centerX" secondItem="IJo-3C-tbA" secondAttribute="centerX" id="Rte-fI-efa"/>
-                            <constraint firstItem="5Wr-NK-oyf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="8" id="V8P-Bt-mMK"/>
-                            <constraint firstItem="5Wr-NK-oyf" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" constant="-8" id="d2A-AI-kZp"/>
-                            <constraint firstItem="5Wr-NK-oyf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="8" id="lNG-CW-Crc"/>
-                            <constraint firstItem="963-DH-98E" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="nGr-q2-9bt"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="5Wr-NK-oyf" secondAttribute="bottom" constant="20" id="pCS-P7-VqG"/>
-                            <constraint firstItem="IJo-3C-tbA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="qZ1-MJ-NVk"/>
-                            <constraint firstAttribute="centerY" secondItem="IJo-3C-tbA" secondAttribute="centerY" id="tix-Hk-h2i"/>
+                            <constraint firstItem="IJo-3C-tbA" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="1fl-cv-bFa"/>
+                            <constraint firstAttribute="centerX" secondItem="zoO-aC-K8h" secondAttribute="centerX" id="4N2-YD-JuW"/>
+                            <constraint firstAttribute="centerY" secondItem="IJo-3C-tbA" secondAttribute="centerY" constant="0.5" id="9Fv-yz-A29"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="5Wr-NK-oyf" secondAttribute="trailing" constant="8" id="9TR-Wz-4v9"/>
+                            <constraint firstAttribute="centerX" secondItem="IJo-3C-tbA" secondAttribute="centerX" id="BKv-b5-2y6"/>
+                            <constraint firstItem="IJo-3C-tbA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="IMG-Le-dj3"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="5Wr-NK-oyf" secondAttribute="bottom" constant="20" id="VCf-5w-9fK"/>
+                            <constraint firstItem="IJo-3C-tbA" firstAttribute="top" secondItem="zoO-aC-K8h" secondAttribute="bottom" constant="-8" id="WTX-G9-u1b"/>
+                            <constraint firstItem="5Wr-NK-oyf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="8" id="hb8-tg-i1q"/>
+                            <constraint firstAttribute="height" secondItem="zoO-aC-K8h" secondAttribute="height" multiplier="5" id="m9K-u1-QA8"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="V8P-Bt-mMK"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
                         <outlet property="emailTextField" destination="BEq-dN-pYB" id="egZ-Vf-XDn"/>
