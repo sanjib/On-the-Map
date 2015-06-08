@@ -24,13 +24,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
         subscribeToKeyboardNotifications()
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        
         unsubscribeToKeyboardNotifications()
     }
     
@@ -38,6 +36,28 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func loginUdacity(sender: UIButton) {
         
+        UdacityClient.sharedInstance().createSessionWithUdacity(emailTextField.text, password: passwordTextField.text) { userId, errorString in
+            if errorString != nil {
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.errorAlert(errorString!)
+                }                
+            } else {
+                if let userId = userId {
+                    UdacityClient.sharedInstance().getUserData(userId) { firstName, lastName, errorString in
+                        if errorString != nil {
+                            dispatch_async(dispatch_get_main_queue()) {
+                                self.errorAlert(errorString!)
+                            }
+                        } else {
+                            println("userId: \(userId)")
+                            println("firstName: \(firstName)")
+                            println("lastName: \(lastName)")
+                        }
+
+                    }
+                }
+            }
+        }
     }
     
     @IBAction func loginFacebook(sender: UIButton) {
@@ -47,6 +67,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBAction func signupUdacity(sender: UIButton) {
         
     }
+    
+    // MARK: - Alert
+    func errorAlert(errorString: String) {
+        let alert = UIAlertController(title: "Error", message: errorString, preferredStyle: UIAlertControllerStyle.Alert)
+        let alertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+        alert.addAction(alertAction)
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
 
     // MARK: - Text Field Delegates
     
@@ -54,6 +82,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         textField.endEditing(true)
         return true
     }
+    
+    // MARK: - Keyboard
     
     // Editing begain, slide view up
     func keyboardWillShow(notification: NSNotification) {
