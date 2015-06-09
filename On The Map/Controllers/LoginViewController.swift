@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var emailTextField: UITextField!
@@ -20,6 +22,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         emailTextField.delegate = self
         passwordTextField.delegate = self
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "loginFacebookComplete", name: UIApplicationDidBecomeActiveNotification, object: nil)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -32,6 +36,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         unsubscribeToKeyboardNotifications()
     }
     
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIApplicationDidBecomeActiveNotification, object: nil)
+    }
+    
     // MARK: - Login and Signups
     
     @IBAction func loginUdacity(sender: UIButton) {
@@ -39,29 +47,67 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         UdacityClient.sharedInstance().createSessionWithUdacity(emailTextField.text, password: passwordTextField.text) { userId, errorString in
             if errorString != nil {
                 dispatch_async(dispatch_get_main_queue()) {
-                    self.errorAlert(errorString!)
+                    self.errorAlert("Couldn't login to Udacity account", errorMessage: errorString!)
                 }                
             } else {
                 if let userId = userId {
-                    UdacityClient.sharedInstance().getUserData(userId) { firstName, lastName, errorString in
-                        if errorString != nil {
-                            dispatch_async(dispatch_get_main_queue()) {
-                                self.errorAlert(errorString!)
-                            }
-                        } else {
-                            println("userId: \(userId)")
-                            println("firstName: \(firstName)")
-                            println("lastName: \(lastName)")
-                        }
-
-                    }
+                    self.initUserData(userId)
                 }
             }
         }
     }
     
     @IBAction func loginFacebook(sender: UIButton) {
-        
+        if FBSDKAccessToken.currentAccessToken() != nil {
+            println("FBSDK current access token: \(FBSDKAccessToken.currentAccessToken())")
+        } else {
+            FBSDKLoginManager().logInWithReadPermissions(["public_profile"]) {result, error in
+                if error != nil {
+                    println("error: \(error)")
+                } else if result.isCancelled {
+                    println("login cancelled: \(result.isCancelled)")
+                } else {
+                    println("result: \(result.grantedPermissions)")
+                }
+            }
+        }
+    }
+    
+    func loginFacebookComplete() {
+        if FBSDKAccessToken.currentAccessToken() != nil {
+            println("FBSDK current access token: \(FBSDKAccessToken.currentAccessToken().tokenString)")
+            
+            UdacityClient.sharedInstance().createSessionWithFacebook(FBSDKAccessToken.currentAccessToken().tokenString) { userId, errorString in
+                if errorString != nil {
+                    dispatch_async(dispatch_get_main_queue()) {
+                        // since there was an error getting user info from Udacity using Facebook token,
+                        // logout the current user from Facebook
+                        FBSDKLoginManager().logOut()
+                        self.errorAlert("Couldn't complete Facebook/Udactiy handshake", errorMessage: errorString! + "Please login via Udacity account")
+                    }
+                } else {
+                    println("userId: \(userId)")
+                    if let userId = userId {
+                        self.initUserData(userId)
+                    }
+                }
+            }
+        }
+    }
+    
+    private func initUserData(userId: String) {
+        UdacityClient.sharedInstance().getUserData(userId) { firstName, lastName, errorString in
+            if errorString != nil {
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.errorAlert("Couldn't get user info from Udacity", errorMessage: errorString!)
+                }
+            } else {
+                println("userId: \(userId)")
+                println("firstName: \(firstName)")
+                println("lastName: \(lastName)")
+                
+            }
+        }
     }
     
     @IBAction func signupUdacity(sender: UIButton) {
@@ -69,8 +115,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     // MARK: - Alert
-    func errorAlert(errorString: String) {
-        let alert = UIAlertController(title: "Error", message: errorString, preferredStyle: UIAlertControllerStyle.Alert)
+    func errorAlert(errorTitle: String, errorMessage: String) {
+        let alert = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle: UIAlertControllerStyle.Alert)
         let alertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
         alert.addAction(alertAction)
         self.presentViewController(alert, animated: true, completion: nil)
