@@ -48,28 +48,6 @@ class UdacityClient: CommonAPI {
     }
     
     func createSessionWithFacebook(accessToken: String, completionHandler: (userId: String?, errorString: String?) -> Void) {        
-//        let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/session")!)
-//        request.HTTPMethod = "POST"
-//        request.addValue("application/json", forHTTPHeaderField: "Accept")
-//        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-//        
-//        let httpBodyParams = [
-//            "facebook_mobile": ["access_token": accessToken]
-//        ]
-//        request.HTTPBody = NSJSONSerialization.dataWithJSONObject(httpBodyParams, options: nil, error: nil)
-//        
-//        let session = NSURLSession.sharedSession()
-//        let task = session.dataTaskWithRequest(request) { data, response, error in
-//            if error != nil {
-//                // Handle error...
-//                return
-//            }
-//            let newData = data.subdataWithRange(NSMakeRange(5, data.length - 5)) /* subset response data! */
-//            println(NSString(data: newData, encoding: NSUTF8StringEncoding))
-//        }
-//        task.resume()
-        
-        
         let httpBodyParams = [
             "facebook_mobile": ["access_token": accessToken]
         ]
