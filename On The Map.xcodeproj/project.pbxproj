@@ -13,6 +13,7 @@
 		203F722A1B27C3D600BD48A8 /* StudentAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203F72291B27C3D600BD48A8 /* StudentAnnotation.swift */; };
 		203F722C1B27C3F700BD48A8 /* AllStudents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203F722B1B27C3F700BD48A8 /* AllStudents.swift */; };
 		203F722E1B27C40900BD48A8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203F722D1B27C40900BD48A8 /* User.swift */; };
+		203F72301B27C6F700BD48A8 /* StudentLocationsMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203F722F1B27C6F700BD48A8 /* StudentLocationsMapViewController.swift */; };
 		206D4E671B227BDB00BE18B9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206D4E661B227BDB00BE18B9 /* AppDelegate.swift */; };
 		206D4E691B227BDB00BE18B9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206D4E681B227BDB00BE18B9 /* ViewController.swift */; };
 		206D4E6C1B227BDB00BE18B9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 206D4E6A1B227BDB00BE18B9 /* Main.storyboard */; };
@@ -49,6 +50,7 @@
 		203F72291B27C3D600BD48A8 /* StudentAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StudentAnnotation.swift; path = Models/StudentAnnotation.swift; sourceTree = "<group>"; };
 		203F722B1B27C3F700BD48A8 /* AllStudents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AllStudents.swift; path = Models/AllStudents.swift; sourceTree = "<group>"; };
 		203F722D1B27C40900BD48A8 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
+		203F722F1B27C6F700BD48A8 /* StudentLocationsMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StudentLocationsMapViewController.swift; path = Controllers/StudentLocationsMapViewController.swift; sourceTree = "<group>"; };
 		206D4E611B227BDB00BE18B9 /* On The Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "On The Map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		206D4E651B227BDB00BE18B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		206D4E661B227BDB00BE18B9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				206D4E891B227F0700BE18B9 /* LoginViewController.swift */,
 				20E696A11B26734E00877E9F /* MapAndTableNavigationController.swift */,
 				20E6969D1B26714E00877E9F /* StudentLocationsTableViewController.swift */,
+				203F722F1B27C6F700BD48A8 /* StudentLocationsMapViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				203F72301B27C6F700BD48A8 /* StudentLocationsMapViewController.swift in Sources */,
 				203F722E1B27C40900BD48A8 /* User.swift in Sources */,
 				206D4E8A1B227F0700BE18B9 /* LoginViewController.swift in Sources */,
 				203F722A1B27C3D600BD48A8 /* StudentAnnotation.swift in Sources */,

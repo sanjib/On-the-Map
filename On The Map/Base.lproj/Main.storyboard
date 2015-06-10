@@ -163,10 +163,10 @@
             </objects>
             <point key="canvasLocation" x="1169" y="273"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Student Locations Table View Controller-->
         <scene sceneID="Cot-JP-39n">
             <objects>
-                <tableViewController id="QnD-LJ-T1e" sceneMemberID="viewController">
+                <tableViewController id="QnD-LJ-T1e" customClass="StudentLocationsTableViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Ko4-QF-SBq">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -190,10 +190,10 @@
             </objects>
             <point key="canvasLocation" x="2829" y="-74"/>
         </scene>
-        <!--View Controller-->
+        <!--Student Locations Map View Controller-->
         <scene sceneID="32m-Kf-2Mt">
             <objects>
-                <viewController id="Ubn-NM-nja" sceneMemberID="viewController">
+                <viewController id="Ubn-NM-nja" customClass="StudentLocationsMapViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dE2-61-rBu"/>
                         <viewControllerLayoutGuide type="bottom" id="tSF-zh-dwK"/>
@@ -202,11 +202,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="hLy-8w-wek">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="hLy-8w-wek">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hLy-8w-wek" firstAttribute="bottom" secondItem="sum-DZ-8mx" secondAttribute="bottomMargin" id="Cbc-R5-Sib"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="hLy-8w-wek" secondAttribute="trailing" constant="-16" id="OSA-Xi-PBk"/>
+                            <constraint firstItem="hLy-8w-wek" firstAttribute="top" secondItem="sum-DZ-8mx" secondAttribute="topMargin" id="VAV-DK-pzN"/>
+                            <constraint firstItem="hLy-8w-wek" firstAttribute="leading" secondItem="sum-DZ-8mx" secondAttribute="leadingMargin" constant="-16" id="g3p-KG-bpp"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="tGQ-35-XGk"/>
                 </viewController>

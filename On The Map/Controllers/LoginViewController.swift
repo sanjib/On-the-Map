@@ -75,7 +75,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     func loginFacebookComplete() {
         if FBSDKAccessToken.currentAccessToken() != nil {
-            println("FBSDK current access token: \(FBSDKAccessToken.currentAccessToken().tokenString)")
+//            println("FBSDK current access token: \(FBSDKAccessToken.currentAccessToken().tokenString)")
             
             UdacityClient.sharedInstance().createSessionWithFacebook(FBSDKAccessToken.currentAccessToken().tokenString) { userId, errorString in
                 if errorString != nil {
@@ -86,7 +86,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         self.errorAlert("Couldn't complete Facebook/Udactiy handshake", errorMessage: errorString! + "Please login via Udacity account")
                     }
                 } else {
-                    println("userId: \(userId)")
                     if let userId = userId {
                         self.initUserData(userId)
                     }
@@ -102,9 +101,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     self.errorAlert("Couldn't get user info from Udacity", errorMessage: errorString!)
                 }
             } else {
-                println("userId: \(userId)")
-                println("firstName: \(firstName)")
-                println("lastName: \(lastName)")
+//                println("userId: \(userId)")
+//                println("firstName: \(firstName)")
+//                println("lastName: \(lastName)")
+                User.currentUser.userId = userId
+                User.currentUser.firstName = firstName
+                User.currentUser.lastName = lastName
                 dispatch_async(dispatch_get_main_queue()) {
                     self.performSegueWithIdentifier("StudentLocationsSegue", sender: self)
                 }

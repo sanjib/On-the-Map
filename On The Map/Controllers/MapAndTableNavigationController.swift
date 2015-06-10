@@ -27,10 +27,12 @@ class MapAndTableNavigationController: UINavigationController {
         
         let navigationItem = UINavigationItem(title: "On The Map")
         
-//        if isUserCurrentlyLoggedInToFacebook {
+        if isUserCurrentlyLoggedInToFacebook {
             let logoutButton = UIBarButtonItem(title: "Logout", style: UIBarButtonItemStyle.Plain, target: self, action: "logout")
             navigationItem.leftBarButtonItem = logoutButton
-//        }
+        } else {
+            navigationItem.setHidesBackButton(true, animated: false)
+        }
         
         let reloadButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Refresh, target: self, action: "reloadData")
         let pinButton = UIBarButtonItem(image: UIImage(named: "pin"), style: UIBarButtonItemStyle.Plain, target: self, action: "pinAnnotation")
@@ -44,10 +46,8 @@ class MapAndTableNavigationController: UINavigationController {
         if isUserCurrentlyLoggedInToFacebook {
             FBSDKLoginManager().logOut()
             // reset user / set user to nil
-//            dismissViewControllerAnimated(true, completion: nil)
-            
+            dismissViewControllerAnimated(true, completion: nil)
         }
-        dismissViewControllerAnimated(true, completion: nil)
     }
     
     func pinAnnotation() {
