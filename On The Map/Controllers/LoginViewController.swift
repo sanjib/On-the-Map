@@ -105,6 +105,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 println("userId: \(userId)")
                 println("firstName: \(firstName)")
                 println("lastName: \(lastName)")
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.performSegueWithIdentifier("StudentLocationsSegue", sender: self)
+                }
                 
             }
         }
@@ -120,6 +123,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         let alertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
         alert.addAction(alertAction)
         self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    // MARK: - Segue
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "StudentLocationsSegue" {
+            // prep code if any
+        }
     }
 
     // MARK: - Text Field Delegates

@@ -18,22 +18,8 @@ class CommonAPI {
             if error != nil {
                 completionHandler(result: nil, error: error)
                 return
-            }
-            
-            let newData: NSData
-            if self.skipResponseDataLength != nil {
-                newData = data.subdataWithRange(NSMakeRange(self.skipResponseDataLength!, data.length - self.skipResponseDataLength!)) /* subset response data! */
-            } else {
-                newData = data
-            }
-            
-            var parsingError: NSError? = nil
-            let parsedResult: AnyObject? = NSJSONSerialization.JSONObjectWithData(newData, options: NSJSONReadingOptions.AllowFragments, error: &parsingError)
-            if let error = parsingError {
-                completionHandler(result: nil, error: error)
-            } else {
-                completionHandler(result: parsedResult, error: nil)
-            }
+            }            
+            self.parseJSONData(data, completionHandler: completionHandler)
         }
         task.resume()
     }
@@ -50,21 +36,7 @@ class CommonAPI {
                 completionHandler(result: nil, error: error)
                 return
             }
-            
-            let newData: NSData
-            if self.skipResponseDataLength != nil {
-                newData = data.subdataWithRange(NSMakeRange(self.skipResponseDataLength!, data.length - self.skipResponseDataLength!)) /* subset response data! */
-            } else {
-                newData = data
-            }
-            
-            var parsingError: NSError? = nil
-            let parsedResult: AnyObject? = NSJSONSerialization.JSONObjectWithData(newData, options: NSJSONReadingOptions.AllowFragments, error: &parsingError)
-            if let error = parsingError {
-                completionHandler(result: nil, error: error)
-            } else {
-                completionHandler(result: parsedResult, error: nil)
-            }
+            self.parseJSONData(data, completionHandler: completionHandler)
         }
         task.resume()
     }
@@ -73,7 +45,20 @@ class CommonAPI {
         
     }
     
-    private func parseJSONData() {
+    private func parseJSONData(data: NSData, completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
+        let newData: NSData
+        if self.skipResponseDataLength != nil {
+            newData = data.subdataWithRange(NSMakeRange(self.skipResponseDataLength!, data.length - self.skipResponseDataLength!)) /* subset response data! */
+        } else {
+            newData = data
+        }
         
+        var parsingError: NSError? = nil
+        let parsedResult: AnyObject? = NSJSONSerialization.JSONObjectWithData(newData, options: NSJSONReadingOptions.AllowFragments, error: &parsingError)
+        if let error = parsingError {
+            completionHandler(result: nil, error: error)
+        } else {
+            completionHandler(result: parsedResult, error: nil)
+        }
     }
 }
