@@ -231,11 +231,11 @@
             </objects>
             <point key="canvasLocation" x="2751" y="648"/>
         </scene>
-        <!--Item-->
+        <!--List-->
         <scene sceneID="8bn-9V-d7N">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4m4-Ys-uHU" customClass="MapAndTableNavigationController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" image="list" id="mEj-Jm-i9j"/>
+                    <tabBarItem key="tabBarItem" title="List" image="list" id="mEj-Jm-i9j"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="UAW-BY-MSh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -250,11 +250,11 @@
             </objects>
             <point key="canvasLocation" x="2017" y="-74"/>
         </scene>
-        <!--Item-->
+        <!--Map-->
         <scene sceneID="uJ4-gk-J5O">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GRP-WT-UeM" customClass="MapAndTableNavigationController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" image="map" id="dW6-d5-Vl6"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="map" id="dW6-d5-Vl6"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="l9M-Xg-QLv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
