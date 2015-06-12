@@ -10,10 +10,18 @@ import Foundation
 
 class CommonAPI {
     let session = NSURLSession.sharedSession()
+    
+    // can be overridden by a subclass
     var skipResponseDataLength: Int? = nil
+    var additionalHTTPHeaderFields: [String:String]? = nil
     
     func httpGet(url: String, completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
         let request = NSMutableURLRequest(URL: NSURL(string: url)!)
+        if let additionalHTTPHeaderFields = self.additionalHTTPHeaderFields {
+            for (httpHeaderField, value) in additionalHTTPHeaderFields {
+                request.addValue(value, forHTTPHeaderField: httpHeaderField)
+            }
+        }
         let task = session.dataTaskWithRequest(request) { data, response, error in
             if error != nil {
                 completionHandler(result: nil, error: error)
@@ -26,6 +34,11 @@ class CommonAPI {
     
     func httpPost(url: String, httpBodyParams: [String:AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
         let request = NSMutableURLRequest(URL: NSURL(string: url)!)
+        if let additionalHTTPHeaderFields = self.additionalHTTPHeaderFields {
+            for (httpHeaderField, value) in additionalHTTPHeaderFields {
+                request.addValue(value, forHTTPHeaderField: httpHeaderField)
+            }
+        }
         request.HTTPMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")

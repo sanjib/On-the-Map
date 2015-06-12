@@ -21,6 +21,21 @@ class StudentLocationsMapViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: - Student Locations
+    func reloadStudentLocations() {
+        println("reloading student locations in map vc")
+        AllStudents.reset()
+        ParseClient.sharedInstance().getStudentLocations() { students, error in
+            if error != nil {
+                
+            } else {
+                AllStudents.collection = students
+                dispatch_async(dispatch_get_main_queue()) {
+
+                }
+            }
+        }
+    }
 
     /*
     // MARK: - Navigation

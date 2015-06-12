@@ -14,20 +14,13 @@ class Student {
     var locationName: String? = nil
     var latitude: Float? = nil
     var longitude: Float? = nil
-    var link: String = ""
+    var link: String? = nil
     var annotation: StudentAnnotation? {
         get {
-            var title = ""
-            if let aFirstName = firstName {
-                title += aFirstName
-            }
-            if let aLastName = lastName {
-                title += " " + aLastName
-            }
             if latitude != nil && longitude != nil {
                 return StudentAnnotation(
-                    title: title,
-                    subtitle: link,
+                    title: "\(firstName) \(lastName)",
+                    subtitle: "\(link)",
                     latitude: latitude!,
                     longitude: longitude!)
             } else {

@@ -56,14 +56,13 @@ class MapAndTableNavigationController: UINavigationController {
     }
     
     func reloadData() {
-        println("reload data")
-//        if self.visibleViewController.restorationIdentifier == "StudentLocationsTable" {
-//            let vc = self.visibleViewController as! StudentLocationsTableViewController
-//            vc.reloadStudentLocationsInTable()
-//        } else if self.visibleViewController.restorationIdentifier == "StudentLocationsMap" {
-//            let vc = self.visibleViewController as! StudentLocationsMapViewController
-//            vc.reloadStudentLocationsInMap()
-//        }
+        if self.visibleViewController.restorationIdentifier == "StudentLocationsTable" {
+            let vc = self.visibleViewController as! StudentLocationsTableViewController
+            vc.reloadStudentLocations()
+        } else if self.visibleViewController.restorationIdentifier == "StudentLocationsMap" {
+            let vc = self.visibleViewController as! StudentLocationsMapViewController
+            vc.reloadStudentLocations()
+        }
     }
     
     /*

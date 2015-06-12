@@ -19,10 +19,29 @@ class StudentLocationsTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if AllStudents.collection.count == 0 {
+            reloadStudentLocations()
+        }
+    }
+    
+    // MARK: - Student Locations
+    func reloadStudentLocations() {
+        println("reloading student locations in table vc")
+        AllStudents.reset()
+        ParseClient.sharedInstance().getStudentLocations() { students, error in
+            if error != nil {
+                
+            } else {
+                AllStudents.collection = students
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.tableView.reloadData()
+                }
+            }
+        }
     }
 
     // MARK: - Table view data source
@@ -30,24 +49,46 @@ class StudentLocationsTableViewController: UITableViewController {
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return 0
+        return AllStudents.collection.count
     }
 
-    /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("StudentCell", forIndexPath: indexPath) as! UITableViewCell
 
-        // Configure the cell...
+        let student = AllStudents.collection[indexPath.row] as Student
+        cell.textLabel?.text = student.firstName! + " " + student.lastName!
 
         return cell
     }
-    */
+    
+    // MARK: - Table view delegate
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let student = AllStudents.collection[indexPath.row] as Student
+        if let urlString = student.link {
+            if let url = NSURL(string: urlString) {
+                UIApplication.sharedApplication().openURL(url)
+            } else {
+                errorAlert("Student Link cannot be opened", errorMessage: "The link provided by the student is not a valid URL: \(urlString)")
+            }
+        } else {
+            errorAlert("Student Link cannot be opened", errorMessage: "The student did not provide a link")
+        }
+    }
+    
+    // MARK: - Alert
+    func errorAlert(errorTitle: String, errorMessage: String) {
+        let alert = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle: UIAlertControllerStyle.Alert)
+        let alertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+        alert.addAction(alertAction)
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
 
     /*
     // Override to support conditional editing of the table view.

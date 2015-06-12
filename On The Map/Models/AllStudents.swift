@@ -9,5 +9,13 @@
 import Foundation
 
 class AllStudents: NSObject {
-    static var locations = [Student]()
+    static var collection = [Student]()
+    
+    static func addStudent(student: Student) {
+        collection.append(student)
+    }
+    
+    static func reset() {
+        collection = [Student]()
+    }
 }
