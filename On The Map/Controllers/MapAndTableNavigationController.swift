@@ -52,7 +52,7 @@ class MapAndTableNavigationController: UINavigationController {
     
     func pinAnnotation() {
         println("pin annotation")
-//        performSegueWithIdentifier("InformationPostingSegue", sender: self)
+        performSegueWithIdentifier("InformationPostingSegue", sender: self)
     }
     
     func reloadData() {

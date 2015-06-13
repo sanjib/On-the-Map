@@ -13,11 +13,7 @@ import FBSDKLoginKit
 class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    
-    // For tracking view slides
-    var keyboardAdjusted = false
-    var lastKeyboardOffset : CGFloat = 0.0
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         emailTextField.delegate = self
@@ -128,11 +124,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     // MARK: - Segue
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "StudentLocationsSegue" {
-            // prep code if any
-        }
-    }
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        if segue.identifier == "StudentLocationsSegue" {
+//            // prep code if any
+//        }
+//    }
 
     // MARK: - Text Field Delegates
     
