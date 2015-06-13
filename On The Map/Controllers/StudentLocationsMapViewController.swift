@@ -68,6 +68,19 @@ class StudentLocationsMapViewController: UIViewController, MKMapViewDelegate {
         return nil
     }
     
+    func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
+        let urlString = view.annotation.subtitle
+        if urlString != "" {
+            if let url = NSURL(string: urlString!) {
+                UIApplication.sharedApplication().openURL(url)
+            } else {
+                errorAlert("Student Link cannot be opened", errorMessage: "The link provided by the student is not a valid URL: \(urlString)")
+            }
+        } else {
+            errorAlert("Student Link cannot be opened", errorMessage: "The student did not provide a link")
+        }
+    }
+    
     // MARK: - Alert
     func errorAlert(errorTitle: String, errorMessage: String) {
         let alert = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle: UIAlertControllerStyle.Alert)
