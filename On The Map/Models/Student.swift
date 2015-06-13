@@ -11,16 +11,30 @@ import Foundation
 class Student {
     var firstName: String? = nil
     var lastName: String? = nil
+    var link: String? = nil
+    
     var locationName: String? = nil
     var latitude: Float? = nil
     var longitude: Float? = nil
-    var link: String? = nil
+    
     var annotation: StudentAnnotation? {
         get {
             if latitude != nil && longitude != nil {
+                var aFirstName = ""
+                if firstName != nil {
+                    aFirstName = firstName!
+                }
+                var aLastName = ""
+                if lastName != nil {
+                    aLastName = lastName!
+                }
+                var aLink = ""
+                if link != nil {
+                    aLink = link!
+                }
                 return StudentAnnotation(
-                    title: "\(firstName) \(lastName)",
-                    subtitle: "\(link)",
+                    title: aFirstName + aLastName,
+                    subtitle: aLink,
                     latitude: latitude!,
                     longitude: longitude!)
             } else {

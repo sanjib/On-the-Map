@@ -31,46 +31,39 @@ class ParseClient: CommonAPI {
         static let updateStudentLocation = Constants.baseURL + "/StudentLocation/{objectId}"
     }
     
-    func getStudentLocations(completionHandler: (students: [Student], errorString: String?) -> Void) {
+    func getStudentLocations(completionHandler: (students: [Student]?, errorString: String?) -> Void) {
         httpGet(Methods.getStudentLocations) { result, error in
             if error != nil {
-//                completionHandler(firstName: nil, lastName: nil, errorString: error?.localizedDescription)
+                completionHandler(students: nil, errorString: error?.localizedDescription)
                 println(error)
             } else {
-                if let studentsJSON = result["results"] as? NSArray {
-//                    println(studentsJSON)
+                if let studentResults = result["results"] as? NSArray {
                     var allStudents = [Student]()
-                    for studentJSON in studentsJSON {
+                    for studentResult in studentResults {
                         let student = Student()
-                        if let firstName = studentJSON["firstName"] as? String {
+                        if let firstName = studentResult["firstName"] as? String {
                             student.firstName = firstName
                         }
-                        if let lastName = studentJSON["lastName"] as? String {
+                        if let lastName = studentResult["lastName"] as? String {
                             student.lastName = lastName
                         }
-                        if let link = studentJSON["mediaURL"] as? String {
+                        if let link = studentResult["mediaURL"] as? String {
                             student.link = link
                         }
+                        if let locationName = studentResult["mapString"] as? String {
+                            student.locationName = locationName
+                        }
+                        if let latitude = studentResult["latitude"] as? Float {
+                            student.latitude = latitude
+                        }
+                        if let longitude = studentResult["longitude"] as? Float {
+                            student.longitude = longitude
+                        }
+                        
                         allStudents.append(student)
                     }
                     completionHandler(students: allStudents, errorString: nil)
                 }
-//                if let user = result["user"] as? NSDictionary {
-//                    if let firstName = user["first_name"] as? String {
-//                        if let lastName = user["last_name"] as? String {
-//                            completionHandler(firstName: firstName, lastName: lastName, errorString: nil)
-//                        } else {
-//                            completionHandler(firstName: nil, lastName: nil, errorString: "An unknown error occured")
-//                        }
-//                    } else {
-//                        completionHandler(firstName: nil, lastName: nil, errorString: "An unknown error occured")
-//                    }
-//                } else if let error = result["error"] as? String {
-//                    completionHandler(firstName: nil, lastName: nil, errorString: error)
-//                } else {
-//                    completionHandler(firstName: nil, lastName: nil, errorString: "An unknown error occured")
-//                }
-//                println(result)
             }
         }
     }

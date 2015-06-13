@@ -32,11 +32,11 @@ class StudentLocationsTableViewController: UITableViewController {
     func reloadStudentLocations() {
         println("reloading student locations in table vc")
         AllStudents.reset()
-        ParseClient.sharedInstance().getStudentLocations() { students, error in
-            if error != nil {
+        ParseClient.sharedInstance().getStudentLocations() { students, errorString in
+            if errorString != nil {
                 
             } else {
-                AllStudents.collection = students
+                AllStudents.collection = students!
                 dispatch_async(dispatch_get_main_queue()) {
                     self.tableView.reloadData()
                 }

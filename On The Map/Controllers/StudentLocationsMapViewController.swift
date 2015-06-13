@@ -7,34 +7,73 @@
 //
 
 import UIKit
+import MapKit
 
-class StudentLocationsMapViewController: UIViewController {
+class StudentLocationsMapViewController: UIViewController, MKMapViewDelegate {
+    @IBOutlet weak var studentLocationsMapView: MKMapView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        studentLocationsMapView.delegate = self
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        if AllStudents.collection.count == 0 {
+            reloadStudentLocations()
+        }
     }
     
     // MARK: - Student Locations
     func reloadStudentLocations() {
         println("reloading student locations in map vc")
         AllStudents.reset()
-        ParseClient.sharedInstance().getStudentLocations() { students, error in
-            if error != nil {
-                
-            } else {
-                AllStudents.collection = students
+        ParseClient.sharedInstance().getStudentLocations() { students, errorString in
+            if errorString != nil {
                 dispatch_async(dispatch_get_main_queue()) {
-
+                    self.errorAlert("Couldn't get student locations", errorMessage: errorString!)
+                }
+            } else {
+                AllStudents.collection = students!
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.studentLocationsMapView.removeAnnotations(self.studentLocationsMapView.annotations)
+                    self.addAnnotations()
                 }
             }
         }
+    }
+    
+    private func addAnnotations() {
+        for student in AllStudents.collection {
+            studentLocationsMapView.addAnnotation(student.annotation)
+        }
+    }
+    
+    // MARK: - Map view delegates
+    
+    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+        if let annotation = annotation as? StudentAnnotation {
+            let identifier = "pin"
+            var view: MKPinAnnotationView
+            if let dequeuedView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier) as? MKPinAnnotationView {
+                dequeuedView.annotation = annotation
+                view = dequeuedView
+            } else {
+                view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                view.canShowCallout = true
+                view.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as! UIView
+            }
+            return view
+        }
+        return nil
+    }
+    
+    // MARK: - Alert
+    func errorAlert(errorTitle: String, errorMessage: String) {
+        let alert = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle: UIAlertControllerStyle.Alert)
+        let alertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+        alert.addAction(alertAction)
+        self.presentViewController(alert, animated: true, completion: nil)
     }
 
     /*

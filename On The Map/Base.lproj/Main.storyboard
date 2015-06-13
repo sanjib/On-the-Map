@@ -155,8 +155,8 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="4m4-Ys-uHU" kind="relationship" relationship="viewControllers" id="h90-ce-WLx"/>
                         <segue destination="GRP-WT-UeM" kind="relationship" relationship="viewControllers" id="vkE-Et-Z9K"/>
+                        <segue destination="4m4-Ys-uHU" kind="relationship" relationship="viewControllers" id="h90-ce-WLx"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G8z-yv-aqX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -180,7 +180,7 @@
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XPs-5g-G89">
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="pin" id="G0q-32-rll">
@@ -199,7 +199,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3jx-tF-8JM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2751" y="-74"/>
+            <point key="canvasLocation" x="2869" y="867"/>
         </scene>
         <!--Student Locations Map View Controller-->
         <scene sceneID="32m-Kf-2Mt">
@@ -226,10 +226,13 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="tGQ-35-XGk"/>
+                    <connections>
+                        <outlet property="studentLocationsMapView" destination="hLy-8w-wek" id="2hg-AL-fXh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vpu-Wg-4wd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2751" y="648"/>
+            <point key="canvasLocation" x="2869" y="-345"/>
         </scene>
         <!--List-->
         <scene sceneID="8bn-9V-d7N">
@@ -248,7 +251,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wYB-GW-jFR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2017" y="-74"/>
+            <point key="canvasLocation" x="2135" y="867"/>
         </scene>
         <!--Map-->
         <scene sceneID="uJ4-gk-J5O">
@@ -267,7 +270,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0KN-Za-lsB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2017" y="648"/>
+            <point key="canvasLocation" x="2135" y="-345"/>
         </scene>
     </scenes>
     <resources>
