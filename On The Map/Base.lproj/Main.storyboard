@@ -383,6 +383,7 @@ today?</string>
                         <outlet property="findOnTheMapContainerView" destination="Sjq-NI-H8Q" id="u8V-bj-dC8"/>
                         <outlet property="linkTextField" destination="XOx-1M-eiG" id="Uql-XW-Dac"/>
                         <outlet property="locationTextField" destination="Qlm-Ci-kMp" id="wfJ-Jx-d2c"/>
+                        <outlet property="mapView" destination="bP4-gv-khR" id="IVd-0v-OB5"/>
                         <outlet property="submitInformationContainerView" destination="bK5-hj-Tu3" id="NIa-Hm-6R2"/>
                     </connections>
                 </viewController>

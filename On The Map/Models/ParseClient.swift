@@ -25,18 +25,23 @@ class ParseClient: CommonAPI {
     }
     
     private struct Methods {
-        static let getStudentLocations   = Constants.baseURL + "/StudentLocation?limit=100"
-        static let addStudentLocation    = Constants.baseURL + "/StudentLocation"
-        static let queryStudentLocation  = Constants.baseURL + "/StudentLocation?where={\"uniqueKey\":\"userId\"}"
-        static let updateStudentLocation = Constants.baseURL + "/StudentLocation/{objectId}"
+        static let studentLocation       = Constants.baseURL + "/StudentLocation"
+//        static let queryStudentLocation  = Constants.baseURL + "/StudentLocation?where={\"uniqueKey\":\"userId\"}"
+//        static let updateStudentLocation = Constants.baseURL + "/StudentLocation/{objectId}"
     }
     
     func getStudentLocations(completionHandler: (students: [Student]?, errorString: String?) -> Void) {
-        httpGet(Methods.getStudentLocations) { result, error in
+        let methodParams = [
+            "limit": 1000
+        ]
+        let url = Methods.studentLocation + methodParamsFromDictionary(methodParams)
+        
+        httpGet(url) { result, error in
             if error != nil {
                 completionHandler(students: nil, errorString: error?.localizedDescription)
                 println(error)
             } else {
+//                println(result)
                 if let studentResults = result["results"] as? NSArray {
                     var allStudents = [Student]()
                     for studentResult in studentResults {
@@ -66,6 +71,20 @@ class ParseClient: CommonAPI {
                 }
             }
         }
+    }
+    
+    func queryStudentLocation(userId: String) {
+        let urlString = "https://api.parse.com/1/classes/StudentLocation?where=%7B%22uniqueKey%22%3A%22\(userId)%22%7D"
+        let url = NSURL(string: urlString)
+        let request = NSMutableURLRequest(URL: url!)
+        request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
+        request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request) { data, response, error in
+            if error != nil { /* Handle error */ return }
+            println(NSString(data: data, encoding: NSUTF8StringEncoding))
+        }
+        task.resume()
     }
     
     static func sharedInstance() -> ParseClient {

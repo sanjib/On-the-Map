@@ -21,14 +21,23 @@ class UdacityClient: CommonAPI {
     
     private struct Methods {
         static let session = Constants.baseURL + "/session"
-        static let publicUserData = Constants.baseURL + "/users"
+        static let publicUserData = Constants.baseURL + "/users/{user_id}"
+    }
+    
+    private struct MethodKeys {
+        static let userId = "user_id"
+    }
+    
+    private struct MethodParams {
+        
     }
         
     func createSessionWithUdacity(username: String, password: String, completionHandler: (userId: String?, errorString: String?) -> Void) {
+        let url = Methods.session
         let httpBodyParams = [
             "udacity": ["username": username, "password": password]
         ]
-        httpPost(Methods.session, httpBodyParams: httpBodyParams) { result, error in
+        httpPost(url, httpBodyParams: httpBodyParams) { result, error in
             if error != nil {
                 completionHandler(userId: nil, errorString: error?.localizedDescription)
             } else {
@@ -47,11 +56,12 @@ class UdacityClient: CommonAPI {
         }
     }
     
-    func createSessionWithFacebook(accessToken: String, completionHandler: (userId: String?, errorString: String?) -> Void) {        
+    func createSessionWithFacebook(accessToken: String, completionHandler: (userId: String?, errorString: String?) -> Void) {
+        let url = Methods.session
         let httpBodyParams = [
             "facebook_mobile": ["access_token": accessToken]
         ]
-        httpPost(Methods.session, httpBodyParams: httpBodyParams) { result, error in
+        httpPost(url, httpBodyParams: httpBodyParams) { result, error in
             if error != nil {
                 completionHandler(userId: nil, errorString: error?.localizedDescription)
             } else {
@@ -71,11 +81,12 @@ class UdacityClient: CommonAPI {
     }
     
     func getUserData(userId: String, completionHandler: (firstName: String?, lastName: String?, errorString: String?) -> Void) {
-        let url = Methods.publicUserData + "/" + userId
-        httpGet(url) { result, error in
+        let url = methodKeySubstitute(Methods.publicUserData, key: MethodKeys.userId, value: userId)
+        httpGet(url!) { result, error in
             if error != nil {
                 completionHandler(firstName: nil, lastName: nil, errorString: error?.localizedDescription)
             } else {
+                println(result)
                 if let user = result["user"] as? NSDictionary {
                     if let firstName = user["first_name"] as? String {
                         if let lastName = user["last_name"] as? String {
@@ -93,6 +104,10 @@ class UdacityClient: CommonAPI {
                 }
             }
         }
+    }
+    
+    func getUserPhoto(student: Student) -> Void {
+        
     }
     
     static func sharedInstance() -> UdacityClient {

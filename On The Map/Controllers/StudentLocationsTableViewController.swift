@@ -30,13 +30,27 @@ class StudentLocationsTableViewController: UITableViewController {
     
     // MARK: - Student Locations
     func reloadStudentLocations() {
-        println("reloading student locations in table vc")
-        AllStudents.reset()
-        ParseClient.sharedInstance().getStudentLocations() { students, errorString in
+//        println("reloading student locations in table vc")
+        
+//        ParseClient.sharedInstance().getStudentLocations() { students, errorString in
+//            if errorString != nil {
+//                
+//            } else {
+//                AllStudents.reset()
+//                AllStudents.collection = students!
+//                AllStudents.sortByFirstName()
+//                dispatch_async(dispatch_get_main_queue()) {
+//                    self.tableView.reloadData()
+//                }
+//            }
+//        }
+        
+        AllStudents.reload() { errorString in
             if errorString != nil {
-                
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.errorAlert("Couldn't get student locations", errorMessage: errorString!)
+                }
             } else {
-                AllStudents.collection = students!
                 dispatch_async(dispatch_get_main_queue()) {
                     self.tableView.reloadData()
                 }
@@ -70,7 +84,7 @@ class StudentLocationsTableViewController: UITableViewController {
     // MARK: - Table view delegate
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let student = AllStudents.collection[indexPath.row] as Student
+        let student = AllStudents.collection[indexPath.row] as Student        
         if let urlString = student.link {
             if let url = NSURL(string: urlString) {
                 UIApplication.sharedApplication().openURL(url)

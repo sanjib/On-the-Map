@@ -58,6 +58,33 @@ class CommonAPI {
         
     }
     
+    // Method helpers for subclass
+    
+    func methodKeySubstitute(method: String, key: String, value: String) -> String? {
+        if method.rangeOfString("{\(key)}") != nil {
+            return method.stringByReplacingOccurrencesOfString("{\(key)}", withString: value)
+        } else {
+            return nil
+        }
+    }
+    
+    func methodParamsFromDictionary(parameters: [String : AnyObject]) -> String {
+        var urlVars = [String]()
+        for (key, value) in parameters {
+            /* Make sure that it is a string value */
+            let stringValue = "\(value)"
+            
+            /* Escape it */
+            let escapedValue = stringValue.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
+            
+            /* Append it */
+            urlVars += [key + "=" + "\(escapedValue!)"]
+        }
+        return (!urlVars.isEmpty ? "?" : "") + join("&", urlVars)
+    }
+    
+    // Helpers for JSON parsing
+    
     private func parseJSONData(data: NSData, completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
         let newData: NSData
         if self.skipResponseDataLength != nil {

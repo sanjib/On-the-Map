@@ -11,11 +11,29 @@ import Foundation
 class AllStudents: NSObject {
     static var collection = [Student]()
     
-    static func addStudent(student: Student) {
-        collection.append(student)
+    static func reload(completionHandler: (errorString: String?) -> Void) {
+        ParseClient.sharedInstance().getStudentLocations() { students, errorString in
+            if errorString != nil {
+                completionHandler(errorString: errorString)
+            } else {
+                self.reset()
+                self.collection = students!
+                self.sortByFirstName()
+                completionHandler(errorString: nil)
+            }
+        }
     }
     
-    static func reset() {
+    static func addStudent(student: Student) {
+        collection.append(student)
+        sortByFirstName()
+    }
+    
+    private static func reset() {
         collection = [Student]()
+    }
+    
+    private static func sortByFirstName() {
+        collection.sort({ $0.firstName < $1.firstName })
     }
 }

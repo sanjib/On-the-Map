@@ -26,28 +26,45 @@ class StudentLocationsMapViewController: UIViewController, MKMapViewDelegate {
     
     // MARK: - Student Locations
     func reloadStudentLocations() {
-        println("reloading student locations in map vc")
-        AllStudents.reset()
-        ParseClient.sharedInstance().getStudentLocations() { students, errorString in
+//        println("reloading student locations in map vc")        
+//        ParseClient.sharedInstance().getStudentLocations() { students, errorString in
+//            if errorString != nil {
+//                dispatch_async(dispatch_get_main_queue()) {
+//                    self.errorAlert("Couldn't get student locations", errorMessage: errorString!)
+//                }
+//            } else {
+//                AllStudents.reset()
+//                AllStudents.collection = students!
+//                AllStudents.sortByFirstName()
+//                dispatch_async(dispatch_get_main_queue()) {
+//                    self.studentLocationsMapView.removeAnnotations(self.studentLocationsMapView.annotations)
+//                    self.addAnnotations()
+//                }
+//            }
+//        }
+        
+        AllStudents.reload() { errorString in
             if errorString != nil {
                 dispatch_async(dispatch_get_main_queue()) {
                     self.errorAlert("Couldn't get student locations", errorMessage: errorString!)
                 }
             } else {
-                AllStudents.collection = students!
                 dispatch_async(dispatch_get_main_queue()) {
                     self.studentLocationsMapView.removeAnnotations(self.studentLocationsMapView.annotations)
-                    self.addAnnotations()
+//                    self.addAnnotations()
+                    for student in AllStudents.collection {
+                        self.studentLocationsMapView.addAnnotation(student.annotation)
+                    }
                 }
             }
         }
     }
     
-    private func addAnnotations() {
-        for student in AllStudents.collection {
-            studentLocationsMapView.addAnnotation(student.annotation)
-        }
-    }
+//    private func addAnnotations() {
+//        for student in AllStudents.collection {
+//            studentLocationsMapView.addAnnotation(student.annotation)
+//        }
+//    }
     
     // MARK: - Map view delegates
     

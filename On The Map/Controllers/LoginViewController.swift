@@ -97,12 +97,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     self.errorAlert("Couldn't get user info from Udacity", errorMessage: errorString!)
                 }
             } else {
-//                println("userId: \(userId)")
-//                println("firstName: \(firstName)")
-//                println("lastName: \(lastName)")
                 User.currentUser.userId = userId
                 User.currentUser.firstName = firstName
                 User.currentUser.lastName = lastName
+                
+//                ParseClient.sharedInstance().queryStudentLocation(userId)
+                
                 dispatch_async(dispatch_get_main_queue()) {
                     self.performSegueWithIdentifier("StudentLocationsSegue", sender: self)
                 }
