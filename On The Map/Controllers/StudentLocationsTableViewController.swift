@@ -62,6 +62,8 @@ class StudentLocationsTableViewController: UITableViewController {
 
         let student = AllStudents.collection[indexPath.row] as Student
         cell.textLabel?.text = student.firstName! + " " + student.lastName!
+        cell.detailTextLabel?.text = student.link
+        cell.imageView?.frame.size.width -= 20.0
 
         return cell
     }

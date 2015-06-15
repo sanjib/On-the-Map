@@ -15,6 +15,20 @@ class StudentLocationsMapViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         studentLocationsMapView.delegate = self
+//        studentLocationsMapView.region.span.latitudeDelta += 0
+//        studentLocationsMapView.region.span.longitudeDelta += 0
+//        studentLocationsMapView.regionThatFits(studentLocationsMapView.region)
+        
+//        println(studentLocationsMapView.region.center.latitude)
+//        println(studentLocationsMapView.region.center.longitude)
+        
+//        studentLocationsMapView.setCenterCoordinate(studentLocationsMapView.userLocation.coordinate, animated: true)
+        
+        println(studentLocationsMapView.region.center.latitude)
+        println(studentLocationsMapView.region.center.longitude)
+        
+        println(studentLocationsMapView.userLocation.coordinate.latitude)
+        println(studentLocationsMapView.userLocation.coordinate.longitude)
     }
     
     override func viewWillAppear(animated: Bool) {
