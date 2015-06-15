@@ -145,7 +145,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="457" y="273"/>
+            <point key="canvasLocation" x="489" y="273"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="iZf-Gi-FVG">
@@ -160,11 +160,12 @@
                     <connections>
                         <segue destination="GRP-WT-UeM" kind="relationship" relationship="viewControllers" id="vkE-Et-Z9K"/>
                         <segue destination="4m4-Ys-uHU" kind="relationship" relationship="viewControllers" id="h90-ce-WLx"/>
+                        <segue destination="Qpj-BA-Y6f" kind="relationship" relationship="viewControllers" id="0qf-M9-Urt"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G8z-yv-aqX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1169" y="273"/>
+            <point key="canvasLocation" x="1193" y="273"/>
         </scene>
         <!--Student Locations Table View Controller-->
         <scene sceneID="Cot-JP-39n">
@@ -202,7 +203,73 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3jx-tF-8JM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2949" y="1099"/>
+            <point key="canvasLocation" x="2645" y="289"/>
+        </scene>
+        <!--Student Locations Collection View Controller-->
+        <scene sceneID="NDo-Pu-Q9A">
+            <objects>
+                <collectionViewController storyboardIdentifier="StudentLocationsCollection" useStoryboardIdentifierAsRestorationIdentifier="YES" id="00U-GM-NTQ" customClass="StudentLocationsCollectionViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="mDW-A7-13S">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="tJc-EG-43e">
+                            <size key="itemSize" width="191" height="191"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="StudentCollectionViewCell" id="FXS-ZQ-ybj" customClass="StudentProfileCollectionViewCell" customModule="On_The_Map" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="191" height="191"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gdp-z4-VND">
+                                            <rect key="frame" x="0.0" y="0.0" width="191" height="176.5"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q1A-Jm-L12">
+                                            <rect key="frame" x="8" y="176" width="175" height="14.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="trailingMargin" secondItem="gdp-z4-VND" secondAttribute="trailing" constant="-8" id="0ID-5H-4ne"/>
+                                    <constraint firstItem="Q1A-Jm-L12" firstAttribute="bottom" secondItem="FXS-ZQ-ybj" secondAttribute="bottomMargin" constant="8" id="6Zr-FQ-RQU"/>
+                                    <constraint firstItem="gdp-z4-VND" firstAttribute="top" secondItem="FXS-ZQ-ybj" secondAttribute="topMargin" constant="-8" id="8T5-mx-pfl"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="Q1A-Jm-L12" secondAttribute="trailing" id="8UQ-eg-DaC"/>
+                                    <constraint firstItem="Q1A-Jm-L12" firstAttribute="leading" secondItem="FXS-ZQ-ybj" secondAttribute="leadingMargin" id="Ypv-q2-qgj"/>
+                                    <constraint firstItem="gdp-z4-VND" firstAttribute="leading" secondItem="FXS-ZQ-ybj" secondAttribute="leadingMargin" constant="-8" id="eZJ-1f-HH9"/>
+                                    <constraint firstAttribute="centerX" secondItem="Q1A-Jm-L12" secondAttribute="centerX" constant="0.5" id="g3Q-c9-bRu"/>
+                                    <constraint firstItem="Q1A-Jm-L12" firstAttribute="top" secondItem="gdp-z4-VND" secondAttribute="bottom" id="rns-rA-EAa"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="g3Q-c9-bRu"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <outlet property="studentImageView" destination="gdp-z4-VND" id="N1c-ra-DMD"/>
+                                    <outlet property="studentLabel" destination="Q1A-Jm-L12" id="rky-tA-LxZ"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="00U-GM-NTQ" id="voT-Bi-QbT"/>
+                            <outlet property="delegate" destination="00U-GM-NTQ" id="fyD-MY-5nI"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="Sh2-yV-8Wf"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="klq-tE-IRK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2645" y="1019"/>
         </scene>
         <!--Student Locations Map View Controller-->
         <scene sceneID="32m-Kf-2Mt">
@@ -235,7 +302,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vpu-Wg-4wd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2949" y="-533"/>
+            <point key="canvasLocation" x="2645" y="-477"/>
         </scene>
         <!--Information Posting View Controller-->
         <scene sceneID="3J0-Y1-6ws">
@@ -389,12 +456,12 @@ today?</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sSh-7m-pVE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2949" y="273"/>
+            <point key="canvasLocation" x="3685" y="289"/>
         </scene>
         <!--List-->
         <scene sceneID="8bn-9V-d7N">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4m4-Ys-uHU" customClass="MapAndTableNavigationController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4m4-Ys-uHU" customClass="StudentLocationsNavigationController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="List" image="list" id="mEj-Jm-i9j"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="UAW-BY-MSh">
@@ -409,12 +476,12 @@ today?</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wYB-GW-jFR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2051" y="699"/>
+            <point key="canvasLocation" x="1911" y="289"/>
         </scene>
         <!--Map-->
         <scene sceneID="uJ4-gk-J5O">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GRP-WT-UeM" customClass="MapAndTableNavigationController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GRP-WT-UeM" customClass="StudentLocationsNavigationController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Map" image="map" id="dW6-d5-Vl6"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="l9M-Xg-QLv">
@@ -429,16 +496,37 @@ today?</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0KN-Za-lsB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2059" y="-153"/>
+            <point key="canvasLocation" x="1911" y="-477"/>
+        </scene>
+        <!--Grid-->
+        <scene sceneID="R73-47-anD">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Qpj-BA-Y6f" customClass="StudentLocationsNavigationController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Grid" image="grid" id="BI6-ks-YQX"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="CUy-U4-ADt">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="00U-GM-NTQ" kind="relationship" relationship="rootViewController" id="Ncy-4l-OtA"/>
+                        <segue destination="fGo-kf-JSo" kind="presentation" identifier="InformationPostingSegue" id="B5D-do-WlZ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LXa-Ds-TS1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1911" y="1019"/>
         </scene>
     </scenes>
     <resources>
+        <image name="grid" width="20" height="20"/>
         <image name="list" width="32" height="32"/>
         <image name="map" width="32" height="32"/>
         <image name="pin" width="32" height="32"/>
         <image name="udacity" width="256" height="256"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="sik-az-UVC"/>
+        <segue reference="B5D-do-WlZ"/>
     </inferredMetricsTieBreakers>
 </document>

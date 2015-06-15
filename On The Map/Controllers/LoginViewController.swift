@@ -35,7 +35,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIApplicationDidBecomeActiveNotification, object: nil)
     }
-    
+
     // MARK: - Login and Signups
     
     @IBAction func loginUdacity(sender: UIButton) {

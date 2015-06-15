@@ -56,7 +56,7 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
         findOnTheMapContainerView.hidden = false
         submitInformationContainerView.hidden = true
     }
-    
+
     @IBAction func findOnTheMap(sender: UIButton) {
         if locationTextField.text == "" {
             errorAlert("Empty Location", errorMessage: "Please type a location")

@@ -46,6 +46,9 @@ class ParseClient: CommonAPI {
                     var allStudents = [Student]()
                     for studentResult in studentResults {
                         let student = Student()
+                        if let userId = studentResult["uniqueKey"] as? String {
+                            student.userId = userId
+                        }
                         if let firstName = studentResult["firstName"] as? String {
                             student.firstName = firstName
                         }
@@ -64,8 +67,37 @@ class ParseClient: CommonAPI {
                         if let longitude = studentResult["longitude"] as? Float {
                             student.longitude = longitude
                         }
+                        if let updatedAt = studentResult["updatedAt"] as? String {
+                            let dateFormatter = NSDateFormatter()
+                            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSz"
+                            let date = dateFormatter.dateFromString(updatedAt)
+                            student.updatedAt = date
+                        }
+//                        println(student.updatedAt)
                         
-                        allStudents.append(student)
+                        if let duplicateStudentById =  allStudents.filter({$0.userId == student.userId}).first {
+                            continue
+                        } else {                            
+                            allStudents.append(student)
+                            
+                            
+//                            if let duplicateStudentByName = allStudents.filter({$0.firstName! + $0.lastName! == student.firstName! + student.lastName!}).first {
+//                                continue
+//                            } else {
+//                                allStudents.append(student)
+//                            }
+                        }
+//                        if duplicateStudent != nil {
+//                            if let duplicatedStudentUpdatedAt = duplicateStudent?.updatedAt {
+//                                if student.updatedAt?.compare(duplicatedStudentUpdatedAt) == NSComparisonResult.OrderedDescending  {
+//                                    println("will replace: old- \(duplicateStudent?.updatedAt) with new- \(student.updatedAt)")
+                                    
+//                                }
+//                            }
+//                            
+//                        } else {
+                        
+//                        }
                     }
                     completionHandler(students: allStudents, errorString: nil)
                 }

@@ -86,8 +86,7 @@ class UdacityClient: CommonAPI {
             if error != nil {
                 completionHandler(firstName: nil, lastName: nil, errorString: error?.localizedDescription)
             } else {
-                println(result)
-                if let user = result["user"] as? NSDictionary {
+                if let user = result["user"] as? NSDictionary {                    
                     if let firstName = user["first_name"] as? String {
                         if let lastName = user["last_name"] as? String {
                             completionHandler(firstName: firstName, lastName: lastName, errorString: nil)
@@ -106,8 +105,23 @@ class UdacityClient: CommonAPI {
         }
     }
     
-    func getUserPhoto(student: Student) -> Void {
-        
+    func getUserPhoto(student: Student, completionHandler: (imageURL: String?) -> Void) -> Void {
+        if let userId = student.userId {
+            let url = methodKeySubstitute(Methods.publicUserData, key: MethodKeys.userId, value: userId)
+            httpGet(url!) { result, error in
+                if error != nil {
+                    completionHandler(imageURL: nil)
+                } else {
+                    if let user = result["user"] as? NSDictionary {
+                        if let image_url = user["_image_url"] as? String {
+                            completionHandler(imageURL: image_url)
+                        }
+                    } else {
+                        completionHandler(imageURL: nil)
+                    }
+                }
+            }
+        }
     }
     
     static func sharedInstance() -> UdacityClient {

@@ -10,7 +10,7 @@ import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
 
-class MapAndTableNavigationController: UINavigationController {
+class StudentLocationsNavigationController: UINavigationController {
 
     var isUserCurrentlyLoggedInToFacebook: Bool {
         get {
@@ -61,6 +61,9 @@ class MapAndTableNavigationController: UINavigationController {
             vc.reloadStudentLocations()
         } else if self.visibleViewController.restorationIdentifier == "StudentLocationsMap" {
             let vc = self.visibleViewController as! StudentLocationsMapViewController
+            vc.reloadStudentLocations()
+        } else if self.visibleViewController.restorationIdentifier == "StudentLocationsCollection" {
+            let vc = self.visibleViewController as! StudentLocationsCollectionViewController
             vc.reloadStudentLocations()
         }
     }

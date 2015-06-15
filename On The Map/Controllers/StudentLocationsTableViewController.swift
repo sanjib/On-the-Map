@@ -29,22 +29,7 @@ class StudentLocationsTableViewController: UITableViewController {
     }
     
     // MARK: - Student Locations
-    func reloadStudentLocations() {
-//        println("reloading student locations in table vc")
-        
-//        ParseClient.sharedInstance().getStudentLocations() { students, errorString in
-//            if errorString != nil {
-//                
-//            } else {
-//                AllStudents.reset()
-//                AllStudents.collection = students!
-//                AllStudents.sortByFirstName()
-//                dispatch_async(dispatch_get_main_queue()) {
-//                    self.tableView.reloadData()
-//                }
-//            }
-//        }
-        
+    func reloadStudentLocations() {        
         AllStudents.reload() { errorString in
             if errorString != nil {
                 dispatch_async(dispatch_get_main_queue()) {

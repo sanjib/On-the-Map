@@ -9,9 +9,14 @@
 import Foundation
 
 class Student {
+    var userId: String? = nil
     var firstName: String? = nil
     var lastName: String? = nil
     var link: String? = nil
+    var updatedAt: NSDate? = nil
+    
+    var imageURL: String? = nil
+    var imageData: NSData? = nil    
     
     var locationName: String? = nil
     var latitude: Float? = nil
