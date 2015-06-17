@@ -9,18 +9,16 @@
 import UIKit
 
 class StudentProfileCollectionViewCell: UICollectionViewCell {
-    
-    
-    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var studentImageView: UIImageView!
     @IBOutlet weak var studentLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-
         studentImageView.contentMode = UIViewContentMode.ScaleAspectFill
         studentImageView.clipsToBounds = true
-
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.stopAnimating()
     }
     
 }

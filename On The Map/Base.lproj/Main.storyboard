@@ -240,6 +240,10 @@
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
+                        <activityIndicatorView key="backgroundView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="ufu-vm-cKW">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </activityIndicatorView>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="StudentCollectionViewCell" id="FXS-ZQ-ybj" customClass="StudentProfileCollectionViewCell" customModule="On_The_Map" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -257,14 +261,19 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="9cM-0n-npg">
+                                            <rect key="frame" x="85" y="86" width="20" height="20"/>
+                                        </activityIndicatorView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <constraints>
                                     <constraint firstAttribute="trailingMargin" secondItem="gdp-z4-VND" secondAttribute="trailing" constant="-8" id="0ID-5H-4ne"/>
                                     <constraint firstItem="Q1A-Jm-L12" firstAttribute="bottom" secondItem="FXS-ZQ-ybj" secondAttribute="bottomMargin" constant="8" id="6Zr-FQ-RQU"/>
+                                    <constraint firstAttribute="centerX" secondItem="9cM-0n-npg" secondAttribute="centerX" constant="0.5" id="7Z5-vt-ZZi"/>
                                     <constraint firstItem="gdp-z4-VND" firstAttribute="top" secondItem="FXS-ZQ-ybj" secondAttribute="topMargin" constant="-8" id="8T5-mx-pfl"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="Q1A-Jm-L12" secondAttribute="trailing" id="8UQ-eg-DaC"/>
+                                    <constraint firstAttribute="centerY" secondItem="9cM-0n-npg" secondAttribute="centerY" constant="-0.5" id="VKE-Xp-d45"/>
                                     <constraint firstItem="Q1A-Jm-L12" firstAttribute="leading" secondItem="FXS-ZQ-ybj" secondAttribute="leadingMargin" id="Ypv-q2-qgj"/>
                                     <constraint firstItem="gdp-z4-VND" firstAttribute="leading" secondItem="FXS-ZQ-ybj" secondAttribute="leadingMargin" constant="-8" id="eZJ-1f-HH9"/>
                                     <constraint firstAttribute="centerX" secondItem="Q1A-Jm-L12" secondAttribute="centerX" constant="0.5" id="g3Q-c9-bRu"/>
@@ -276,6 +285,7 @@
                                     </mask>
                                 </variation>
                                 <connections>
+                                    <outlet property="activityIndicator" destination="9cM-0n-npg" id="Jcf-bk-rL7"/>
                                     <outlet property="studentImageView" destination="gdp-z4-VND" id="N1c-ra-DMD"/>
                                     <outlet property="studentLabel" destination="Q1A-Jm-L12" id="rky-tA-LxZ"/>
                                 </connections>
@@ -287,6 +297,9 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="Sh2-yV-8Wf"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="ufu-vm-cKW" id="MCa-ON-c5B"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="klq-tE-IRK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

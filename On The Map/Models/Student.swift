@@ -16,8 +16,8 @@ class Student {
     var lastName: String? = nil
     var link: String? = nil
     
-    var imageURL: String? = nil
-    var imageData: NSData? = nil    
+    var imageData: NSData? = nil
+    var isoCountryCode: String? = nil
     
     var locationName: String? = nil
     var latitude: Float? = nil

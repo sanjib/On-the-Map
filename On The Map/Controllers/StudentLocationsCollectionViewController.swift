@@ -12,12 +12,18 @@ import MapKit
 let reuseIdentifier = "StudentCollectionViewCell"
 
 class StudentLocationsCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     // Layout properties
     let minimumSpacingBetweenCells = 5
     let cellsPerRowInPortraitMode = 3
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
+        activityIndicator.color = UIColor.blackColor()
+        activityIndicator.stopAnimating()
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -28,14 +34,18 @@ class StudentLocationsCollectionViewController: UICollectionViewController, UICo
     }
     
     func reloadStudentLocations() {
+        activityIndicator.startAnimating()
+        
         AllStudents.reload() { errorString in
             if errorString != nil {
                 dispatch_async(dispatch_get_main_queue()) {
+                    self.activityIndicator.stopAnimating()
                     self.errorAlert("Couldn't get student locations", errorMessage: errorString!)
                 }
             } else {
                 dispatch_async(dispatch_get_main_queue()) {
                     self.collectionView?.reloadData()
+                    self.activityIndicator.stopAnimating()
                 }
             }
         }
@@ -103,52 +113,54 @@ class StudentLocationsCollectionViewController: UICollectionViewController, UICo
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-//    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> StudentProfileCollectionViewCell {
-//        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! UICollectionViewCell
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! StudentProfileCollectionViewCell
-    
         let student = AllStudents.collection[indexPath.row]
-        if student.imageURL == nil {
-            UdacityClient.sharedInstance().getUserPhoto(student) { imageURL in
-                if imageURL != nil {
-                    student.imageURL = imageURL
-                    let urlString = "https:" + imageURL!
-                    if let url = NSURL(string: urlString) {
-                        println("will get \(urlString)")
-                        student.imageData = NSData(contentsOfURL: url)
-                        dispatch_async(dispatch_get_main_queue()) {
-                            self.collectionView?.reloadItemsAtIndexPaths([indexPath])
-                        }
-                    } else {
-                        student.imageData = NSData(contentsOfFile: "no-student-image")
-                    }
-                }
-            }
-        }
         
         // Configure the cell
         if let imageData = student.imageData {
             cell.studentImageView.image = UIImage(data: imageData)
         } else {
-            cell.studentImageView.image = UIImage(named: "no-student-image")
-        }
-        cell.studentLabel.text = student.firstName
-        
-        if let studentLocation = student.annotation?.coordinate {
-            let location = CLLocation(latitude: studentLocation.latitude, longitude: studentLocation.longitude)
-            CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
-                if error != nil {
-                    
+            // immediately set a no-student-image first, then if image url exists fetch the image
+            let noStudentImage = UIImage(named: "no-student-image")
+            student.imageData = NSData(data: UIImagePNGRepresentation(noStudentImage))
+            cell.studentImageView.image = noStudentImage
+            
+            cell.activityIndicator.startAnimating()
+            UdacityClient.sharedInstance().getUserPhoto(student) { imageURL in
+                if imageURL != nil {
+                    if let url = NSURL(string: "https:" + imageURL!) {
+                        student.imageData = NSData(contentsOfURL: url)
+                        dispatch_async(dispatch_get_main_queue()) {
+                            cell.activityIndicator.stopAnimating()
+                            self.collectionView?.reloadItemsAtIndexPaths([indexPath])
+                        }
+                    } else {
+                        dispatch_async(dispatch_get_main_queue()) {
+                            cell.activityIndicator.stopAnimating()
+                        }
+                    }
                 } else {
-                    if let placemark = placemarks.first as? CLPlacemark {
-                        println(placemark.ISOcountryCode)
+                    dispatch_async(dispatch_get_main_queue()) {
+                        cell.activityIndicator.stopAnimating()
                     }
                 }
             }
         }
-
-
+        cell.studentLabel.text = student.firstName
         
+        
+//        if let studentLocation = student.annotation?.coordinate {
+//            let location = CLLocation(latitude: studentLocation.latitude, longitude: studentLocation.longitude)
+//            CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
+//                if error != nil {
+//                    
+//                } else {
+//                    if let placemark = placemarks.first as? CLPlacemark {
+//                        println(placemark.ISOcountryCode)
+//                    }
+//                }
+//            }
+//        }
     
         return cell
     }
