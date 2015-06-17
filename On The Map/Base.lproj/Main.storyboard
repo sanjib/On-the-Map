@@ -100,16 +100,21 @@
                                             <action selector="signupUdacity:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vLf-Vc-hOv"/>
                                         </connections>
                                     </button>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="dWR-P9-A1l">
+                                        <rect key="frame" x="385" y="135" width="20" height="20"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="centerX" secondItem="XrQ-6a-39X" secondAttribute="centerX" id="3ni-mK-ZkU"/>
+                                    <constraint firstItem="dxg-hT-hlJ" firstAttribute="centerX" secondItem="dWR-P9-A1l" secondAttribute="centerX" constant="-111" id="5Sf-nz-r3G"/>
                                     <constraint firstAttribute="trailing" secondItem="dxg-hT-hlJ" secondAttribute="trailing" constant="8" id="7jS-OA-uCF"/>
                                     <constraint firstItem="10J-E5-cT5" firstAttribute="top" secondItem="IJo-3C-tbA" secondAttribute="top" constant="8" id="Hxb-ED-7h5"/>
                                     <constraint firstItem="m6h-1j-wGY" firstAttribute="leading" secondItem="IJo-3C-tbA" secondAttribute="leading" constant="8" id="Jxr-QG-lsZ"/>
                                     <constraint firstAttribute="centerX" secondItem="10J-E5-cT5" secondAttribute="centerX" constant="-0.25" id="KXb-dp-tKf"/>
                                     <constraint firstAttribute="height" constant="207" id="Srn-Cc-u2E"/>
                                     <constraint firstItem="dxg-hT-hlJ" firstAttribute="leading" secondItem="IJo-3C-tbA" secondAttribute="leading" constant="8" id="ar2-CX-7kd"/>
+                                    <constraint firstItem="dxg-hT-hlJ" firstAttribute="centerY" secondItem="dWR-P9-A1l" secondAttribute="centerY" id="fD0-CC-E8b"/>
                                     <constraint firstItem="dxg-hT-hlJ" firstAttribute="top" secondItem="m6h-1j-wGY" secondAttribute="bottom" constant="8" id="g8f-LP-d72"/>
                                     <constraint firstItem="XrQ-6a-39X" firstAttribute="top" secondItem="dxg-hT-hlJ" secondAttribute="bottom" constant="8" id="mGX-L7-67U"/>
                                     <constraint firstAttribute="trailing" secondItem="BEq-dN-pYB" secondAttribute="trailing" constant="8" id="mjs-T5-T50"/>
@@ -122,11 +127,15 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="udacity" translatesAutoresizingMaskIntoConstraints="NO" id="zoO-aC-K8h">
                                 <rect key="frame" x="172" y="84" width="256" height="120"/>
                             </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="mCm-08-Rf1">
+                                <rect key="frame" x="408" y="556" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.50196081399917603" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="IJo-3C-tbA" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="1fl-cv-bFa"/>
                             <constraint firstAttribute="centerX" secondItem="zoO-aC-K8h" secondAttribute="centerX" id="4N2-YD-JuW"/>
+                            <constraint firstItem="mCm-08-Rf1" firstAttribute="centerX" secondItem="5Wr-NK-oyf" secondAttribute="centerX" constant="118" id="642-Tm-tMf"/>
                             <constraint firstAttribute="centerY" secondItem="IJo-3C-tbA" secondAttribute="centerY" constant="0.5" id="9Fv-yz-A29"/>
                             <constraint firstAttribute="trailingMargin" secondItem="5Wr-NK-oyf" secondAttribute="trailing" constant="8" id="9TR-Wz-4v9"/>
                             <constraint firstAttribute="centerX" secondItem="IJo-3C-tbA" secondAttribute="centerX" id="BKv-b5-2y6"/>
@@ -134,12 +143,17 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="5Wr-NK-oyf" secondAttribute="bottom" constant="16" id="VCf-5w-9fK"/>
                             <constraint firstItem="IJo-3C-tbA" firstAttribute="top" secondItem="zoO-aC-K8h" secondAttribute="bottom" constant="-8" id="WTX-G9-u1b"/>
                             <constraint firstItem="5Wr-NK-oyf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="8" id="hb8-tg-i1q"/>
+                            <constraint firstItem="mCm-08-Rf1" firstAttribute="centerY" secondItem="5Wr-NK-oyf" secondAttribute="centerY" id="kfM-Bj-6cG"/>
                             <constraint firstAttribute="height" secondItem="zoO-aC-K8h" secondAttribute="height" multiplier="5" id="m9K-u1-QA8"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="emailTextField" destination="BEq-dN-pYB" id="egZ-Vf-XDn"/>
+                        <outlet property="facebookLoginActivityIndicator" destination="mCm-08-Rf1" id="y6Q-QX-GxQ"/>
+                        <outlet property="facebookLoginButton" destination="5Wr-NK-oyf" id="2vt-8z-Lut"/>
                         <outlet property="passwordTextField" destination="m6h-1j-wGY" id="caH-pc-o4Y"/>
+                        <outlet property="udacityLoginActivityIndicator" destination="dWR-P9-A1l" id="rCW-9u-G4O"/>
+                        <outlet property="udacityLoginButton" destination="dxg-hT-hlJ" id="9El-HE-50Z"/>
                         <segue destination="haX-2B-kbN" kind="show" identifier="StudentLocationsSegue" id="XkI-SD-sVy"/>
                     </connections>
                 </viewController>

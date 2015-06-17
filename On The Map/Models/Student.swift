@@ -15,7 +15,6 @@ class Student {
     var firstName: String? = nil
     var lastName: String? = nil
     var link: String? = nil
-    var updatedAt: NSDate? = nil
     
     var imageURL: String? = nil
     var imageData: NSData? = nil    

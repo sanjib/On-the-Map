@@ -75,10 +75,6 @@ class CommonAPI {
         task.resume()
     }
     
-    func httpDelete() {
-        
-    }
-    
     // Method helpers for subclass
     
     func methodKeySubstitute(method: String, key: String, value: String) -> String? {
