@@ -9,15 +9,12 @@
 import UIKit
 
 class StudentLocationsTableViewController: UITableViewController {
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.color = UIColor.blackColor()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -29,15 +26,24 @@ class StudentLocationsTableViewController: UITableViewController {
     }
     
     // MARK: - Student Locations
-    func reloadStudentLocations() {        
+    func reloadStudentLocations() {
+        // reset students and reload the table for an empty view to show the activityIndicator
+        // (otherwise it's not shown since the table is already populated)
+        AllStudents.reset()
+        tableView.reloadData()
+        
+        activityIndicator.startAnimating()
+        
         AllStudents.reload() { errorString in
             if errorString != nil {
                 dispatch_async(dispatch_get_main_queue()) {
+                    self.activityIndicator.stopAnimating()
                     self.errorAlert("Couldn't get student locations", errorMessage: errorString!)
                 }
             } else {
                 dispatch_async(dispatch_get_main_queue()) {
                     self.tableView.reloadData()
+                    self.activityIndicator.stopAnimating()
                 }
             }
         }

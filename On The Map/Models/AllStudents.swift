@@ -29,7 +29,7 @@ class AllStudents: NSObject {
         sortByFirstName()
     }
     
-    private static func reset() {
+    static func reset() {
         collection = [Student]()
     }
     
