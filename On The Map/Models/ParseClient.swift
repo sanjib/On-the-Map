@@ -44,7 +44,6 @@ class ParseClient: CommonAPI {
                 completionHandler(students: nil, errorString: error?.localizedDescription)
                 println(error)
             } else {
-//                println(result)
                 if let studentResults = result["results"] as? NSArray {
                     var allStudents = [Student]()
                     for studentResult in studentResults {
@@ -53,25 +52,7 @@ class ParseClient: CommonAPI {
                             continue
                         } else {                            
                             allStudents.append(student)
-                            
-                            
-//                            if let duplicateStudentByName = allStudents.filter({$0.firstName! + $0.lastName! == student.firstName! + student.lastName!}).first {
-//                                continue
-//                            } else {
-//                                allStudents.append(student)
-//                            }
                         }
-//                        if duplicateStudent != nil {
-//                            if let duplicatedStudentUpdatedAt = duplicateStudent?.updatedAt {
-//                                if student.updatedAt?.compare(duplicatedStudentUpdatedAt) == NSComparisonResult.OrderedDescending  {
-//                                    println("will replace: old- \(duplicateStudent?.updatedAt) with new- \(student.updatedAt)")
-                                    
-//                                }
-//                            }
-//                            
-//                        } else {
-                        
-//                        }
                     }
                     completionHandler(students: allStudents, errorString: nil)
                 }
@@ -118,21 +99,6 @@ class ParseClient: CommonAPI {
                 }
             }
         }
-        
-//        let request = NSMutableURLRequest(URL: NSURL(string: "https://api.parse.com/1/classes/StudentLocation")!)
-//        request.HTTPMethod = "POST"
-//        request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
-//        request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
-//        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-//        request.HTTPBody = "{\"uniqueKey\": \"1234\", \"firstName\": \"John\", \"lastName\": \"Doe\",\"mapString\": \"Mountain View, CA\", \"mediaURL\": \"https://udacity.com\",\"latitude\": 37.386052, \"longitude\": -122.083851}".dataUsingEncoding(NSUTF8StringEncoding)
-//        let session = NSURLSession.sharedSession()
-//        let task = session.dataTaskWithRequest(request) { data, response, error in
-//            if error != nil { // Handle error
-//                return
-//            }
-//            println(NSString(data: data, encoding: NSUTF8StringEncoding))
-//        }
-//        task.resume()
     }
     
     func updateStudentLocation(student: Student, completionHandler: (errorString: String?) -> Void) {
@@ -180,16 +146,6 @@ class ParseClient: CommonAPI {
         }
         if let longitude = studentResult["longitude"] as? Float {
             student.longitude = longitude
-        }
-        
-        // sometimes multiple locations exist for a student
-        // in the future we may want to check the latest updatedAt
-        // and replace that object
-        if let updatedAt = studentResult["updatedAt"] as? String {
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSz"
-            let date = dateFormatter.dateFromString(updatedAt)
-            student.updatedAt = date
         }
         return student
     }
