@@ -101,12 +101,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 User.currentUser.firstName = firstName
                 User.currentUser.lastName = lastName
                 
-//                ParseClient.sharedInstance().queryStudentLocation(userId)
-                
                 dispatch_async(dispatch_get_main_queue()) {
                     self.performSegueWithIdentifier("StudentLocationsSegue", sender: self)
                 }
-                
             }
         }
     }

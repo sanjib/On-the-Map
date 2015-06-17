@@ -22,6 +22,11 @@ class StudentLocationsNavigationController: UINavigationController {
         }
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadStudentLocations", name: "reloadStudentLocations", object: nil)
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -34,7 +39,7 @@ class StudentLocationsNavigationController: UINavigationController {
             navigationItem.setHidesBackButton(true, animated: false)
         }
         
-        let reloadButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Refresh, target: self, action: "reloadData")
+        let reloadButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Refresh, target: self, action: "reloadStudentLocations")
         let pinButton = UIBarButtonItem(image: UIImage(named: "pin"), style: UIBarButtonItemStyle.Plain, target: self, action: "pinAnnotation")
         navigationItem.rightBarButtonItems = [reloadButton, pinButton]
         
@@ -51,11 +56,10 @@ class StudentLocationsNavigationController: UINavigationController {
     }
     
     func pinAnnotation() {
-        println("pin annotation")
         performSegueWithIdentifier("InformationPostingSegue", sender: self)
     }
     
-    func reloadData() {
+    func reloadStudentLocations() {
         if self.visibleViewController.restorationIdentifier == "StudentLocationsTable" {
             let vc = self.visibleViewController as! StudentLocationsTableViewController
             vc.reloadStudentLocations()
@@ -67,15 +71,4 @@ class StudentLocationsNavigationController: UINavigationController {
             vc.reloadStudentLocations()
         }
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

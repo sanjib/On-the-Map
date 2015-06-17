@@ -8,7 +8,7 @@
 
 import Foundation
 
-class User: Student {    
-    var objectId: String? = nil
-    static let currentUser = User()
+class User {
+//    var objectId: String? = nil
+    static let currentUser = Student()
 }

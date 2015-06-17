@@ -32,10 +32,40 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
         tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "singleTap:")
         tapGestureRecognizer?.numberOfTapsRequired = 1
         self.view.addGestureRecognizer(tapGestureRecognizer!)
+        
+        if User.currentUser.objectId == nil {
+            ParseClient.sharedInstance().queryStudentLocation(User.currentUser.userId!) { student, errorString in
+                if errorString != nil {
+                    
+                } else {
+                    User.currentUser.objectId = student?.objectId
+                    User.currentUser.locationName = student?.locationName
+                    User.currentUser.link = student?.link
+                    User.currentUser.latitude = student?.latitude
+                    User.currentUser.longitude = student?.longitude
+                    dispatch_async(dispatch_get_main_queue()) {
+                        if User.currentUser.link != nil {
+                            self.linkTextField.text = User.currentUser.link!
+                        }
+                        if User.currentUser.locationName != nil {
+                            self.locationTextField.text = User.currentUser.locationName!
+                        }
+                    }
+                }
+            }
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        if User.currentUser.link != nil {
+            self.linkTextField.text = User.currentUser.link!
+        }
+        if User.currentUser.locationName != nil {
+            self.locationTextField.text = User.currentUser.locationName!
+        }
+        
         findOnTheMapContainerView.hidden = false
         submitInformationContainerView.hidden = true
         subscribeToKeyboardNotifications()
@@ -88,7 +118,43 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
     @IBAction func submitInformation(sender: UIButton) {
         // if user objectId exists, update else add
         // on success: reload parent vc (table or map)
-        self.dismissViewControllerAnimated(true, completion: nil)
+        
+        User.currentUser.locationName = self.locationTextField.text
+        User.currentUser.link = self.linkTextField.text
+        User.currentUser.latitude = self.student.latitude
+        User.currentUser.longitude = self.student.longitude
+        
+        if User.currentUser.objectId != nil {
+            ParseClient.sharedInstance().updateStudentLocation(User.currentUser) { errorString in
+                if errorString != nil {
+                    
+                } else {
+//                    AllStudents.reload() { errorString in
+//                        
+//                    }
+                    
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.dismissViewControllerAnimated(true) {
+                            NSNotificationCenter.defaultCenter().postNotificationName("reloadStudentLocations", object: nil)
+                        }
+                    }
+                }
+            }
+        } else {
+            ParseClient.sharedInstance().addStudentLocation(User.currentUser) { objectId, errorString in
+                if errorString != nil {
+                    
+                } else {
+                    User.currentUser.objectId = objectId
+                    AllStudents.reload() { errorString in
+                        
+                    }
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.dismissViewControllerAnimated(true, completion: nil)
+                    }
+                }
+            }
+        }
     }
     
     // MARK: - Map methods

@@ -54,6 +54,27 @@ class CommonAPI {
         task.resume()
     }
     
+    func httpPut(url: String, httpBodyParams: [String:AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
+        let request = NSMutableURLRequest(URL: NSURL(string: url)!)
+        if let additionalHTTPHeaderFields = self.additionalHTTPHeaderFields {
+            for (httpHeaderField, value) in additionalHTTPHeaderFields {
+                request.addValue(value, forHTTPHeaderField: httpHeaderField)
+            }
+        }
+        request.HTTPMethod = "PUT"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.HTTPBody = NSJSONSerialization.dataWithJSONObject(httpBodyParams, options: nil, error: nil)
+        
+        let task = session.dataTaskWithRequest(request) { data, response, error in
+            if error != nil {
+                completionHandler(result: nil, error: error)
+                return
+            }
+            self.parseJSONData(data, completionHandler: completionHandler)
+        }
+        task.resume()
+    }
+    
     func httpDelete() {
         
     }

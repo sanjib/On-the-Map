@@ -10,6 +10,8 @@ import Foundation
 
 class Student {
     var userId: String? = nil
+    var objectId: String? = nil
+    
     var firstName: String? = nil
     var lastName: String? = nil
     var link: String? = nil
