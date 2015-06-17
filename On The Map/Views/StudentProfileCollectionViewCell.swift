@@ -12,11 +12,17 @@ class StudentProfileCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var studentImageView: UIImageView!
     @IBOutlet weak var studentLabel: UILabel!
+    @IBOutlet weak var flagImageView: UIImageView!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
         studentImageView.contentMode = UIViewContentMode.ScaleAspectFill
         studentImageView.clipsToBounds = true
+        
+        flagImageView.contentMode = UIViewContentMode.ScaleAspectFill
+        flagImageView.clipsToBounds = true
+        
         activityIndicator.hidesWhenStopped = true
         activityIndicator.stopAnimating()
     }

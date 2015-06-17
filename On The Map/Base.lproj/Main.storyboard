@@ -264,15 +264,24 @@
                                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="9cM-0n-npg">
                                             <rect key="frame" x="85" y="86" width="20" height="20"/>
                                         </activityIndicatorView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GXA-ih-wAC">
+                                            <rect key="frame" x="159" y="161" width="32" height="22"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="32" id="0KU-Lc-RlV"/>
+                                                <constraint firstAttribute="height" constant="22" id="vhB-fs-H9x"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <constraints>
                                     <constraint firstAttribute="trailingMargin" secondItem="gdp-z4-VND" secondAttribute="trailing" constant="-8" id="0ID-5H-4ne"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="GXA-ih-wAC" secondAttribute="trailing" constant="-8" id="2iA-A2-EQM"/>
                                     <constraint firstItem="Q1A-Jm-L12" firstAttribute="bottom" secondItem="FXS-ZQ-ybj" secondAttribute="bottomMargin" constant="8" id="6Zr-FQ-RQU"/>
                                     <constraint firstAttribute="centerX" secondItem="9cM-0n-npg" secondAttribute="centerX" constant="0.5" id="7Z5-vt-ZZi"/>
                                     <constraint firstItem="gdp-z4-VND" firstAttribute="top" secondItem="FXS-ZQ-ybj" secondAttribute="topMargin" constant="-8" id="8T5-mx-pfl"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="Q1A-Jm-L12" secondAttribute="trailing" id="8UQ-eg-DaC"/>
+                                    <constraint firstItem="GXA-ih-wAC" firstAttribute="bottom" secondItem="FXS-ZQ-ybj" secondAttribute="bottomMargin" id="JOt-aE-sK9"/>
                                     <constraint firstAttribute="centerY" secondItem="9cM-0n-npg" secondAttribute="centerY" constant="-0.5" id="VKE-Xp-d45"/>
                                     <constraint firstItem="Q1A-Jm-L12" firstAttribute="leading" secondItem="FXS-ZQ-ybj" secondAttribute="leadingMargin" id="Ypv-q2-qgj"/>
                                     <constraint firstItem="gdp-z4-VND" firstAttribute="leading" secondItem="FXS-ZQ-ybj" secondAttribute="leadingMargin" constant="-8" id="eZJ-1f-HH9"/>
@@ -286,6 +295,7 @@
                                 </variation>
                                 <connections>
                                     <outlet property="activityIndicator" destination="9cM-0n-npg" id="Jcf-bk-rL7"/>
+                                    <outlet property="flagImageView" destination="GXA-ih-wAC" id="OSi-8p-5aN"/>
                                     <outlet property="studentImageView" destination="gdp-z4-VND" id="N1c-ra-DMD"/>
                                     <outlet property="studentLabel" destination="Q1A-Jm-L12" id="rky-tA-LxZ"/>
                                 </connections>

@@ -17,6 +17,7 @@ class Student {
     var link: String? = nil
     
     var imageData: NSData? = nil
+    var imageFetchInProgress: Bool = false
     var isoCountryCode: String? = nil
     
     var locationName: String? = nil

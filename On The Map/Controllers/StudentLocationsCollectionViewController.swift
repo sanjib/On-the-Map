@@ -108,13 +108,23 @@ class StudentLocationsCollectionViewController: UICollectionViewController, UICo
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //#warning Incomplete method implementation -- Return the number of items in the section
-        println(AllStudents.collection.count)
         return AllStudents.collection.count
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! StudentProfileCollectionViewCell
+        cell.activityIndicator.stopAnimating()
+        
         let student = AllStudents.collection[indexPath.row]
+        
+        // keep track of image fetch in progress because the cell may be dequed
+        if student.imageFetchInProgress {
+            cell.activityIndicator.startAnimating()
+        } else {
+            cell.activityIndicator.stopAnimating()
+        }
+        
+        cell.studentLabel.text = student.firstName
         
         // Configure the cell
         if let imageData = student.imageData {
@@ -125,42 +135,56 @@ class StudentLocationsCollectionViewController: UICollectionViewController, UICo
             student.imageData = NSData(data: UIImagePNGRepresentation(noStudentImage))
             cell.studentImageView.image = noStudentImage
             
+            student.imageFetchInProgress = true
             cell.activityIndicator.startAnimating()
             UdacityClient.sharedInstance().getUserPhoto(student) { imageURL in
                 if imageURL != nil {
                     if let url = NSURL(string: "https:" + imageURL!) {
                         student.imageData = NSData(contentsOfURL: url)
+                        student.imageFetchInProgress = false
                         dispatch_async(dispatch_get_main_queue()) {
                             cell.activityIndicator.stopAnimating()
                             self.collectionView?.reloadItemsAtIndexPaths([indexPath])
                         }
                     } else {
+                        student.imageFetchInProgress = false
                         dispatch_async(dispatch_get_main_queue()) {
                             cell.activityIndicator.stopAnimating()
                         }
                     }
                 } else {
+                    student.imageFetchInProgress = false
                     dispatch_async(dispatch_get_main_queue()) {
                         cell.activityIndicator.stopAnimating()
                     }
                 }
             }
         }
-        cell.studentLabel.text = student.firstName
         
-        
-//        if let studentLocation = student.annotation?.coordinate {
-//            let location = CLLocation(latitude: studentLocation.latitude, longitude: studentLocation.longitude)
-//            CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
-//                if error != nil {
-//                    
-//                } else {
-//                    if let placemark = placemarks.first as? CLPlacemark {
-//                        println(placemark.ISOcountryCode)
-//                    }
-//                }
-//            }
-//        }
+        if let isoCountryCode = student.isoCountryCode {
+            if let flagImage = UIImage(named: isoCountryCode.lowercaseString) {
+                cell.flagImageView.image = flagImage
+            }
+        } else {
+            if let studentLocation = student.annotation?.coordinate {
+                let location = CLLocation(latitude: studentLocation.latitude, longitude: studentLocation.longitude)
+                CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
+                    if error != nil {
+
+                    } else {
+                        if let placemark = placemarks.first as? CLPlacemark {
+                            student.isoCountryCode = placemark.ISOcountryCode
+                            dispatch_async(dispatch_get_main_queue()) {
+                                self.collectionView?.reloadItemsAtIndexPaths([indexPath])
+//                                if let flagImage = UIImage(named: student.isoCountryCode!.lowercaseString) {
+//                                    cell.flagImageView.image = flagImage
+//                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     
         return cell
     }
