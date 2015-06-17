@@ -300,17 +300,23 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="hLy-8w-wek">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </mapView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Uk8-18-SpZ">
+                                <rect key="frame" x="282" y="281" width="37" height="37"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="centerY" secondItem="Uk8-18-SpZ" secondAttribute="centerY" constant="0.5" id="3Rd-Xx-V2p"/>
                             <constraint firstItem="hLy-8w-wek" firstAttribute="bottom" secondItem="sum-DZ-8mx" secondAttribute="bottomMargin" id="Cbc-R5-Sib"/>
                             <constraint firstAttribute="trailingMargin" secondItem="hLy-8w-wek" secondAttribute="trailing" constant="-16" id="OSA-Xi-PBk"/>
                             <constraint firstItem="hLy-8w-wek" firstAttribute="top" secondItem="sum-DZ-8mx" secondAttribute="topMargin" id="VAV-DK-pzN"/>
+                            <constraint firstAttribute="centerX" secondItem="Uk8-18-SpZ" secondAttribute="centerX" constant="-0.5" id="eHI-Cv-VKP"/>
                             <constraint firstItem="hLy-8w-wek" firstAttribute="leading" secondItem="sum-DZ-8mx" secondAttribute="leadingMargin" constant="-16" id="g3p-KG-bpp"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="tGQ-35-XGk"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="Uk8-18-SpZ" id="Rxd-Vh-63S"/>
                         <outlet property="studentLocationsMapView" destination="hLy-8w-wek" id="2hg-AL-fXh"/>
                     </connections>
                 </viewController>

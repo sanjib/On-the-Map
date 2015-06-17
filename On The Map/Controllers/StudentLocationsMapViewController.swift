@@ -11,10 +11,13 @@ import MapKit
 
 class StudentLocationsMapViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var studentLocationsMapView: MKMapView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         studentLocationsMapView.delegate = self
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.color = UIColor.blackColor()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -26,9 +29,12 @@ class StudentLocationsMapViewController: UIViewController, MKMapViewDelegate {
     
     // MARK: - Student Locations
     func reloadStudentLocations() {
+        self.activityIndicator.startAnimating()
+        
         AllStudents.reload() { errorString in
             if errorString != nil {
                 dispatch_async(dispatch_get_main_queue()) {
+                    self.activityIndicator.stopAnimating()
                     self.errorAlert("Couldn't get student locations", errorMessage: errorString!)
                 }
             } else {
@@ -37,6 +43,7 @@ class StudentLocationsMapViewController: UIViewController, MKMapViewDelegate {
                     for student in AllStudents.collection {
                         self.studentLocationsMapView.addAnnotation(student.annotation)
                     }
+                    self.activityIndicator.stopAnimating()
                 }
             }
         }
