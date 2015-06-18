@@ -124,6 +124,22 @@ class UdacityClient: CommonAPI {
         }
     }
     
+    func logout(completionHandler: (success: Bool?, errorString: String?) -> Void) {
+        let url = Methods.session
+        httpDelete(url, cookieName: "XSRF-TOKEN") { result, error in
+            if error != nil {
+                completionHandler(success: nil, errorString: error?.localizedDescription)
+            } else {
+                if let session = result["session"] as? NSDictionary {
+                    completionHandler(success: true, errorString: nil)
+                } else {
+                    completionHandler(success: nil, errorString: "An unknown error occured.")
+                }
+            }
+            
+        }
+    }
+    
     static func sharedInstance() -> UdacityClient {
         let sharedInstance = UdacityClient()
         return sharedInstance

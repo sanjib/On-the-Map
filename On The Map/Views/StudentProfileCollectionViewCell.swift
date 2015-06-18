@@ -22,9 +22,10 @@ class StudentProfileCollectionViewCell: UICollectionViewCell {
         
         flagImageView.contentMode = UIViewContentMode.ScaleAspectFill
         flagImageView.clipsToBounds = true
+        flagImageView.layer.borderColor = UIColor.grayColor().CGColor
+        flagImageView.layer.borderWidth = 0
         
         activityIndicator.hidesWhenStopped = true
-        activityIndicator.stopAnimating()
     }
     
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		200105A21B33102100C8C3FA /* IJReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200105A11B33102100C8C3FA /* IJReachability.swift */; };
 		203F72251B27B7E300BD48A8 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 203F72231B27B7E300BD48A8 /* FBSDKCoreKit.framework */; };
 		203F72261B27B7E300BD48A8 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 203F72241B27B7E300BD48A8 /* FBSDKLoginKit.framework */; };
 		203F72281B27C3BE00BD48A8 /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203F72271B27C3BE00BD48A8 /* Student.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		200105A11B33102100C8C3FA /* IJReachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IJReachability.swift; sourceTree = "<group>"; };
 		203F72231B27B7E300BD48A8 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		203F72241B27B7E300BD48A8 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		203F72271B27C3BE00BD48A8 /* Student.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Student.swift; path = Models/Student.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 			children = (
 				203F72231B27B7E300BD48A8 /* FBSDKCoreKit.framework */,
 				203F72241B27B7E300BD48A8 /* FBSDKLoginKit.framework */,
+				200105A11B33102100C8C3FA /* IJReachability.swift */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 				20E696A21B26734E00877E9F /* StudentLocationsNavigationController.swift in Sources */,
 				206D4E8F1B22895600BE18B9 /* RoundStyleButton.swift in Sources */,
 				20E6969E1B26714E00877E9F /* StudentLocationsTableViewController.swift in Sources */,
+				200105A21B33102100C8C3FA /* IJReachability.swift in Sources */,
 				206D4E671B227BDB00BE18B9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -10,5 +10,9 @@ import Foundation
 
 class User {
 //    var objectId: String? = nil
-    static let currentUser = Student()
+    static var currentUser = Student()
+    
+    static func reset() {
+        currentUser = Student()
+    }
 }

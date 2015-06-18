@@ -14,6 +14,9 @@ let reuseIdentifier = "StudentCollectionViewCell"
 class StudentLocationsCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    private let noStudentImage = UIImage(named: "no-student-image")
+    private let noStudentImageData = NSData(data: UIImagePNGRepresentation(UIImage(named: "no-student-image")))
+    
     // Layout properties
     let minimumSpacingBetweenCells = 5
     let cellsPerRowInPortraitMode = 3
@@ -58,16 +61,6 @@ class StudentLocationsCollectionViewController: UICollectionViewController, UICo
         alert.addAction(alertAction)
         self.presentViewController(alert, animated: true, completion: nil)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     // MARK: - UICollectionViewDelegateFlowLayout
     
@@ -101,40 +94,34 @@ class StudentLocationsCollectionViewController: UICollectionViewController, UICo
     // MARK: UICollectionViewDataSource
 
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        //#warning Incomplete method implementation -- Return the number of sections
         return 1
     }
 
-
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //#warning Incomplete method implementation -- Return the number of items in the section
         return AllStudents.collection.count
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! StudentProfileCollectionViewCell
-        cell.activityIndicator.stopAnimating()
         
         let student = AllStudents.collection[indexPath.row]
+        cell.studentLabel.text = student.firstName
         
-        // keep track of image fetch in progress because the cell may be dequed
+        // Keep track of image fetch in progress because the cell may be dequed
         if student.imageFetchInProgress {
             cell.activityIndicator.startAnimating()
         } else {
             cell.activityIndicator.stopAnimating()
         }
-        
-        cell.studentLabel.text = student.firstName
-        
-        // Configure the cell
+
+        // Student images
         if let imageData = student.imageData {
             cell.studentImageView.image = UIImage(data: imageData)
         } else {
             // immediately set a no-student-image first, then if image url exists fetch the image
-            let noStudentImage = UIImage(named: "no-student-image")
-            student.imageData = NSData(data: UIImagePNGRepresentation(noStudentImage))
+            student.imageData = noStudentImageData
             cell.studentImageView.image = noStudentImage
-            
+
             student.imageFetchInProgress = true
             cell.activityIndicator.startAnimating()
             UdacityClient.sharedInstance().getUserPhoto(student) { imageURL in
@@ -143,42 +130,44 @@ class StudentLocationsCollectionViewController: UICollectionViewController, UICo
                         student.imageData = NSData(contentsOfURL: url)
                         student.imageFetchInProgress = false
                         dispatch_async(dispatch_get_main_queue()) {
-                            cell.activityIndicator.stopAnimating()
                             self.collectionView?.reloadItemsAtIndexPaths([indexPath])
                         }
                     } else {
                         student.imageFetchInProgress = false
                         dispatch_async(dispatch_get_main_queue()) {
-                            cell.activityIndicator.stopAnimating()
+                            self.collectionView?.reloadItemsAtIndexPaths([indexPath])
                         }
                     }
                 } else {
                     student.imageFetchInProgress = false
                     dispatch_async(dispatch_get_main_queue()) {
-                        cell.activityIndicator.stopAnimating()
+                        self.collectionView?.reloadItemsAtIndexPaths([indexPath])
                     }
                 }
             }
         }
         
+        // Flags
         if let isoCountryCode = student.isoCountryCode {
             if let flagImage = UIImage(named: isoCountryCode.lowercaseString) {
+                cell.flagImageView.layer.borderWidth = 1.0
                 cell.flagImageView.image = flagImage
+            } else {
+                cell.flagImageView.layer.borderWidth = 0
+                cell.flagImageView.image = nil
             }
         } else {
             if let studentLocation = student.annotation?.coordinate {
                 let location = CLLocation(latitude: studentLocation.latitude, longitude: studentLocation.longitude)
                 CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
                     if error != nil {
-
+                        // Silently fail because there is no need to alert user that 
+                        // we couldn't get the country ISO code for displaying flag
                     } else {
                         if let placemark = placemarks.first as? CLPlacemark {
                             student.isoCountryCode = placemark.ISOcountryCode
                             dispatch_async(dispatch_get_main_queue()) {
                                 self.collectionView?.reloadItemsAtIndexPaths([indexPath])
-//                                if let flagImage = UIImage(named: student.isoCountryCode!.lowercaseString) {
-//                                    cell.flagImageView.image = flagImage
-//                                }
                             }
                         }
                     }
@@ -188,38 +177,5 @@ class StudentLocationsCollectionViewController: UICollectionViewController, UICo
     
         return cell
     }
-    
-
-
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(collectionView: UICollectionView, shouldShowMenuForItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(collectionView: UICollectionView, canPerformAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
-        return false
-    }
-
-    override func collectionView(collectionView: UICollectionView, performAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
-    
-    }
-    */
 
 }

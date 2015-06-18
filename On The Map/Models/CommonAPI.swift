@@ -75,6 +75,36 @@ class CommonAPI {
         task.resume()
     }
     
+    func httpDelete(url: String, cookieName: String?, completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
+        let request = NSMutableURLRequest(URL: NSURL(string: url)!)
+        if let additionalHTTPHeaderFields = self.additionalHTTPHeaderFields {
+            for (httpHeaderField, value) in additionalHTTPHeaderFields {
+                request.addValue(value, forHTTPHeaderField: httpHeaderField)
+            }
+        }
+        request.HTTPMethod = "DELETE"
+
+        if let cookieName = cookieName {
+            var cookie: NSHTTPCookie? = nil
+            let sharedCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+            for sharedCookie in sharedCookieStorage.cookies as! [NSHTTPCookie] {
+                if sharedCookie.name == cookieName { cookie = sharedCookie }
+            }
+            if let cookie = cookie {
+                request.addValue(cookie.value!, forHTTPHeaderField: cookieName)
+            }
+        }
+
+        let task = session.dataTaskWithRequest(request) { data, response, error in
+            if error != nil {
+                completionHandler(result: nil, error: error)
+                return
+            }
+            self.parseJSONData(data, completionHandler: completionHandler)
+        }
+        task.resume()
+    }
+    
     // Method helpers for subclass
     
     func methodKeySubstitute(method: String, key: String, value: String) -> String? {

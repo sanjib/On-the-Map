@@ -13,6 +13,11 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var linkTextField: UITextField!
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var findOnTheMapActivityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var submitInformationActivityIndicator: UIActivityIndicatorView!
+    
+    @IBOutlet weak var findOnTheMapButton: RoundStyleButton!
+    @IBOutlet weak var submitInformationButton: RoundStyleButton!
     
     @IBOutlet weak var findOnTheMapContainerView: UIView!
     @IBOutlet weak var submitInformationContainerView: UIView!
@@ -32,6 +37,9 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
         tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "singleTap:")
         tapGestureRecognizer?.numberOfTapsRequired = 1
         self.view.addGestureRecognizer(tapGestureRecognizer!)
+        
+        findOnTheMapActivityIndicator.hidesWhenStopped = true
+        submitInformationActivityIndicator.hidesWhenStopped = true
         
         if User.currentUser.objectId == nil {
             ParseClient.sharedInstance().queryStudentLocation(User.currentUser.userId!) { student, errorString in
@@ -68,12 +76,38 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
         
         findOnTheMapContainerView.hidden = false
         submitInformationContainerView.hidden = true
+        
+        findOnTheMapActivityIndicatorStop()
+        submitInformationActivityIndicatorStop()
+        
         subscribeToKeyboardNotifications()
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         unsubscribeToKeyboardNotifications()
+    }
+    
+    // MARK: - Activity indicator
+    
+    private func findOnTheMapActivityIndicatorStart() {
+        findOnTheMapButton.setTitle("Locating...", forState: UIControlState.Normal)
+        findOnTheMapActivityIndicator.startAnimating()
+    }
+    
+    private func findOnTheMapActivityIndicatorStop() {
+        findOnTheMapButton.setTitle("Find on the Map", forState: UIControlState.Normal)
+        findOnTheMapActivityIndicator.stopAnimating()
+    }
+    
+    private func submitInformationActivityIndicatorStart() {
+        submitInformationButton.setTitle("Submitting...", forState: UIControlState.Normal)
+        submitInformationActivityIndicator.startAnimating()
+    }
+    
+    private func submitInformationActivityIndicatorStop() {
+        submitInformationButton.setTitle("Submit", forState: UIControlState.Normal)
+        submitInformationActivityIndicator.stopAnimating()
     }
     
     // MARK: - Button actions
@@ -91,9 +125,11 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
         if locationTextField.text == "" {
             errorAlert("Empty Location", errorMessage: "Please type a location")
         } else {
+            findOnTheMapActivityIndicatorStart()
             CLGeocoder().geocodeAddressString(locationTextField.text) { placemarks, error in
                 if error != nil {
                     dispatch_async(dispatch_get_main_queue()) {
+                        self.findOnTheMapActivityIndicatorStop()
                         self.errorAlert("Couldn't find location", errorMessage: error.localizedDescription)
                     }
                 } else {
@@ -103,10 +139,12 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
                                 self.findOnTheMapContainerView.hidden = true
                                 self.submitInformationContainerView.hidden = false
                                 self.showStudentLocation(placemark.location)
+                                self.findOnTheMapActivityIndicatorStop()
                             }
                         }
                     } else {
                         dispatch_async(dispatch_get_main_queue()) {
+                            self.findOnTheMapActivityIndicatorStop()
                             self.errorAlert("Multiple locations found", errorMessage: "Please type a more specific location")
                         }
                     }
@@ -124,33 +162,37 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
         User.currentUser.latitude = self.student.latitude
         User.currentUser.longitude = self.student.longitude
         
+        submitInformationActivityIndicatorStart()
         if User.currentUser.objectId != nil {
             ParseClient.sharedInstance().updateStudentLocation(User.currentUser) { errorString in
                 if errorString != nil {
-                    
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.submitInformationActivityIndicatorStop()
+                        
+                    }
                 } else {
-//                    AllStudents.reload() { errorString in
-//                        
-//                    }
-                    
                     dispatch_async(dispatch_get_main_queue()) {
                         self.dismissViewControllerAnimated(true) {
                             NSNotificationCenter.defaultCenter().postNotificationName("reloadStudentLocations", object: nil)
                         }
+                        self.submitInformationActivityIndicatorStop()
                     }
                 }
             }
         } else {
             ParseClient.sharedInstance().addStudentLocation(User.currentUser) { objectId, errorString in
                 if errorString != nil {
-                    
-                } else {
-                    User.currentUser.objectId = objectId
-                    AllStudents.reload() { errorString in
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.submitInformationActivityIndicatorStop()
                         
                     }
+                } else {
+                    User.currentUser.objectId = objectId
                     dispatch_async(dispatch_get_main_queue()) {
-                        self.dismissViewControllerAnimated(true, completion: nil)
+                        self.dismissViewControllerAnimated(true) {
+                            NSNotificationCenter.defaultCenter().postNotificationName("reloadStudentLocations", object: nil)
+                        }
+                        self.submitInformationActivityIndicatorStop()
                     }
                 }
             }

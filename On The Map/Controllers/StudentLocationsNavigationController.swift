@@ -33,10 +33,11 @@ class StudentLocationsNavigationController: UINavigationController {
         let navigationItem = UINavigationItem(title: "On The Map")
         
         if isUserCurrentlyLoggedInToFacebook {
-            let logoutButton = UIBarButtonItem(title: "Logout", style: UIBarButtonItemStyle.Plain, target: self, action: "logout")
+            let logoutButton = UIBarButtonItem(title: "Logout", style: UIBarButtonItemStyle.Plain, target: self, action: "logoutFacebook")
             navigationItem.leftBarButtonItem = logoutButton
         } else {
-            navigationItem.setHidesBackButton(true, animated: false)
+            let logoutButton = UIBarButtonItem(title: "Logout", style: UIBarButtonItemStyle.Plain, target: self, action: "logoutUdacity")
+            navigationItem.leftBarButtonItem = logoutButton
         }
         
         let reloadButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Refresh, target: self, action: "reloadStudentLocations")
@@ -47,11 +48,37 @@ class StudentLocationsNavigationController: UINavigationController {
         
     }
     
-    func logout() {
+    func logoutFacebook() {
         if isUserCurrentlyLoggedInToFacebook {
             FBSDKLoginManager().logOut()
-            // reset user / set user to nil
+            AllStudents.reset()
+            User.reset()
             dismissViewControllerAnimated(true, completion: nil)
+        }
+    }
+    
+    func logoutUdacity() {
+        UdacityClient.sharedInstance().logout { success, errorString in
+            if errorString != nil {
+                if self.visibleViewController.restorationIdentifier == "StudentLocationsTable" {
+                    let vc = self.visibleViewController as! StudentLocationsTableViewController
+                    vc.errorAlert("Couln't logout", errorMessage: errorString!)
+                } else if self.visibleViewController.restorationIdentifier == "StudentLocationsMap" {
+                    let vc = self.visibleViewController as! StudentLocationsMapViewController
+                    vc.errorAlert("Couln't logout", errorMessage: errorString!)
+                } else if self.visibleViewController.restorationIdentifier == "StudentLocationsCollection" {
+                    let vc = self.visibleViewController as! StudentLocationsCollectionViewController
+                    vc.errorAlert("Couln't logout", errorMessage: errorString!)
+                }
+            } else {
+                if success != nil {
+                    dispatch_async(dispatch_get_main_queue()) {
+                        AllStudents.reset()
+                        User.reset()
+                        self.dismissViewControllerAnimated(true, completion: nil)
+                    }
+                }
+            }
         }
     }
     
