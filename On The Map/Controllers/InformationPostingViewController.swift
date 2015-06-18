@@ -121,6 +121,14 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
         submitInformationContainerView.hidden = true
     }
 
+    @IBAction func verifyLink(sender: UIButton) {
+        if let urlString = linkTextField.text {
+            if let url = NSURL(string: urlString) {
+                UIApplication.sharedApplication().openURL(url)
+            }
+        }
+    }
+    
     @IBAction func findOnTheMap(sender: UIButton) {
         if locationTextField.text == "" {
             errorAlert("Empty Location", errorMessage: "Please type a location")

@@ -18,6 +18,8 @@
             <string>Roboto-Regular</string>
             <string>Roboto-Regular</string>
             <string>Roboto-Regular</string>
+            <string>Roboto-Regular</string>
+            <string>Roboto-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -463,6 +465,7 @@ today?</string>
                                             <constraint firstAttribute="width" constant="175" id="0lf-Ug-7Bl"/>
                                             <constraint firstAttribute="height" constant="36" id="IEy-RE-wDb"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                         <state key="normal" title="Submit">
                                             <color key="titleColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -474,15 +477,32 @@ today?</string>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="VbT-LP-UMx">
                                         <rect key="frame" x="358" y="493" width="20" height="20"/>
                                     </activityIndicatorView>
+                                    <button opaque="NO" alpha="0.49999999999999961" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SKb-c6-LRF">
+                                        <rect key="frame" x="245" y="162" width="110" height="30"/>
+                                        <color key="backgroundColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="110" id="ZTn-2b-kmT"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
+                                        <state key="normal" title="Verify Link">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="verifyLink:" destination="fGo-kf-JSo" eventType="touchUpInside" id="8qy-fM-Tcm"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="orx-cs-j1I" firstAttribute="top" secondItem="bK5-hj-Tu3" secondAttribute="top" constant="20" id="1x9-W0-mhJ"/>
                                     <constraint firstAttribute="trailing" secondItem="orx-cs-j1I" secondAttribute="trailing" constant="8" id="51H-yU-zpi"/>
                                     <constraint firstAttribute="centerX" secondItem="YcQ-co-2HJ" secondAttribute="centerX" constant="-0.5" id="6gY-8Z-Lyp"/>
+                                    <constraint firstItem="XOx-1M-eiG" firstAttribute="centerX" secondItem="SKb-c6-LRF" secondAttribute="centerX" id="7DU-le-puV"/>
                                     <constraint firstAttribute="height" secondItem="XOx-1M-eiG" secondAttribute="height" multiplier="3:1" id="AIK-om-raD"/>
                                     <constraint firstItem="XOx-1M-eiG" firstAttribute="leading" secondItem="bK5-hj-Tu3" secondAttribute="leading" id="CIk-pQ-lgq"/>
                                     <constraint firstAttribute="trailing" secondItem="bP4-gv-khR" secondAttribute="trailing" id="EeA-M8-yQH"/>
+                                    <constraint firstItem="SKb-c6-LRF" firstAttribute="top" secondItem="XOx-1M-eiG" secondAttribute="bottom" constant="-38" id="L9W-ri-dkt"/>
                                     <constraint firstItem="VbT-LP-UMx" firstAttribute="leading" secondItem="YcQ-co-2HJ" secondAttribute="trailing" constant="-30" id="OSo-0N-EOO"/>
                                     <constraint firstItem="XOx-1M-eiG" firstAttribute="top" secondItem="bK5-hj-Tu3" secondAttribute="top" id="PJb-Aw-TGb"/>
                                     <constraint firstAttribute="bottom" secondItem="bP4-gv-khR" secondAttribute="bottom" id="WJU-pw-XOc"/>
