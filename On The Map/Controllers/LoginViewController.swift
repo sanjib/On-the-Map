@@ -58,8 +58,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             if errorString != nil {
                 dispatch_async(dispatch_get_main_queue()) {
                     self.udacityLoginIndicatorNormal()
-                    self.errorAlert("Couldn't login to Udacity account", errorMessage: errorString!)
-                }                
+                    ErrorAlert.create("Udacity Login Failed", errorMessage: errorString!, viewController: self)
+                }
             } else {
                 if let userId = userId {
                     self.initUserData(userId)
@@ -111,21 +111,25 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     private func udacityLoginIndicatorNormal() {
         udacityLoginActivityIndicator.stopAnimating()
+        view.userInteractionEnabled = true
         udacityLoginButton.setTitle(self.udacityLoginButtonTitleNormal, forState: .Normal)
     }
     
     private func udacityLoginIndicatorLoggingIn() {
         udacityLoginActivityIndicator.startAnimating()
+        view.userInteractionEnabled = false
         udacityLoginButton.setTitle(udacityLoginButtonTitleLoggingIn, forState: .Normal)
     }
     
     private func facebookLoginIndicatorNormal() {
         facebookLoginActivityIndicator.stopAnimating()
+        view.userInteractionEnabled = true
         facebookLoginButton.setTitle(self.facebookLoginButtonTitleNormal, forState: .Normal)
     }
     
     private func facebookLoginIndicatorLoggingIn() {
         facebookLoginActivityIndicator.startAnimating()
+        view.userInteractionEnabled = false
         facebookLoginButton.setTitle(facebookLoginButtonTitleLoggingIn, forState: .Normal)
     }
     
@@ -156,7 +160,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Alert
     func errorAlert(errorTitle: String, errorMessage: String) {
         let alert = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let image = UIImage(named: "error")
+        let imageView = UIImageView(image: image)
+        imageView.frame.origin.x += 10
+        imageView.frame.origin.y += 10
+        alert.view.addSubview(imageView)
+        
         let alertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+        
         alert.addAction(alertAction)
         self.presentViewController(alert, animated: true, completion: nil)
     }

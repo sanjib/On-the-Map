@@ -163,9 +163,17 @@ class StudentLocationsCollectionViewController: UICollectionViewController, UICo
                     if error != nil {
                         // Silently fail because there is no need to alert user that 
                         // we couldn't get the country ISO code for displaying flag
+                        student.isoCountryCode = "unitednations"
+                        dispatch_async(dispatch_get_main_queue()) {
+                            self.collectionView?.reloadItemsAtIndexPaths([indexPath])
+                        }
                     } else {
                         if let placemark = placemarks.first as? CLPlacemark {
-                            student.isoCountryCode = placemark.ISOcountryCode
+                            if let isoCountryCode = placemark.ISOcountryCode {
+                                student.isoCountryCode = placemark.ISOcountryCode
+                            } else {
+                                student.isoCountryCode = "unitednations"
+                            }
                             dispatch_async(dispatch_get_main_queue()) {
                                 self.collectionView?.reloadItemsAtIndexPaths([indexPath])
                             }

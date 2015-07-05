@@ -15,21 +15,32 @@ class CommonAPI {
     var skipResponseDataLength: Int? = nil
     var additionalHTTPHeaderFields: [String:String]? = nil
     
-    func httpGet(url: String, completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
-        let request = NSMutableURLRequest(URL: NSURL(string: url)!)
-        if let additionalHTTPHeaderFields = self.additionalHTTPHeaderFields {
-            for (httpHeaderField, value) in additionalHTTPHeaderFields {
-                request.addValue(value, forHTTPHeaderField: httpHeaderField)
+    func httpGet(urlString: String, completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
+        // FIX ME: fatal error: unexpectedly found nil while unwrapping an Optional value
+        
+        if urlString != "" {
+            if let url = NSURL(string: urlString) {
+                let request = NSMutableURLRequest(URL: url)
+                if let additionalHTTPHeaderFields = self.additionalHTTPHeaderFields {
+                    for (httpHeaderField, value) in additionalHTTPHeaderFields {
+                        request.addValue(value, forHTTPHeaderField: httpHeaderField)
+                    }
+                }
+                let task = session.dataTaskWithRequest(request) { data, response, error in
+                    if error != nil {
+                        completionHandler(result: nil, error: error)
+                        return
+                    }
+                    self.parseJSONData(data, completionHandler: completionHandler)
+                }
+                task.resume()
+            } else {
+                completionHandler(result: nil, error: NSError(domain: "OnTheMap Error", code: 1, userInfo: [NSLocalizedDescriptionKey : "Invalid URL"]))
             }
+        } else {
+            completionHandler(result: nil, error: NSError(domain: "OnTheMap Error", code: 1, userInfo: [NSLocalizedDescriptionKey : "Empty URL"]))
         }
-        let task = session.dataTaskWithRequest(request) { data, response, error in
-            if error != nil {
-                completionHandler(result: nil, error: error)
-                return
-            }            
-            self.parseJSONData(data, completionHandler: completionHandler)
-        }
-        task.resume()
+        
     }
     
     func httpPost(url: String, httpBodyParams: [String:AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
