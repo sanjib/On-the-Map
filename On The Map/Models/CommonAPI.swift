@@ -16,8 +16,6 @@ class CommonAPI {
     var additionalHTTPHeaderFields: [String:String]? = nil
     
     func httpGet(urlString: String, completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
-        // FIX ME: fatal error: unexpectedly found nil while unwrapping an Optional value
-        
         if urlString != "" {
             if let url = NSURL(string: urlString) {
                 let request = NSMutableURLRequest(URL: url)
@@ -43,77 +41,101 @@ class CommonAPI {
         
     }
     
-    func httpPost(url: String, httpBodyParams: [String:AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
-        let request = NSMutableURLRequest(URL: NSURL(string: url)!)
-        if let additionalHTTPHeaderFields = self.additionalHTTPHeaderFields {
-            for (httpHeaderField, value) in additionalHTTPHeaderFields {
-                request.addValue(value, forHTTPHeaderField: httpHeaderField)
+    func httpPost(urlString: String, httpBodyParams: [String:AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
+        if urlString != "" {
+            if let url = NSURL(string: urlString) {
+                let request = NSMutableURLRequest(URL: url)
+                if let additionalHTTPHeaderFields = self.additionalHTTPHeaderFields {
+                    for (httpHeaderField, value) in additionalHTTPHeaderFields {
+                        request.addValue(value, forHTTPHeaderField: httpHeaderField)
+                    }
+                }
+                request.HTTPMethod = "POST"
+                request.addValue("application/json", forHTTPHeaderField: "Accept")
+                request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+                request.HTTPBody = NSJSONSerialization.dataWithJSONObject(httpBodyParams, options: nil, error: nil)
+                
+                let task = session.dataTaskWithRequest(request) { data, response, error in
+                    if error != nil {
+                        completionHandler(result: nil, error: error)
+                        return
+                    }
+                    self.parseJSONData(data, completionHandler: completionHandler)
+                }
+                task.resume()
+            } else {
+                completionHandler(result: nil, error: NSError(domain: "OnTheMap Error", code: 1, userInfo: [NSLocalizedDescriptionKey : "Invalid URL"]))
             }
+        } else {
+            completionHandler(result: nil, error: NSError(domain: "OnTheMap Error", code: 1, userInfo: [NSLocalizedDescriptionKey : "Empty URL"]))
         }
-        request.HTTPMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.HTTPBody = NSJSONSerialization.dataWithJSONObject(httpBodyParams, options: nil, error: nil)
-        
-        let task = session.dataTaskWithRequest(request) { data, response, error in
-            if error != nil {
-                completionHandler(result: nil, error: error)
-                return
-            }
-            self.parseJSONData(data, completionHandler: completionHandler)
-        }
-        task.resume()
     }
     
-    func httpPut(url: String, httpBodyParams: [String:AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
-        let request = NSMutableURLRequest(URL: NSURL(string: url)!)
-        if let additionalHTTPHeaderFields = self.additionalHTTPHeaderFields {
-            for (httpHeaderField, value) in additionalHTTPHeaderFields {
-                request.addValue(value, forHTTPHeaderField: httpHeaderField)
+    func httpPut(urlString: String, httpBodyParams: [String:AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
+        if urlString != "" {
+            if let url = NSURL(string: urlString) {
+                let request = NSMutableURLRequest(URL: url)
+                if let additionalHTTPHeaderFields = self.additionalHTTPHeaderFields {
+                    for (httpHeaderField, value) in additionalHTTPHeaderFields {
+                        request.addValue(value, forHTTPHeaderField: httpHeaderField)
+                    }
+                }
+                request.HTTPMethod = "PUT"
+                request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+                request.HTTPBody = NSJSONSerialization.dataWithJSONObject(httpBodyParams, options: nil, error: nil)
+                
+                let task = session.dataTaskWithRequest(request) { data, response, error in
+                    if error != nil {
+                        completionHandler(result: nil, error: error)
+                        return
+                    }
+                    self.parseJSONData(data, completionHandler: completionHandler)
+                }
+                task.resume()
+            } else {
+                completionHandler(result: nil, error: NSError(domain: "OnTheMap Error", code: 1, userInfo: [NSLocalizedDescriptionKey : "Invalid URL"]))
             }
+        } else {
+            completionHandler(result: nil, error: NSError(domain: "OnTheMap Error", code: 1, userInfo: [NSLocalizedDescriptionKey : "Empty URL"]))
         }
-        request.HTTPMethod = "PUT"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.HTTPBody = NSJSONSerialization.dataWithJSONObject(httpBodyParams, options: nil, error: nil)
-        
-        let task = session.dataTaskWithRequest(request) { data, response, error in
-            if error != nil {
-                completionHandler(result: nil, error: error)
-                return
-            }
-            self.parseJSONData(data, completionHandler: completionHandler)
-        }
-        task.resume()
     }
     
-    func httpDelete(url: String, cookieName: String?, completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
-        let request = NSMutableURLRequest(URL: NSURL(string: url)!)
-        if let additionalHTTPHeaderFields = self.additionalHTTPHeaderFields {
-            for (httpHeaderField, value) in additionalHTTPHeaderFields {
-                request.addValue(value, forHTTPHeaderField: httpHeaderField)
+    func httpDelete(urlString: String, cookieName: String?, completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
+        if urlString != "" {
+            if let url = NSURL(string: urlString) {
+                let request = NSMutableURLRequest(URL: url)
+                if let additionalHTTPHeaderFields = self.additionalHTTPHeaderFields {
+                    for (httpHeaderField, value) in additionalHTTPHeaderFields {
+                        request.addValue(value, forHTTPHeaderField: httpHeaderField)
+                    }
+                }
+                request.HTTPMethod = "DELETE"
+                
+                if let cookieName = cookieName {
+                    var cookie: NSHTTPCookie? = nil
+                    let sharedCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+                    for sharedCookie in sharedCookieStorage.cookies as! [NSHTTPCookie] {
+                        if sharedCookie.name == cookieName { cookie = sharedCookie }
+                    }
+                    if let cookie = cookie {
+                        request.addValue(cookie.value!, forHTTPHeaderField: cookieName)
+                    }
+                }
+                
+                let task = session.dataTaskWithRequest(request) { data, response, error in
+                    if error != nil {
+                        completionHandler(result: nil, error: error)
+                        return
+                    }
+                    self.parseJSONData(data, completionHandler: completionHandler)
+                }
+                task.resume()
+            } else {
+                completionHandler(result: nil, error: NSError(domain: "OnTheMap Error", code: 1, userInfo: [NSLocalizedDescriptionKey : "Invalid URL"]))
             }
+        } else {
+            completionHandler(result: nil, error: NSError(domain: "OnTheMap Error", code: 1, userInfo: [NSLocalizedDescriptionKey : "Empty URL"]))
         }
-        request.HTTPMethod = "DELETE"
-
-        if let cookieName = cookieName {
-            var cookie: NSHTTPCookie? = nil
-            let sharedCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
-            for sharedCookie in sharedCookieStorage.cookies as! [NSHTTPCookie] {
-                if sharedCookie.name == cookieName { cookie = sharedCookie }
-            }
-            if let cookie = cookie {
-                request.addValue(cookie.value!, forHTTPHeaderField: cookieName)
-            }
-        }
-
-        let task = session.dataTaskWithRequest(request) { data, response, error in
-            if error != nil {
-                completionHandler(result: nil, error: error)
-                return
-            }
-            self.parseJSONData(data, completionHandler: completionHandler)
-        }
-        task.resume()
     }
     
     // Method helpers for subclass
