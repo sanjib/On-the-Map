@@ -199,8 +199,8 @@
 				20784C091B3609C300C78A04 /* ErrorAlert.swift */,
 				206D4E891B227F0700BE18B9 /* LoginViewController.swift */,
 				20E696A11B26734E00877E9F /* StudentLocationsNavigationController.swift */,
-				20E6969D1B26714E00877E9F /* StudentLocationsTableViewController.swift */,
 				203F722F1B27C6F700BD48A8 /* StudentLocationsMapViewController.swift */,
+				20E6969D1B26714E00877E9F /* StudentLocationsTableViewController.swift */,
 				209DB2CC1B2D8AC5008607C5 /* StudentLocationsCollectionViewController.swift */,
 				20E776771B2BD5A1008CBBAE /* InformationPostingViewController.swift */,
 			);

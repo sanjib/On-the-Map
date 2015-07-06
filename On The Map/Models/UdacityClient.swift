@@ -101,15 +101,15 @@ class UdacityClient: CommonAPI {
                         if let lastName = user["last_name"] as? String {
                             completionHandler(firstName: firstName, lastName: lastName, errorString: nil)
                         } else {
-                            completionHandler(firstName: nil, lastName: nil, errorString: "An unknown error occured")
+                            completionHandler(firstName: nil, lastName: nil, errorString: "JSON key error: last_name not found.")
                         }
                     } else {
-                        completionHandler(firstName: nil, lastName: nil, errorString: "An unknown error occured")
+                        completionHandler(firstName: nil, lastName: nil, errorString: "JSON key error: first_name not found.")
                     }
                 } else if let error = result["error"] as? String {
                     completionHandler(firstName: nil, lastName: nil, errorString: error)
                 } else {
-                    completionHandler(firstName: nil, lastName: nil, errorString: "An unknown error occured")
+                    completionHandler(firstName: nil, lastName: nil, errorString: "An error occured")
                 }
             }
         }
@@ -144,7 +144,7 @@ class UdacityClient: CommonAPI {
                 if let session = result["session"] as? NSDictionary {
                     completionHandler(success: true, errorString: nil)
                 } else {
-                    completionHandler(success: nil, errorString: "An unknown error occured.")
+                    completionHandler(success: nil, errorString: "JSON key error: session not found.")
                 }
             }
             

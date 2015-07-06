@@ -60,15 +60,8 @@ class StudentLocationsNavigationController: UINavigationController {
     func logoutUdacity() {
         UdacityClient.sharedInstance().logout { success, errorString in
             if errorString != nil {
-                if self.visibleViewController.restorationIdentifier == "StudentLocationsTable" {
-                    let vc = self.visibleViewController as! StudentLocationsTableViewController
-                    vc.errorAlert("Couln't logout", errorMessage: errorString!)
-                } else if self.visibleViewController.restorationIdentifier == "StudentLocationsMap" {
-                    let vc = self.visibleViewController as! StudentLocationsMapViewController
-                    vc.errorAlert("Couln't logout", errorMessage: errorString!)
-                } else if self.visibleViewController.restorationIdentifier == "StudentLocationsCollection" {
-                    let vc = self.visibleViewController as! StudentLocationsCollectionViewController
-                    vc.errorAlert("Couln't logout", errorMessage: errorString!)
+                dispatch_async(dispatch_get_main_queue()) {
+                    ErrorAlert.create("Logout Failed", errorMessage: errorString!, viewController: self)
                 }
             } else {
                 if success != nil {

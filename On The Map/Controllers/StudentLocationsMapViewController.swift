@@ -35,7 +35,7 @@ class StudentLocationsMapViewController: UIViewController, MKMapViewDelegate {
             if errorString != nil {
                 dispatch_async(dispatch_get_main_queue()) {
                     self.activityIndicator.stopAnimating()
-                    self.errorAlert("Couldn't get student locations", errorMessage: errorString!)
+                    ErrorAlert.create("Failed Getting Student Locations", errorMessage: errorString!, viewController: self)
                 }
             } else {
                 dispatch_async(dispatch_get_main_queue()) {
@@ -74,29 +74,11 @@ class StudentLocationsMapViewController: UIViewController, MKMapViewDelegate {
             if let url = NSURL(string: urlString!) {
                 UIApplication.sharedApplication().openURL(url)
             } else {
-                errorAlert("Student Link cannot be opened", errorMessage: "The link provided by the student is not a valid URL: \(urlString)")
+                ErrorAlert.create("Invalid Student Link", errorMessage: "The link provided by the student is not a valid URL: \(urlString)", viewController: self)
             }
         } else {
-            errorAlert("Student Link cannot be opened", errorMessage: "The student did not provide a link")
+            ErrorAlert.create("Invalid Student Link", errorMessage: "The student did not provide a link.", viewController: self)
         }
     }
-    
-    // MARK: - Alert
-    func errorAlert(errorTitle: String, errorMessage: String) {
-        let alert = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle: UIAlertControllerStyle.Alert)
-        let alertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
-        alert.addAction(alertAction)
-        self.presentViewController(alert, animated: true, completion: nil)
-    }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

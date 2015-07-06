@@ -145,6 +145,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 dispatch_async(dispatch_get_main_queue()) {
                     self.facebookLoginIndicatorNormal()
                     self.udacityLoginIndicatorNormal()
+                    
+                    // set username/password empty since we don't need them anymore
+                    self.emailTextField.text = ""
+                    self.passwordTextField.text = ""
+                    
                     self.performSegueWithIdentifier("StudentLocationsSegue", sender: self)
                 }
             }

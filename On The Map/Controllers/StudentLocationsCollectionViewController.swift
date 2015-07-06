@@ -43,7 +43,7 @@ class StudentLocationsCollectionViewController: UICollectionViewController, UICo
             if errorString != nil {
                 dispatch_async(dispatch_get_main_queue()) {
                     self.activityIndicator.stopAnimating()
-                    self.errorAlert("Couldn't get student locations", errorMessage: errorString!)
+                    ErrorAlert.create("Failed Getting Student Locations", errorMessage: errorString!, viewController: self)
                 }
             } else {
                 dispatch_async(dispatch_get_main_queue()) {
@@ -52,14 +52,6 @@ class StudentLocationsCollectionViewController: UICollectionViewController, UICo
                 }
             }
         }
-    }
-    
-    // MARK: - Alert
-    func errorAlert(errorTitle: String, errorMessage: String) {
-        let alert = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle: UIAlertControllerStyle.Alert)
-        let alertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
-        alert.addAction(alertAction)
-        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     // MARK: - UICollectionViewDelegateFlowLayout
