@@ -13,7 +13,7 @@ class ErrorAlert {
     static func create(errorTitle: String, errorMessage: String, viewController: UIViewController) {
         let alert = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle: UIAlertControllerStyle.Alert)
         
-        let image = UIImage(named: "error")
+        let image = UIImage(named: "error_v2")
         let imageView = UIImageView(image: image)
         imageView.frame.origin.x += 11
         imageView.frame.origin.y += 11

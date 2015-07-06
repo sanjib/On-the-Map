@@ -131,14 +131,14 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func findOnTheMap(sender: UIButton) {
         if locationTextField.text == "" {
-            errorAlert("Empty Location", errorMessage: "Please type a location")
+            ErrorAlert.create("Empty Location", errorMessage: "Please type your location.", viewController: self)
         } else {
             findOnTheMapActivityIndicatorStart()
             CLGeocoder().geocodeAddressString(locationTextField.text) { placemarks, error in
                 if error != nil {
                     dispatch_async(dispatch_get_main_queue()) {
                         self.findOnTheMapActivityIndicatorStop()
-                        self.errorAlert("Couldn't find location", errorMessage: error.localizedDescription)
+                        ErrorAlert.create("Location Not Found", errorMessage: error.localizedDescription, viewController: self)
                     }
                 } else {
                     if placemarks.count == 1 {
@@ -153,7 +153,7 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
                     } else {
                         dispatch_async(dispatch_get_main_queue()) {
                             self.findOnTheMapActivityIndicatorStop()
-                            self.errorAlert("Multiple locations found", errorMessage: "Please type a more specific location")
+                            ErrorAlert.create("Multiple Locations Found", errorMessage: "Please type a more specific location.", viewController: self)
                         }
                     }
                 }
@@ -218,15 +218,6 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
             mapView.showAnnotations([student.annotation!], animated: true)
         }
     }
-    
-    // MARK: - Alert
-    func errorAlert(errorTitle: String, errorMessage: String) {
-        let alert = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle: UIAlertControllerStyle.Alert)
-        let alertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
-        alert.addAction(alertAction)
-        self.presentViewController(alert, animated: true, completion: nil)
-    }
-
 
     // MARK: - Text field delegates
     
