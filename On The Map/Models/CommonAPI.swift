@@ -15,7 +15,18 @@ class CommonAPI {
     var skipResponseDataLength: Int? = nil
     var additionalHTTPHeaderFields: [String:String]? = nil
     
+    struct ErrorMessages {
+        static let noInternet = "You appear to be offline, please connect to the Internet to use On the Map."
+        static let invalidURL = "Invalid URL"
+        static let emptyURL = "Empty URL"
+    }
+    
     func httpGet(urlString: String, completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
+        if IJReachability.isConnectedToNetwork() == false {
+            completionHandler(result: nil, error: NSError(domain: "OnTheMap Error", code: 1, userInfo: [NSLocalizedDescriptionKey : ErrorMessages.noInternet]))
+            return
+        }
+        
         if urlString != "" {
             if let url = NSURL(string: urlString) {
                 let request = NSMutableURLRequest(URL: url)
@@ -33,15 +44,20 @@ class CommonAPI {
                 }
                 task.resume()
             } else {
-                completionHandler(result: nil, error: NSError(domain: "OnTheMap Error", code: 1, userInfo: [NSLocalizedDescriptionKey : "Invalid URL"]))
+                completionHandler(result: nil, error: NSError(domain: "OnTheMap Error", code: 1, userInfo: [NSLocalizedDescriptionKey : ErrorMessages.invalidURL]))
             }
         } else {
-            completionHandler(result: nil, error: NSError(domain: "OnTheMap Error", code: 1, userInfo: [NSLocalizedDescriptionKey : "Empty URL"]))
+            completionHandler(result: nil, error: NSError(domain: "OnTheMap Error", code: 1, userInfo: [NSLocalizedDescriptionKey : ErrorMessages.emptyURL]))
         }
         
     }
     
     func httpPost(urlString: String, httpBodyParams: [String:AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
+        if IJReachability.isConnectedToNetwork() == false {
+            completionHandler(result: nil, error: NSError(domain: "OnTheMap Error", code: 1, userInfo: [NSLocalizedDescriptionKey : ErrorMessages.noInternet]))
+            return
+        }
+        
         if urlString != "" {
             if let url = NSURL(string: urlString) {
                 let request = NSMutableURLRequest(URL: url)
@@ -64,14 +80,19 @@ class CommonAPI {
                 }
                 task.resume()
             } else {
-                completionHandler(result: nil, error: NSError(domain: "OnTheMap Error", code: 1, userInfo: [NSLocalizedDescriptionKey : "Invalid URL"]))
+                completionHandler(result: nil, error: NSError(domain: "OnTheMap Error", code: 1, userInfo: [NSLocalizedDescriptionKey : ErrorMessages.invalidURL]))
             }
         } else {
-            completionHandler(result: nil, error: NSError(domain: "OnTheMap Error", code: 1, userInfo: [NSLocalizedDescriptionKey : "Empty URL"]))
+            completionHandler(result: nil, error: NSError(domain: "OnTheMap Error", code: 1, userInfo: [NSLocalizedDescriptionKey : ErrorMessages.emptyURL]))
         }
     }
     
     func httpPut(urlString: String, httpBodyParams: [String:AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
+        if IJReachability.isConnectedToNetwork() == false {
+            completionHandler(result: nil, error: NSError(domain: "OnTheMap Error", code: 1, userInfo: [NSLocalizedDescriptionKey : ErrorMessages.noInternet]))
+            return
+        }
+        
         if urlString != "" {
             if let url = NSURL(string: urlString) {
                 let request = NSMutableURLRequest(URL: url)
@@ -93,14 +114,19 @@ class CommonAPI {
                 }
                 task.resume()
             } else {
-                completionHandler(result: nil, error: NSError(domain: "OnTheMap Error", code: 1, userInfo: [NSLocalizedDescriptionKey : "Invalid URL"]))
+                completionHandler(result: nil, error: NSError(domain: "OnTheMap Error", code: 1, userInfo: [NSLocalizedDescriptionKey : ErrorMessages.invalidURL]))
             }
         } else {
-            completionHandler(result: nil, error: NSError(domain: "OnTheMap Error", code: 1, userInfo: [NSLocalizedDescriptionKey : "Empty URL"]))
+            completionHandler(result: nil, error: NSError(domain: "OnTheMap Error", code: 1, userInfo: [NSLocalizedDescriptionKey : ErrorMessages.emptyURL]))
         }
     }
     
     func httpDelete(urlString: String, cookieName: String?, completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
+        if IJReachability.isConnectedToNetwork() == false {
+            completionHandler(result: nil, error: NSError(domain: "OnTheMap Error", code: 1, userInfo: [NSLocalizedDescriptionKey : ErrorMessages.noInternet]))
+            return
+        }
+        
         if urlString != "" {
             if let url = NSURL(string: urlString) {
                 let request = NSMutableURLRequest(URL: url)
@@ -131,10 +157,10 @@ class CommonAPI {
                 }
                 task.resume()
             } else {
-                completionHandler(result: nil, error: NSError(domain: "OnTheMap Error", code: 1, userInfo: [NSLocalizedDescriptionKey : "Invalid URL"]))
+                completionHandler(result: nil, error: NSError(domain: "OnTheMap Error", code: 1, userInfo: [NSLocalizedDescriptionKey : ErrorMessages.invalidURL]))
             }
         } else {
-            completionHandler(result: nil, error: NSError(domain: "OnTheMap Error", code: 1, userInfo: [NSLocalizedDescriptionKey : "Empty URL"]))
+            completionHandler(result: nil, error: NSError(domain: "OnTheMap Error", code: 1, userInfo: [NSLocalizedDescriptionKey : ErrorMessages.emptyURL]))
         }
     }
     

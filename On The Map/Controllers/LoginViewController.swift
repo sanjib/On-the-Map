@@ -69,14 +69,17 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func loginFacebook(sender: UIButton) {
+        if IJReachability.isConnectedToNetwork() == false {
+            ErrorAlert.create("Facebook Login Failed", errorMessage: CommonAPI.ErrorMessages.noInternet, viewController: self)
+            return
+        }
+        
         if FBSDKAccessToken.currentAccessToken() == nil {
-            FBSDKLoginManager().logInWithReadPermissions(["public_profile"]) {result, error in
+            FBSDKLoginManager().logInWithReadPermissions(["public_profile"]) { result, error in
                 if error != nil {
-                    println("error: \(error)")
+                    ErrorAlert.create("Facebook Login Failed", errorMessage: error.localizedDescription, viewController: self)
                 } else if result.isCancelled {
-                    println("login cancelled: \(result.isCancelled)")
-                } else {
-                    println("result: \(result.grantedPermissions)")
+                    ErrorAlert.create("Facebook Login Failed", errorMessage: "Login process was cancelled.", viewController: self)
                 }
             }
         }
@@ -93,16 +96,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         // logout the current user from Facebook
                         self.facebookLoginIndicatorNormal()
                         FBSDKLoginManager().logOut()
-                        self.errorAlert("Couldn't complete Facebook/Udactiy handshake", errorMessage: errorString! + "Please login via Udacity account")
+                        ErrorAlert.create("Facebook Login Failed", errorMessage: errorString! + " Please login via Udacity account.", viewController: self)
                     }
                 } else {
                     if let userId = userId {
                         self.initUserData(userId)
-                    } else {
-                        dispatch_async(dispatch_get_main_queue()) {
-                            self.errorAlert("Coudn't get userId", errorMessage: "Facebook login failed!")
-                        }
-
                     }
                 }
             }
@@ -137,7 +135,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         UdacityClient.sharedInstance().getUserData(userId) { firstName, lastName, errorString in
             if errorString != nil {
                 dispatch_async(dispatch_get_main_queue()) {
-                    self.errorAlert("Couldn't get user info from Udacity", errorMessage: errorString!)
+                    ErrorAlert.create("Failed Getting User Info", errorMessage: errorString!, viewController: self)
                 }
             } else {
                 User.currentUser.userId = userId
@@ -155,22 +153,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func signupUdacity(sender: UIButton) {
         UIApplication.sharedApplication().openURL(NSURL(string: "https://www.udacity.com/account/auth#!/signup")!)
-    }
-    
-    // MARK: - Alert
-    func errorAlert(errorTitle: String, errorMessage: String) {
-        let alert = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle: UIAlertControllerStyle.Alert)
-        
-        let image = UIImage(named: "error")
-        let imageView = UIImageView(image: image)
-        imageView.frame.origin.x += 10
-        imageView.frame.origin.y += 10
-        alert.view.addSubview(imageView)
-        
-        let alertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
-        
-        alert.addAction(alertAction)
-        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     // MARK: - Text Field Delegates

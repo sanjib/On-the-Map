@@ -15,7 +15,7 @@ class ErrorAlert {
         
         let image = UIImage(named: "error")
         let imageView = UIImageView(image: image)
-        imageView.frame.origin.x += 15
+        imageView.frame.origin.x += 11
         imageView.frame.origin.y += 11
         imageView.frame.size.width -= 7
         imageView.frame.size.height -= 7
@@ -24,7 +24,10 @@ class ErrorAlert {
         let alertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
         alert.addAction(alertAction)
         
-        viewController.presentViewController(alert, animated: true, completion: nil)
+        if viewController.presentedViewController == nil {
+            viewController.presentViewController(alert, animated: true, completion: nil)
+        }
+        
     }
 
 }

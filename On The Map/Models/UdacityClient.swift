@@ -19,6 +19,13 @@ class UdacityClient: CommonAPI {
         static let baseURL = "https://www.udacity.com/api"
     }
     
+    private struct ErrorMessages {
+        static let parameter = [
+            "udacity.username": "Please type your Udacity username.",
+            "udacity.password": "Please type your Udacity password."
+        ]
+    }
+    
     private struct Methods {
         static let session = Constants.baseURL + "/session"
         static let publicUserData = Constants.baseURL + "/users/{user_id}"
@@ -26,10 +33,6 @@ class UdacityClient: CommonAPI {
     
     private struct MethodKeys {
         static let userId = "user_id"
-    }
-    
-    private struct MethodParams {
-        
     }
         
     func createSessionWithUdacity(username: String, password: String, completionHandler: (userId: String?, errorString: String?) -> Void) {
@@ -45,12 +48,19 @@ class UdacityClient: CommonAPI {
                     if let key = account["key"] as? String {
                         completionHandler(userId: key, errorString: nil)
                     } else {
-                        completionHandler(userId: nil, errorString: "An unknown error occured")
+                        completionHandler(userId: nil, errorString: "JSON key error: account not found.")
                     }
                 } else if let error = result["error"] as? String {
+                    if let errorParameter = result["parameter"] as? String {
+                        if let errorParameterMessage = ErrorMessages.parameter[errorParameter] {
+                            completionHandler(userId: nil, errorString: errorParameterMessage)
+                        } else {
+                            completionHandler(userId: nil, errorString: error)
+                        }
+                    }
                     completionHandler(userId: nil, errorString: error)
                 } else {
-                    completionHandler(userId: nil, errorString: "An unknown error occured")
+                    completionHandler(userId: nil, errorString: "An error occured.")
                 }
             }
         }
@@ -69,12 +79,12 @@ class UdacityClient: CommonAPI {
                     if let key = account["key"] as? String {
                         completionHandler(userId: key, errorString: nil)
                     } else {
-                        completionHandler(userId: nil, errorString: "An unknown error occured")
+                        completionHandler(userId: nil, errorString: "JSON key error: account not found.")
                     }
                 } else if let error = result["error"] as? String {
                     completionHandler(userId: nil, errorString: error)
                 } else {
-                    completionHandler(userId: nil, errorString: "An unknown error occured")
+                    completionHandler(userId: nil, errorString: "An error occured")
                 }
             }
         }
