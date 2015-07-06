@@ -11,7 +11,7 @@ import Foundation
 class AllStudents: NSObject {
     static var collection = [Student]()
     
-    static func reload(completionHandler: (errorString: String?) -> Void) {
+    static func reload(completionHandler: (errorString: String?) -> Void) {        
         ParseClient.sharedInstance().getStudentLocations() { students, errorString in
             if errorString != nil {
                 completionHandler(errorString: errorString)

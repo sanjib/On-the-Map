@@ -118,12 +118,21 @@ class StudentLocationsCollectionViewController: UICollectionViewController, UICo
             cell.activityIndicator.startAnimating()
             UdacityClient.sharedInstance().getUserPhoto(student) { imageURL in
                 if imageURL != nil {
-                    if let url = NSURL(string: "https:" + imageURL!) {
-                        student.imageData = NSData(contentsOfURL: url)
-                        student.imageFetchInProgress = false
-                        dispatch_async(dispatch_get_main_queue()) {
-                            self.collectionView?.reloadItemsAtIndexPaths([indexPath])
-                        }
+                    if let url = NSURL(string: "https:" + imageURL!) {                        
+                        NSURLSession.sharedSession().dataTaskWithURL(url) { data, response, error in
+                            if error != nil {
+                                student.imageFetchInProgress = false
+                                dispatch_async(dispatch_get_main_queue()) {
+                                    self.collectionView?.reloadItemsAtIndexPaths([indexPath])
+                                }
+                            } else {
+                                student.imageData = NSData(data: data)
+                                student.imageFetchInProgress = false
+                                dispatch_async(dispatch_get_main_queue()) {
+                                    self.collectionView?.reloadItemsAtIndexPaths([indexPath])
+                                }
+                            }
+                        }.resume()
                     } else {
                         student.imageFetchInProgress = false
                         dispatch_async(dispatch_get_main_queue()) {

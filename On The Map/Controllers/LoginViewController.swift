@@ -96,7 +96,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         // logout the current user from Facebook
                         self.facebookLoginIndicatorNormal()
                         FBSDKLoginManager().logOut()
-                        ErrorAlert.create("Facebook Login Failed", errorMessage: errorString! + " Please login via Udacity account.", viewController: self)
+                        ErrorAlert.create("Facebook Login Failed", errorMessage: errorString!, viewController: self)
                     }
                 } else {
                     if let userId = userId {
