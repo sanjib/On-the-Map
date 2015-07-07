@@ -171,7 +171,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Keyboard
     
-    // Editing begain, slide view up
+    // Editing began, slide view up
     func keyboardWillShow(notification: NSNotification) {
         if self.view.frame.origin.y >= 0 {
             // divide by 3 to shift 33% of the view in relation to the keyboard

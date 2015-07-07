@@ -70,11 +70,6 @@ class StudentLocationsMapViewController: UIViewController, MKMapViewDelegate {
                     }
                 } else {
                     dispatch_async(dispatch_get_main_queue()) {
-//                        self.studentLocationsMapView.removeAnnotations(self.studentLocationsMapView.annotations)
-//                        for student in AllStudents.collection {
-//                            self.studentLocationsMapView.addAnnotation(student.annotation)
-//                        }
-//                        self.activityIndicator.stopAnimating()
                         self.refreshViewAndNotify()
                     }
                 }

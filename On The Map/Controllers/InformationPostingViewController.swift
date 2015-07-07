@@ -240,7 +240,7 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Keyboard
     
-    // Editing begain, slide view up
+    // Editing began, slide view up
     func keyboardWillShow(notification: NSNotification) {
         if currentTextFieldBeingEdited == "location" {
             if self.view.frame.origin.y >= 0 {

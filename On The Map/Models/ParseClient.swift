@@ -122,7 +122,7 @@ class ParseClient: CommonAPI {
     }
     
     private func parseJSONStudentResult(studentResult: NSDictionary) -> Student {
-        let student = Student()
+        var student = Student()
         if let userId = studentResult["uniqueKey"] as? String {
             student.userId = userId
         }
