@@ -47,7 +47,6 @@ class ParseClient: CommonAPI {
                 if let studentResults = result["results"] as? NSArray {
                     var allStudents = [Student]()
                     for studentResult in studentResults {
-//                        let student = self.parseJSONStudentResult(studentResult as! NSDictionary)
                         let student = Student(jsonData: studentResult as? NSDictionary)
                         if let duplicateStudentById =  allStudents.filter({$0.userId == student.userId}).first {
                             continue
@@ -72,7 +71,6 @@ class ParseClient: CommonAPI {
             } else {
                 if let studentResults = result["results"] as? NSArray {
                     if let studentResult = studentResults.firstObject as? NSDictionary {
-//                        let student = self.parseJSONStudentResult(studentResult)
                         let student = Student(jsonData: studentResult)
                         completionHandler(student: student, errorString: nil)
                     }
@@ -122,35 +120,6 @@ class ParseClient: CommonAPI {
             }
         }
     }
-    
-//    private func parseJSONStudentResult(studentResult: NSDictionary) -> Student {
-//        let student = Student()
-//        if let userId = studentResult["uniqueKey"] as? String {
-//            student.userId = userId
-//        }
-//        if let objectId = studentResult["objectId"] as? String {
-//            student.objectId = objectId
-//        }
-//        if let firstName = studentResult["firstName"] as? String {
-//            student.firstName = firstName
-//        }
-//        if let lastName = studentResult["lastName"] as? String {
-//            student.lastName = lastName
-//        }
-//        if let link = studentResult["mediaURL"] as? String {
-//            student.link = link
-//        }
-//        if let locationName = studentResult["mapString"] as? String {
-//            student.locationName = locationName
-//        }
-//        if let latitude = studentResult["latitude"] as? Float {
-//            student.latitude = latitude
-//        }
-//        if let longitude = studentResult["longitude"] as? Float {
-//            student.longitude = longitude
-//        }
-//        return student
-//    }
     
     static func sharedInstance() -> ParseClient {
         let sharedInstance = ParseClient()
