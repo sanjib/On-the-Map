@@ -24,7 +24,7 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
 
     var tapGestureRecognizer: UITapGestureRecognizer? = nil
     private var currentTextFieldBeingEdited = ""
-    private let student = Student()
+    private let student = Student(jsonData: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
