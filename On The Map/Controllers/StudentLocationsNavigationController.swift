@@ -80,14 +80,14 @@ class StudentLocationsNavigationController: UINavigationController {
     }
     
     func reloadStudentLocations() {
-        if self.visibleViewController.restorationIdentifier == "StudentLocationsTable" {
-            let vc = self.visibleViewController as! StudentLocationsTableViewController
+        if visibleViewController.restorationIdentifier == "StudentLocationsTable" {
+            let vc = visibleViewController as! StudentLocationsTableViewController
             vc.reloadStudentLocations()
-        } else if self.visibleViewController.restorationIdentifier == "StudentLocationsMap" {
-            let vc = self.visibleViewController as! StudentLocationsMapViewController
+        } else if visibleViewController.restorationIdentifier == "StudentLocationsMap" {
+            let vc = visibleViewController as! StudentLocationsMapViewController
             vc.reloadStudentLocations()
-        } else if self.visibleViewController.restorationIdentifier == "StudentLocationsCollection" {
-            let vc = self.visibleViewController as! StudentLocationsCollectionViewController
+        } else if visibleViewController.restorationIdentifier == "StudentLocationsCollection" {
+            let vc = visibleViewController as! StudentLocationsCollectionViewController
             vc.reloadStudentLocations()
         }
     }

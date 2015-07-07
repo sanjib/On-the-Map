@@ -25,12 +25,11 @@ class AllStudents: NSObject {
         }
         NSURLSession.sharedSession().invalidateAndCancel()
         
-        self.collection = [Student]()
+        collection = [Student]()
         ParseClient.sharedInstance().getStudentLocations() { students, errorString in
             if errorString != nil {
                 completionHandler(errorString: errorString)
             } else {
-                //                self.reset()
                 self.collection = students!
                 self.sortByFirstName()
                 self.reloadInProgress = false

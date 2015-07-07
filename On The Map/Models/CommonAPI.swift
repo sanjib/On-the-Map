@@ -30,7 +30,7 @@ class CommonAPI {
         if urlString != "" {
             if let url = NSURL(string: urlString) {
                 let request = NSMutableURLRequest(URL: url)
-                if let additionalHTTPHeaderFields = self.additionalHTTPHeaderFields {
+                if let additionalHTTPHeaderFields = additionalHTTPHeaderFields {
                     for (httpHeaderField, value) in additionalHTTPHeaderFields {
                         request.addValue(value, forHTTPHeaderField: httpHeaderField)
                     }
@@ -61,7 +61,7 @@ class CommonAPI {
         if urlString != "" {
             if let url = NSURL(string: urlString) {
                 let request = NSMutableURLRequest(URL: url)
-                if let additionalHTTPHeaderFields = self.additionalHTTPHeaderFields {
+                if let additionalHTTPHeaderFields = additionalHTTPHeaderFields {
                     for (httpHeaderField, value) in additionalHTTPHeaderFields {
                         request.addValue(value, forHTTPHeaderField: httpHeaderField)
                     }
@@ -96,7 +96,7 @@ class CommonAPI {
         if urlString != "" {
             if let url = NSURL(string: urlString) {
                 let request = NSMutableURLRequest(URL: url)
-                if let additionalHTTPHeaderFields = self.additionalHTTPHeaderFields {
+                if let additionalHTTPHeaderFields = additionalHTTPHeaderFields {
                     for (httpHeaderField, value) in additionalHTTPHeaderFields {
                         request.addValue(value, forHTTPHeaderField: httpHeaderField)
                     }
@@ -130,7 +130,7 @@ class CommonAPI {
         if urlString != "" {
             if let url = NSURL(string: urlString) {
                 let request = NSMutableURLRequest(URL: url)
-                if let additionalHTTPHeaderFields = self.additionalHTTPHeaderFields {
+                if let additionalHTTPHeaderFields = additionalHTTPHeaderFields {
                     for (httpHeaderField, value) in additionalHTTPHeaderFields {
                         request.addValue(value, forHTTPHeaderField: httpHeaderField)
                     }
@@ -193,8 +193,8 @@ class CommonAPI {
     
     private func parseJSONData(data: NSData, completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
         let newData: NSData
-        if self.skipResponseDataLength != nil {
-            newData = data.subdataWithRange(NSMakeRange(self.skipResponseDataLength!, data.length - self.skipResponseDataLength!)) /* subset response data! */
+        if skipResponseDataLength != nil {
+            newData = data.subdataWithRange(NSMakeRange(skipResponseDataLength!, data.length - skipResponseDataLength!)) /* subset response data! */
         } else {
             newData = data
         }

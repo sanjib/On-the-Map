@@ -32,11 +32,11 @@ class StudentLocationsMapViewController: UIViewController, MKMapViewDelegate {
     }
     
     func refreshView() {
-        self.activityIndicator.stopAnimating()
+        activityIndicator.stopAnimating()
         for student in AllStudents.collection {
-            self.studentLocationsMapView.addAnnotation(student.annotation)
+            studentLocationsMapView.addAnnotation(student.annotation)
         }
-        if let rightBarButtonItems = self.navigationController?.navigationBar.items.last?.rightBarButtonItems as? [UIBarButtonItem] {
+        if let rightBarButtonItems = navigationController?.navigationBar.items.last?.rightBarButtonItems as? [UIBarButtonItem] {
             rightBarButtonItems.first?.enabled = true
         }
     }
@@ -50,7 +50,7 @@ class StudentLocationsMapViewController: UIViewController, MKMapViewDelegate {
     }
     
     func reloadInProgressView() {
-        if let rightBarButtonItems = self.navigationController?.navigationBar.items.last?.rightBarButtonItems as? [UIBarButtonItem] {
+        if let rightBarButtonItems = navigationController?.navigationBar.items.last?.rightBarButtonItems as? [UIBarButtonItem] {
             rightBarButtonItems.first?.enabled = false
         }
         

@@ -36,7 +36,7 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
         
         tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "singleTap:")
         tapGestureRecognizer?.numberOfTapsRequired = 1
-        self.view.addGestureRecognizer(tapGestureRecognizer!)
+        view.addGestureRecognizer(tapGestureRecognizer!)
         
         findOnTheMapActivityIndicator.hidesWhenStopped = true
         submitInformationActivityIndicator.hidesWhenStopped = true
@@ -67,10 +67,10 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
         super.viewWillAppear(animated)
         
         if User.currentUser.link != nil {
-            self.linkTextField.text = User.currentUser.link!
+            linkTextField.text = User.currentUser.link!
         }
         if User.currentUser.locationName != nil {
-            self.locationTextField.text = User.currentUser.locationName!
+            locationTextField.text = User.currentUser.locationName!
         }
         
         findOnTheMapContainerView.hidden = false
@@ -112,7 +112,7 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Button actions
     
     @IBAction func cancelFromLocationView(sender: UIButton) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func cancelFromLinkView(sender: UIButton) {
@@ -164,10 +164,10 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
         // if user objectId exists, update else add
         // on success: reload parent vc (table or map)
         
-        User.currentUser.locationName = self.locationTextField.text
-        User.currentUser.link = self.linkTextField.text
-        User.currentUser.latitude = self.student.latitude
-        User.currentUser.longitude = self.student.longitude
+        User.currentUser.locationName = locationTextField.text
+        User.currentUser.link = linkTextField.text
+        User.currentUser.latitude = student.latitude
+        User.currentUser.longitude = student.longitude
         
         submitInformationActivityIndicatorStart()
         if User.currentUser.objectId != nil {
@@ -235,7 +235,7 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
     }
     
     func singleTap(recognizer: UITapGestureRecognizer) {
-        self.view.endEditing(true)
+        view.endEditing(true)
     }
     
     // MARK: - Keyboard
@@ -243,16 +243,16 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
     // Editing began, slide view up
     func keyboardWillShow(notification: NSNotification) {
         if currentTextFieldBeingEdited == "location" {
-            if self.view.frame.origin.y >= 0 {
+            if view.frame.origin.y >= 0 {
                 // divide by 3 to shift 33% of the view in relation to the keyboard
-                self.view.frame.origin.y -= getKeyboardHeight(notification)  / 3
+                view.frame.origin.y -= getKeyboardHeight(notification)  / 3
             }
         }
     }
     
     // Editing ended, slide view down
     func keyboardWillHide(notification: NSNotificationCenter) {
-        self.view.frame.origin.y = 0
+        view.frame.origin.y = 0
     }
     
     private func getKeyboardHeight(notification: NSNotification) -> CGFloat {

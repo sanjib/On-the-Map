@@ -112,7 +112,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     private func udacityLoginIndicatorNormal() {
         udacityLoginActivityIndicator.stopAnimating()
         view.userInteractionEnabled = true
-        udacityLoginButton.setTitle(self.udacityLoginButtonTitleNormal, forState: .Normal)
+        udacityLoginButton.setTitle(udacityLoginButtonTitleNormal, forState: .Normal)
     }
     
     private func udacityLoginIndicatorLoggingIn() {
@@ -124,7 +124,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     private func facebookLoginIndicatorNormal() {
         facebookLoginActivityIndicator.stopAnimating()
         view.userInteractionEnabled = true
-        facebookLoginButton.setTitle(self.facebookLoginButtonTitleNormal, forState: .Normal)
+        facebookLoginButton.setTitle(facebookLoginButtonTitleNormal, forState: .Normal)
     }
     
     private func facebookLoginIndicatorLoggingIn() {
@@ -173,15 +173,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     // Editing began, slide view up
     func keyboardWillShow(notification: NSNotification) {
-        if self.view.frame.origin.y >= 0 {
+        if view.frame.origin.y >= 0 {
             // divide by 3 to shift 33% of the view in relation to the keyboard
-            self.view.frame.origin.y -= getKeyboardHeight(notification)  / 3
+            view.frame.origin.y -= getKeyboardHeight(notification)  / 3
         }
     }
     
     // Editing ended, slide view down
     func keyboardWillHide(notification: NSNotificationCenter) {
-        self.view.frame.origin.y = 0
+        view.frame.origin.y = 0
     }
     
     private func getKeyboardHeight(notification: NSNotification) -> CGFloat {

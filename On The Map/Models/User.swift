@@ -9,7 +9,6 @@
 import Foundation
 
 class User {
-//    var objectId: String? = nil
     static var currentUser = Student(jsonData: nil)
     
     static func reset() {

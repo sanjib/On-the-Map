@@ -43,7 +43,7 @@ class StudentLocationsCollectionViewController: UICollectionViewController, UICo
     func refreshView() {
         activityIndicator.stopAnimating()
         collectionView?.reloadData()
-        if let rightBarButtonItems = self.navigationController?.navigationBar.items.last?.rightBarButtonItems as? [UIBarButtonItem] {
+        if let rightBarButtonItems = navigationController?.navigationBar.items.last?.rightBarButtonItems as? [UIBarButtonItem] {
             rightBarButtonItems.first?.enabled = true
         }
     }
@@ -56,9 +56,9 @@ class StudentLocationsCollectionViewController: UICollectionViewController, UICo
     }
     
     func reloadInProgressView() {        
-        self.collectionView?.reloadData()
+        collectionView?.reloadData()
         activityIndicator.startAnimating()
-        if let rightBarButtonItems = self.navigationController?.navigationBar.items.last?.rightBarButtonItems as? [UIBarButtonItem] {
+        if let rightBarButtonItems = navigationController?.navigationBar.items.last?.rightBarButtonItems as? [UIBarButtonItem] {
             rightBarButtonItems.first?.enabled = false
         }
     }
@@ -97,9 +97,9 @@ class StudentLocationsCollectionViewController: UICollectionViewController, UICo
         let deviceOrientation = UIDevice.currentDevice().orientation
         var widthForCollection: CGFloat!
         if (deviceOrientation == UIDeviceOrientation.Portrait) || (deviceOrientation == UIDeviceOrientation.PortraitUpsideDown) {
-            widthForCollection = self.view.frame.width
+            widthForCollection = view.frame.width
         } else {
-            widthForCollection = self.view.frame.height
+            widthForCollection = view.frame.height
         }
         
         // To determine width of a cell we divide frame width by cells per row

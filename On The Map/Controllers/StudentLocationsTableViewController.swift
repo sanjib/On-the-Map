@@ -30,9 +30,9 @@ class StudentLocationsTableViewController: UITableViewController {
     }
     
     func refreshView() {
-        self.activityIndicator.stopAnimating()
-        self.tableView.reloadData()
-        if let rightBarButtonItems = self.navigationController?.navigationBar.items.last?.rightBarButtonItems as? [UIBarButtonItem] {
+        activityIndicator.stopAnimating()
+        tableView.reloadData()
+        if let rightBarButtonItems = navigationController?.navigationBar.items.last?.rightBarButtonItems as? [UIBarButtonItem] {
             rightBarButtonItems.first?.enabled = true
         }
     }
@@ -48,7 +48,7 @@ class StudentLocationsTableViewController: UITableViewController {
     func reloadInProgressView() {
         activityIndicator.startAnimating()
         tableView.reloadData()
-        if let rightBarButtonItems = self.navigationController?.navigationBar.items.last?.rightBarButtonItems as? [UIBarButtonItem] {
+        if let rightBarButtonItems = navigationController?.navigationBar.items.last?.rightBarButtonItems as? [UIBarButtonItem] {
             rightBarButtonItems.first?.enabled = false
         }
     }
