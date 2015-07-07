@@ -11,7 +11,6 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 
 class StudentLocationsNavigationController: UINavigationController {
-
     var isUserCurrentlyLoggedInToFacebook: Bool {
         get {
             if FBSDKAccessToken.currentAccessToken() != nil {
@@ -24,11 +23,6 @@ class StudentLocationsNavigationController: UINavigationController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadStudentLocations", name: "reloadStudentLocations", object: nil)
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
         
         let navigationItem = UINavigationItem(title: "On The Map")
         
@@ -44,8 +38,15 @@ class StudentLocationsNavigationController: UINavigationController {
         let pinButton = UIBarButtonItem(image: UIImage(named: "pin"), style: UIBarButtonItemStyle.Plain, target: self, action: "pinAnnotation")
         navigationItem.rightBarButtonItems = [reloadButton, pinButton]
         
-        self.navigationBar.items.append(navigationItem)
+        navigationBar.items.append(navigationItem)
+
         
+        // Notification posted from InformationPostingViewController
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadStudentLocations", name: "reloadStudentLocations", object: nil)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
     }
     
     func logoutFacebook() {
@@ -83,12 +84,15 @@ class StudentLocationsNavigationController: UINavigationController {
         if self.visibleViewController.restorationIdentifier == "StudentLocationsTable" {
             let vc = self.visibleViewController as! StudentLocationsTableViewController
             vc.reloadStudentLocations()
+//            vcTable.reloadStudentLocations()
         } else if self.visibleViewController.restorationIdentifier == "StudentLocationsMap" {
             let vc = self.visibleViewController as! StudentLocationsMapViewController
             vc.reloadStudentLocations()
+//            vcMap.reloadStudentLocations()
         } else if self.visibleViewController.restorationIdentifier == "StudentLocationsCollection" {
             let vc = self.visibleViewController as! StudentLocationsCollectionViewController
             vc.reloadStudentLocations()
+//            vcCollection.reloadStudentLocations()
         }
     }
 }

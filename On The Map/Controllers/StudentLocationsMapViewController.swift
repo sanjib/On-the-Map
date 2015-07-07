@@ -18,35 +18,69 @@ class StudentLocationsMapViewController: UIViewController, MKMapViewDelegate {
         studentLocationsMapView.delegate = self
         activityIndicator.hidesWhenStopped = true
         activityIndicator.color = UIColor.blackColor()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "refreshView", name: "refreshMapView", object: nil)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if AllStudents.collection.count == 0 {
+        if AllStudents.reloadInProgress == false && AllStudents.collection.count == 0 {
             reloadStudentLocations()
+        } else if AllStudents.reloadInProgress == true {
+            reloadInProgressView()
         }
     }
     
-    // MARK: - Student Locations
-    func reloadStudentLocations() {
-        self.activityIndicator.startAnimating()
+    func refreshView() {
+        self.activityIndicator.stopAnimating()
+        for student in AllStudents.collection {
+            self.studentLocationsMapView.addAnnotation(student.annotation)
+        }
+        if let rightBarButtonItems = self.navigationController?.navigationBar.items.last?.rightBarButtonItems as? [UIBarButtonItem] {
+            rightBarButtonItems.first?.enabled = true
+        }
+    }
+    
+    func refreshViewAndNotify() {
+        refreshView()
+        // refresh the view in the other 2 view controllers
+        NSNotificationCenter.defaultCenter().postNotificationName("refreshTableView", object: nil)
+        NSNotificationCenter.defaultCenter().postNotificationName("refreshCollectionView", object: nil)
         
-        AllStudents.reload() { errorString in
-            if errorString != nil {
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.activityIndicator.stopAnimating()
-                    ErrorAlert.create("Failed Getting Student Locations", errorMessage: errorString!, viewController: self)
-                }
-            } else {
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.studentLocationsMapView.removeAnnotations(self.studentLocationsMapView.annotations)
-                    for student in AllStudents.collection {
-                        self.studentLocationsMapView.addAnnotation(student.annotation)
+    }
+    
+    func reloadInProgressView() {
+        if let rightBarButtonItems = self.navigationController?.navigationBar.items.last?.rightBarButtonItems as? [UIBarButtonItem] {
+            rightBarButtonItems.first?.enabled = false
+        }
+        
+        studentLocationsMapView.removeAnnotations(studentLocationsMapView.annotations)
+        activityIndicator.startAnimating()
+    }
+
+    // MARK: - Student Locations
+    
+    func reloadStudentLocations() {
+        if AllStudents.reloadInProgress == false {
+            AllStudents.reload() { errorString in
+                if errorString != nil {
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.activityIndicator.stopAnimating()
+                        ErrorAlert.create("Failed Getting Student Locations", errorMessage: errorString!, viewController: self)
                     }
-                    self.activityIndicator.stopAnimating()
+                } else {
+                    dispatch_async(dispatch_get_main_queue()) {
+//                        self.studentLocationsMapView.removeAnnotations(self.studentLocationsMapView.annotations)
+//                        for student in AllStudents.collection {
+//                            self.studentLocationsMapView.addAnnotation(student.annotation)
+//                        }
+//                        self.activityIndicator.stopAnimating()
+                        self.refreshViewAndNotify()
+                    }
                 }
             }
         }
+        reloadInProgressView()
     }
     
     // MARK: - Map view delegates

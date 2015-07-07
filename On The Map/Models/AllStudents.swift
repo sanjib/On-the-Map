@@ -10,15 +10,30 @@ import Foundation
 
 class AllStudents: NSObject {
     static var collection = [Student]()
+    static var reloadInProgress = false
     
-    static func reload(completionHandler: (errorString: String?) -> Void) {        
+    static func reload(completionHandler: (errorString: String?) -> Void) {
+        reloadInProgress = true
+        
+        // Stop all NSURLSession tasks
+        NSURLSession.sharedSession().getTasksWithCompletionHandler() { dataTasks, uploadTasks, downloadTasks in
+            if let dataTasks = dataTasks as? [NSURLSessionDataTask] {
+                for dataTask in dataTasks {
+                    dataTask.cancel()
+                }
+            }
+        }
+        NSURLSession.sharedSession().invalidateAndCancel()
+        
+        self.collection = [Student]()
         ParseClient.sharedInstance().getStudentLocations() { students, errorString in
             if errorString != nil {
                 completionHandler(errorString: errorString)
             } else {
-                self.reset()
+                //                self.reset()
                 self.collection = students!
                 self.sortByFirstName()
+                self.reloadInProgress = false
                 completionHandler(errorString: nil)
             }
         }
@@ -28,7 +43,8 @@ class AllStudents: NSObject {
         collection.append(student)
         sortByFirstName()
     }
-    
+
+    // Should be reset when user logs out
     static func reset() {
         collection = [Student]()
     }

@@ -43,8 +43,7 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
         
         if User.currentUser.objectId == nil {
             ParseClient.sharedInstance().queryStudentLocation(User.currentUser.userId!) { student, errorString in
-                if errorString != nil {
-                    
+                if errorString != nil {                    
                 } else {
                     User.currentUser.objectId = student?.objectId
                     User.currentUser.locationName = student?.locationName

@@ -15,38 +15,67 @@ class StudentLocationsTableViewController: UITableViewController {
         super.viewDidLoad()
         activityIndicator.hidesWhenStopped = true
         activityIndicator.color = UIColor.blackColor()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "refreshView", name: "refreshTableView", object: nil)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        if AllStudents.collection.count == 0 {
+        if AllStudents.reloadInProgress == false && AllStudents.collection.count == 0 {
             reloadStudentLocations()
+        } else if AllStudents.reloadInProgress == true {
+            reloadInProgressView()
+        }
+    }
+    
+    func refreshView() {
+        self.activityIndicator.stopAnimating()
+        self.tableView.reloadData()
+        if let rightBarButtonItems = self.navigationController?.navigationBar.items.last?.rightBarButtonItems as? [UIBarButtonItem] {
+            rightBarButtonItems.first?.enabled = true
+        }
+    }
+    
+    func refreshViewAndNotify() {
+        refreshView()
+        
+        // refresh the view in the other 2 view controllers
+        NSNotificationCenter.defaultCenter().postNotificationName("refreshMapView", object: nil)
+        NSNotificationCenter.defaultCenter().postNotificationName("refreshCollectionView", object: nil)
+    }
+    
+    func reloadInProgressView() {
+        activityIndicator.startAnimating()
+        tableView.reloadData()
+        if let rightBarButtonItems = self.navigationController?.navigationBar.items.last?.rightBarButtonItems as? [UIBarButtonItem] {
+            rightBarButtonItems.first?.enabled = false
         }
     }
     
     // MARK: - Student Locations
+    
     func reloadStudentLocations() {
         // reset students and reload the table for an empty view to show the activityIndicator
         // (otherwise it's not shown since the table is already populated)
-        AllStudents.reset()
-        tableView.reloadData()
         
-        activityIndicator.startAnimating()
-        
-        AllStudents.reload() { errorString in
-            if errorString != nil {
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.activityIndicator.stopAnimating()
-                    ErrorAlert.create("Failed Getting Student Locations", errorMessage: errorString!, viewController: self)
-                }
-            } else {
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.tableView.reloadData()
-                    self.activityIndicator.stopAnimating()
+        if AllStudents.reloadInProgress == false {
+            AllStudents.reload() { errorString in
+                if errorString != nil {
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.activityIndicator.stopAnimating()
+                        ErrorAlert.create("Failed Getting Student Locations", errorMessage: errorString!, viewController: self)
+                    }
+                } else {
+                    dispatch_async(dispatch_get_main_queue()) {
+//                        self.tableView.reloadData()
+//                        self.activityIndicator.stopAnimating()
+                        self.refreshViewAndNotify()
+                    }
                 }
             }
         }
+        reloadInProgressView()
     }
 
     // MARK: - Table view data source

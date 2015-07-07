@@ -29,6 +29,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         passwordTextField.delegate = self
         udacityLoginActivityIndicator.hidesWhenStopped = true
         facebookLoginActivityIndicator.hidesWhenStopped = true
+        
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "loginFacebookComplete", name: UIApplicationDidBecomeActiveNotification, object: nil)
     }
     
