@@ -159,14 +159,12 @@ class StudentLocationsCollectionViewController: UICollectionViewController, UICo
                             if error != nil {
                                 student.imageFetchInProgress = false
                                 dispatch_async(dispatch_get_main_queue()) {
-//                                    self.collectionView?.reloadItemsAtIndexPaths([indexPath])
                                     self.safeReloadItemAtIndexPath(indexPath)
                                 }
                             } else {
                                 student.imageData = NSData(data: data)
                                 student.imageFetchInProgress = false
                                 dispatch_async(dispatch_get_main_queue()) {
-//                                    self.collectionView?.reloadItemsAtIndexPaths([indexPath])
                                     self.safeReloadItemAtIndexPath(indexPath)
                                 }
                             }
@@ -174,14 +172,12 @@ class StudentLocationsCollectionViewController: UICollectionViewController, UICo
                     } else {
                         student.imageFetchInProgress = false
                         dispatch_async(dispatch_get_main_queue()) {
-//                            self.collectionView?.reloadItemsAtIndexPaths([indexPath])
                             self.safeReloadItemAtIndexPath(indexPath)
                         }
                     }
                 } else {
                     student.imageFetchInProgress = false
                     dispatch_async(dispatch_get_main_queue()) {
-//                        self.collectionView?.reloadItemsAtIndexPaths([indexPath])
                         self.safeReloadItemAtIndexPath(indexPath)
                     }
                 }
@@ -189,40 +185,44 @@ class StudentLocationsCollectionViewController: UICollectionViewController, UICo
         }
         
         // Flags
-//        if let isoCountryCode = student.isoCountryCode {
-//            if let flagImage = UIImage(named: isoCountryCode.lowercaseString) {
-//                cell.flagImageView.layer.borderWidth = 1.0
-//                cell.flagImageView.image = flagImage
-//            } else {
-//                cell.flagImageView.layer.borderWidth = 0
-//                cell.flagImageView.image = nil
-//            }
-//        } else {
-//            if let studentLocation = student.annotation?.coordinate {
-//                let location = CLLocation(latitude: studentLocation.latitude, longitude: studentLocation.longitude)
-//                CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
-//                    if error != nil {
-//                        // Silently fail because there is no need to alert user that 
-//                        // we couldn't get the country ISO code for displaying flag
-//                        student.isoCountryCode = "unitednations"
-//                        dispatch_async(dispatch_get_main_queue()) {
-//                            self.collectionView?.reloadItemsAtIndexPaths([indexPath])
-//                        }
-//                    } else {
-//                        if let placemark = placemarks.first as? CLPlacemark {
-//                            if let isoCountryCode = placemark.ISOcountryCode {
-//                                student.isoCountryCode = placemark.ISOcountryCode
-//                            } else {
-//                                student.isoCountryCode = "unitednations"
-//                            }
-//                            dispatch_async(dispatch_get_main_queue()) {
-//                                self.collectionView?.reloadItemsAtIndexPaths([indexPath])
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
+        if let isoCountryCode = student.isoCountryCode {
+            if let flagImage = UIImage(named: isoCountryCode.lowercaseString) {
+                cell.flagImageView.layer.borderWidth = 1.0
+                cell.flagImageView.image = flagImage
+            } else {
+                cell.flagImageView.layer.borderWidth = 0
+                cell.flagImageView.image = nil
+            }
+        } else {
+            // immediately set a no flag before the isoCountryCode gets fetched
+            cell.flagImageView.layer.borderWidth = 0
+            cell.flagImageView.image = nil
+            
+            if let studentLocation = student.annotation?.coordinate {
+                let location = CLLocation(latitude: studentLocation.latitude, longitude: studentLocation.longitude)
+                CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
+                    if error != nil {
+                        // Silently fail because there is no need to alert user that 
+                        // we couldn't get the country ISO code for displaying flag
+                        student.isoCountryCode = "unitednations"
+                        dispatch_async(dispatch_get_main_queue()) {
+                            self.safeReloadItemAtIndexPath(indexPath)
+                        }
+                    } else {
+                        if let placemark = placemarks.first as? CLPlacemark {
+                            if let isoCountryCode = placemark.ISOcountryCode {
+                                student.isoCountryCode = placemark.ISOcountryCode
+                            } else {
+                                student.isoCountryCode = "unitednations"
+                            }
+                            dispatch_async(dispatch_get_main_queue()) {
+                                self.safeReloadItemAtIndexPath(indexPath)
+                            }
+                        }
+                    }
+                }
+            }
+        }
     
         return cell
     }
