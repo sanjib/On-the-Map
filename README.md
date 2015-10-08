@@ -5,6 +5,13 @@ First, the user logs in to the app using their Udacity username and password. Af
 
 After viewing the information posted by other students, a user can post their own location and link. The locations are specified with a string and forward geocoded. They can be as specific as a full street address or as generic as “Costa Rica” or “Seattle, WA.”
 
-<b>Video demo</b>
+**Video demo**
 
 https://youtu.be/FQwUY4bSkPg
+
+![Login screen: Udacity or Facebook](https://raw.githubusercontent.com/sanjibahmad/On-the-Map/master/Screenshots/on-the-map-login.png)
+![Map view with pins of user locations](https://raw.githubusercontent.com/sanjibahmad/On-the-Map/master/Screenshots/on-the-map-pins.png)
+![Table view with list of students](https://raw.githubusercontent.com/sanjibahmad/On-the-Map/master/Screenshots/on-the-map-table.png)
+![Collection view with student images and nationality flags](https://raw.githubusercontent.com/sanjibahmad/On-the-Map/master/Screenshots/on-the-map-grid.png)
+![Location picker](https://raw.githubusercontent.com/sanjibahmad/On-the-Map/master/Screenshots/on-the-map-location-picker.png)
+![Location and link confirmation](https://raw.githubusercontent.com/sanjibahmad/On-the-Map/master/Screenshots/on-the-map-location-submit.png)
