@@ -141,7 +141,7 @@ class UdacityClient: CommonAPI {
             if error != nil {
                 completionHandler(success: nil, errorString: error?.localizedDescription)
             } else {
-                if let session = result["session"] as? NSDictionary {
+                if let _ = result["session"] as? NSDictionary {
                     completionHandler(success: true, errorString: nil)
                 } else {
                     completionHandler(success: nil, errorString: "JSON key error: session not found.")

@@ -34,9 +34,9 @@ class StudentLocationsMapViewController: UIViewController, MKMapViewDelegate {
     func refreshView() {
         activityIndicator.stopAnimating()
         for student in AllStudents.collection {
-            studentLocationsMapView.addAnnotation(student.annotation)
+            studentLocationsMapView.addAnnotation(student.annotation!)
         }
-        if let rightBarButtonItems = navigationController?.navigationBar.items.last?.rightBarButtonItems as? [UIBarButtonItem] {
+        if let rightBarButtonItems = navigationController?.navigationBar.items!.last?.rightBarButtonItems {
             rightBarButtonItems.first?.enabled = true
         }
     }
@@ -50,7 +50,7 @@ class StudentLocationsMapViewController: UIViewController, MKMapViewDelegate {
     }
     
     func reloadInProgressView() {
-        if let rightBarButtonItems = navigationController?.navigationBar.items.last?.rightBarButtonItems as? [UIBarButtonItem] {
+        if let rightBarButtonItems = navigationController?.navigationBar.items!.last?.rightBarButtonItems {
             rightBarButtonItems.first?.enabled = false
         }
         
@@ -80,7 +80,7 @@ class StudentLocationsMapViewController: UIViewController, MKMapViewDelegate {
     
     // MARK: - Map view delegates
     
-    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         if let annotation = annotation as? StudentAnnotation {
             let identifier = "pin"
             var view: MKPinAnnotationView
@@ -90,15 +90,15 @@ class StudentLocationsMapViewController: UIViewController, MKMapViewDelegate {
             } else {
                 view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
                 view.canShowCallout = true
-                view.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as! UIView
+                view.rightCalloutAccessoryView = UIButton(type: UIButtonType.DetailDisclosure) as UIView
             }
             return view
         }
         return nil
     }
     
-    func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
-        let urlString = view.annotation.subtitle
+    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        let urlString = view.annotation!.subtitle!
         if urlString != "" {
             if let url = NSURL(string: urlString!) {
                 UIApplication.sharedApplication().openURL(url)

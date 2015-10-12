@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		200105A21B33102100C8C3FA /* IJReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200105A11B33102100C8C3FA /* IJReachability.swift */; };
-		203F72251B27B7E300BD48A8 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 203F72231B27B7E300BD48A8 /* FBSDKCoreKit.framework */; };
-		203F72261B27B7E300BD48A8 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 203F72241B27B7E300BD48A8 /* FBSDKLoginKit.framework */; };
 		203F72281B27C3BE00BD48A8 /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203F72271B27C3BE00BD48A8 /* Student.swift */; };
 		203F722A1B27C3D600BD48A8 /* StudentAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203F72291B27C3D600BD48A8 /* StudentAnnotation.swift */; };
 		203F722C1B27C3F700BD48A8 /* AllStudents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203F722B1B27C3F700BD48A8 /* AllStudents.swift */; };
@@ -32,6 +29,9 @@
 		20990E831B49EE1D0092D906 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20990E821B49EE1D0092D906 /* SystemConfiguration.framework */; };
 		209DB2CD1B2D8AC5008607C5 /* StudentLocationsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209DB2CC1B2D8AC5008607C5 /* StudentLocationsCollectionViewController.swift */; };
 		209DB2CF1B2E4F51008607C5 /* StudentProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209DB2CE1B2E4F51008607C5 /* StudentProfileCollectionViewCell.swift */; };
+		20D9A0D61BCBFC6900956EC3 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20D9A0D41BCBFC6900956EC3 /* FBSDKCoreKit.framework */; settings = {ASSET_TAGS = (); }; };
+		20D9A0D71BCBFC6900956EC3 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20D9A0D51BCBFC6900956EC3 /* FBSDKLoginKit.framework */; settings = {ASSET_TAGS = (); }; };
+		20D9A0D91BCC5B0A00956EC3 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D9A0D81BCC5B0A00956EC3 /* Reachability.swift */; settings = {ASSET_TAGS = (); }; };
 		20E6969E1B26714E00877E9F /* StudentLocationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E6969D1B26714E00877E9F /* StudentLocationsTableViewController.swift */; };
 		20E696A01B26728500877E9F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20E6969F1B26728500877E9F /* MapKit.framework */; };
 		20E696A21B26734E00877E9F /* StudentLocationsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E696A11B26734E00877E9F /* StudentLocationsNavigationController.swift */; };
@@ -49,9 +49,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		200105A11B33102100C8C3FA /* IJReachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IJReachability.swift; sourceTree = "<group>"; };
-		203F72231B27B7E300BD48A8 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
-		203F72241B27B7E300BD48A8 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		203F72271B27C3BE00BD48A8 /* Student.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Student.swift; path = Models/Student.swift; sourceTree = "<group>"; };
 		203F72291B27C3D600BD48A8 /* StudentAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StudentAnnotation.swift; path = Models/StudentAnnotation.swift; sourceTree = "<group>"; };
 		203F722B1B27C3F700BD48A8 /* AllStudents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AllStudents.swift; path = Models/AllStudents.swift; sourceTree = "<group>"; };
@@ -78,6 +75,9 @@
 		20990E821B49EE1D0092D906 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		209DB2CC1B2D8AC5008607C5 /* StudentLocationsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StudentLocationsCollectionViewController.swift; path = Controllers/StudentLocationsCollectionViewController.swift; sourceTree = "<group>"; };
 		209DB2CE1B2E4F51008607C5 /* StudentProfileCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StudentProfileCollectionViewCell.swift; path = Views/StudentProfileCollectionViewCell.swift; sourceTree = "<group>"; };
+		20D9A0D41BCBFC6900956EC3 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		20D9A0D51BCBFC6900956EC3 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		20D9A0D81BCC5B0A00956EC3 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		20E6969D1B26714E00877E9F /* StudentLocationsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StudentLocationsTableViewController.swift; path = Controllers/StudentLocationsTableViewController.swift; sourceTree = "<group>"; };
 		20E6969F1B26728500877E9F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		20E696A11B26734E00877E9F /* StudentLocationsNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StudentLocationsNavigationController.swift; path = Controllers/StudentLocationsNavigationController.swift; sourceTree = "<group>"; };
@@ -90,9 +90,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				20990E831B49EE1D0092D906 /* SystemConfiguration.framework in Frameworks */,
+				20D9A0D61BCBFC6900956EC3 /* FBSDKCoreKit.framework in Frameworks */,
+				20D9A0D71BCBFC6900956EC3 /* FBSDKLoginKit.framework in Frameworks */,
 				20E696A01B26728500877E9F /* MapKit.framework in Frameworks */,
-				203F72251B27B7E300BD48A8 /* FBSDKCoreKit.framework in Frameworks */,
-				203F72261B27B7E300BD48A8 /* FBSDKLoginKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,9 +210,9 @@
 		20E696941B2662B200877E9F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				203F72231B27B7E300BD48A8 /* FBSDKCoreKit.framework */,
-				203F72241B27B7E300BD48A8 /* FBSDKLoginKit.framework */,
-				200105A11B33102100C8C3FA /* IJReachability.swift */,
+				20D9A0D41BCBFC6900956EC3 /* FBSDKCoreKit.framework */,
+				20D9A0D51BCBFC6900956EC3 /* FBSDKLoginKit.framework */,
+				20D9A0D81BCC5B0A00956EC3 /* Reachability.swift */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -261,7 +261,9 @@
 		206D4E591B227BDA00BE18B9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Object Coder";
 				TargetAttributes = {
 					206D4E601B227BDB00BE18B9 = {
@@ -327,6 +329,7 @@
 			files = (
 				209DB2CF1B2E4F51008607C5 /* StudentProfileCollectionViewCell.swift in Sources */,
 				203F72301B27C6F700BD48A8 /* StudentLocationsMapViewController.swift in Sources */,
+				20D9A0D91BCC5B0A00956EC3 /* Reachability.swift in Sources */,
 				203F722E1B27C40900BD48A8 /* User.swift in Sources */,
 				206D4E8A1B227F0700BE18B9 /* LoginViewController.swift in Sources */,
 				203F722A1B27C3D600BD48A8 /* StudentAnnotation.swift in Sources */,
@@ -341,7 +344,6 @@
 				20E696A21B26734E00877E9F /* StudentLocationsNavigationController.swift in Sources */,
 				206D4E8F1B22895600BE18B9 /* RoundStyleButton.swift in Sources */,
 				20E6969E1B26714E00877E9F /* StudentLocationsTableViewController.swift in Sources */,
-				200105A21B33102100C8C3FA /* IJReachability.swift in Sources */,
 				206D4E671B227BDB00BE18B9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -405,6 +407,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -471,9 +474,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				FRAMEWORK_SEARCH_PATHS = "\"$(inherited)$(PROJECT_DIR)/On The Map\"";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(inherited)$(PROJECT_DIR)/On The Map\"",
+					"\"$(PROJECT_DIR)/On The Map\"",
+				);
 				INFOPLIST_FILE = "On The Map/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.objectcoder.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -482,9 +490,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				FRAMEWORK_SEARCH_PATHS = "\"$(inherited)$(PROJECT_DIR)/On The Map\"";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(inherited)$(PROJECT_DIR)/On The Map\"",
+					"\"$(PROJECT_DIR)/On The Map\"",
+				);
 				INFOPLIST_FILE = "On The Map/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.objectcoder.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -493,16 +506,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "On The MapTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.objectcoder.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/On The Map.app/On The Map";
 			};
@@ -512,12 +522,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
 				INFOPLIST_FILE = "On The MapTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.objectcoder.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/On The Map.app/On The Map";
 			};

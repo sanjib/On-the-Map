@@ -42,13 +42,15 @@ class ParseClient: CommonAPI {
         httpGet(url) { result, error in
             if error != nil {
                 completionHandler(students: nil, errorString: error?.localizedDescription)
-                println(error)
+                print(error)
             } else {
                 if let studentResults = result["results"] as? NSArray {
                     var allStudents = [Student]()
                     for studentResult in studentResults {
                         let student = Student(jsonData: studentResult as? NSDictionary)
-                        if let duplicateStudentById =  allStudents.filter({$0.userId == student.userId}).first {
+                        
+                        // Check for duplicate student ID
+                        if allStudents.filter({$0.userId == student.userId}).first != nil {
                             continue
                         } else {                            
                             allStudents.append(student)

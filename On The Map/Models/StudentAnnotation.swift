@@ -10,8 +10,8 @@ import Foundation
 import MapKit
 
 class StudentAnnotation: NSObject, MKAnnotation {
-    var title: String
-    var subtitle: String
+    var title: String?
+    var subtitle: String?
     var coordinate: CLLocationCoordinate2D
     
     init(title: String, subtitle: String, latitude: Float, longitude: Float) {

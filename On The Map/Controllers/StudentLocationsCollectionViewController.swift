@@ -15,7 +15,7 @@ class StudentLocationsCollectionViewController: UICollectionViewController, UICo
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     private let noStudentImage = UIImage(named: "no-student-image")
-    private let noStudentImageData = NSData(data: UIImagePNGRepresentation(UIImage(named: "no-student-image")))
+    private let noStudentImageData = NSData(data: UIImagePNGRepresentation(UIImage(named: "no-student-image")!)!)
     
     // Layout properties
     let minimumSpacingBetweenCells = 5
@@ -43,7 +43,7 @@ class StudentLocationsCollectionViewController: UICollectionViewController, UICo
     func refreshView() {
         activityIndicator.stopAnimating()
         collectionView?.reloadData()
-        if let rightBarButtonItems = navigationController?.navigationBar.items.last?.rightBarButtonItems as? [UIBarButtonItem] {
+        if let rightBarButtonItems = navigationController?.navigationBar.items!.last?.rightBarButtonItems {
             rightBarButtonItems.first?.enabled = true
         }
     }
@@ -58,7 +58,7 @@ class StudentLocationsCollectionViewController: UICollectionViewController, UICo
     func reloadInProgressView() {        
         collectionView?.reloadData()
         activityIndicator.startAnimating()
-        if let rightBarButtonItems = navigationController?.navigationBar.items.last?.rightBarButtonItems as? [UIBarButtonItem] {
+        if let rightBarButtonItems = navigationController?.navigationBar.items!.last?.rightBarButtonItems {
             rightBarButtonItems.first?.enabled = false
         }
     }
@@ -152,9 +152,10 @@ class StudentLocationsCollectionViewController: UICollectionViewController, UICo
 
             student.imageFetchInProgress = true
             cell.activityIndicator.startAnimating()
+            
             UdacityClient.sharedInstance().getUserPhoto(student) { imageURL in
                 if imageURL != nil {
-                    if let url = NSURL(string: "https:" + imageURL!) {
+                    if let url = NSURL(string: "http:" + imageURL!) {
                         NSURLSession.sharedSession().dataTaskWithURL(url) { data, response, error in
                             if error != nil {
                                 student.imageFetchInProgress = false
@@ -162,7 +163,7 @@ class StudentLocationsCollectionViewController: UICollectionViewController, UICo
                                     self.safeReloadItemAtIndexPath(indexPath)
                                 }
                             } else {
-                                student.imageData = NSData(data: data)
+                                student.imageData = NSData(data: data!)
                                 student.imageFetchInProgress = false
                                 dispatch_async(dispatch_get_main_queue()) {
                                     self.safeReloadItemAtIndexPath(indexPath)
@@ -209,9 +210,9 @@ class StudentLocationsCollectionViewController: UICollectionViewController, UICo
                             self.safeReloadItemAtIndexPath(indexPath)
                         }
                     } else {
-                        if let placemark = placemarks.first as? CLPlacemark {
+                        if let placemark = placemarks!.first {
                             if let isoCountryCode = placemark.ISOcountryCode {
-                                student.isoCountryCode = placemark.ISOcountryCode
+                                student.isoCountryCode = isoCountryCode
                             } else {
                                 student.isoCountryCode = "unitednations"
                             }

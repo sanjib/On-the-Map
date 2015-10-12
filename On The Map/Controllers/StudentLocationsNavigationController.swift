@@ -38,7 +38,7 @@ class StudentLocationsNavigationController: UINavigationController {
         let pinButton = UIBarButtonItem(image: UIImage(named: "pin"), style: UIBarButtonItemStyle.Plain, target: self, action: "pinAnnotation")
         navigationItem.rightBarButtonItems = [reloadButton, pinButton]
         
-        navigationBar.items.append(navigationItem)
+        navigationBar.items!.append(navigationItem)
         
         // Notification posted from InformationPostingViewController
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadStudentLocations", name: "reloadStudentLocations", object: nil)
@@ -80,13 +80,13 @@ class StudentLocationsNavigationController: UINavigationController {
     }
     
     func reloadStudentLocations() {
-        if visibleViewController.restorationIdentifier == "StudentLocationsTable" {
+        if visibleViewController!.restorationIdentifier == "StudentLocationsTable" {
             let vc = visibleViewController as! StudentLocationsTableViewController
             vc.reloadStudentLocations()
-        } else if visibleViewController.restorationIdentifier == "StudentLocationsMap" {
+        } else if visibleViewController!.restorationIdentifier == "StudentLocationsMap" {
             let vc = visibleViewController as! StudentLocationsMapViewController
             vc.reloadStudentLocations()
-        } else if visibleViewController.restorationIdentifier == "StudentLocationsCollection" {
+        } else if visibleViewController!.restorationIdentifier == "StudentLocationsCollection" {
             let vc = visibleViewController as! StudentLocationsCollectionViewController
             vc.reloadStudentLocations()
         }

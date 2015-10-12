@@ -17,10 +17,8 @@ class AllStudents: NSObject {
         
         // Stop all NSURLSession tasks
         NSURLSession.sharedSession().getTasksWithCompletionHandler() { dataTasks, uploadTasks, downloadTasks in
-            if let dataTasks = dataTasks as? [NSURLSessionDataTask] {
-                for dataTask in dataTasks {
-                    dataTask.cancel()
-                }
+            for dataTask in dataTasks {
+                dataTask.cancel()
             }
         }
         NSURLSession.sharedSession().invalidateAndCancel()
@@ -49,6 +47,6 @@ class AllStudents: NSObject {
     }
     
     private static func sortByFirstName() {
-        collection.sort({ $0.firstName < $1.firstName })
+        collection.sortInPlace({ $0.firstName < $1.firstName })
     }
 }

@@ -32,7 +32,7 @@ class StudentLocationsTableViewController: UITableViewController {
     func refreshView() {
         activityIndicator.stopAnimating()
         tableView.reloadData()
-        if let rightBarButtonItems = navigationController?.navigationBar.items.last?.rightBarButtonItems as? [UIBarButtonItem] {
+        if let rightBarButtonItems = navigationController?.navigationBar.items!.last?.rightBarButtonItems {
             rightBarButtonItems.first?.enabled = true
         }
     }
@@ -48,7 +48,7 @@ class StudentLocationsTableViewController: UITableViewController {
     func reloadInProgressView() {
         activityIndicator.startAnimating()
         tableView.reloadData()
-        if let rightBarButtonItems = navigationController?.navigationBar.items.last?.rightBarButtonItems as? [UIBarButtonItem] {
+        if let rightBarButtonItems = navigationController?.navigationBar.items!.last?.rightBarButtonItems {
             rightBarButtonItems.first?.enabled = false
         }
     }
@@ -87,7 +87,7 @@ class StudentLocationsTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("StudentCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("StudentCell", forIndexPath: indexPath) 
 
         let student = AllStudents.collection[indexPath.row] as Student
         cell.textLabel?.text = student.firstName! + " " + student.lastName!

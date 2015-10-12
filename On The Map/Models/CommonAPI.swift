@@ -22,7 +22,12 @@ class CommonAPI {
     }
     
     func httpGet(urlString: String, completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
-        if IJReachability.isConnectedToNetwork() == false {
+//        if IJReachability.isConnectedToNetwork() == false {
+//            completionHandler(result: nil, error: NSError(domain: "OnTheMap Error", code: 1, userInfo: [NSLocalizedDescriptionKey : ErrorMessages.noInternet]))
+//            return
+//        }
+        
+        if Reachability.isConnectedToNetwork() == false {
             completionHandler(result: nil, error: NSError(domain: "OnTheMap Error", code: 1, userInfo: [NSLocalizedDescriptionKey : ErrorMessages.noInternet]))
             return
         }
@@ -40,7 +45,7 @@ class CommonAPI {
                         completionHandler(result: nil, error: error)
                         return
                     }
-                    self.parseJSONData(data, completionHandler: completionHandler)
+                    self.parseJSONData(data!, completionHandler: completionHandler)
                 }
                 task.resume()
             } else {
@@ -53,7 +58,7 @@ class CommonAPI {
     }
     
     func httpPost(urlString: String, httpBodyParams: [String:AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
-        if IJReachability.isConnectedToNetwork() == false {
+        if Reachability.isConnectedToNetwork() == false {
             completionHandler(result: nil, error: NSError(domain: "OnTheMap Error", code: 1, userInfo: [NSLocalizedDescriptionKey : ErrorMessages.noInternet]))
             return
         }
@@ -69,14 +74,14 @@ class CommonAPI {
                 request.HTTPMethod = "POST"
                 request.addValue("application/json", forHTTPHeaderField: "Accept")
                 request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-                request.HTTPBody = NSJSONSerialization.dataWithJSONObject(httpBodyParams, options: nil, error: nil)
+                request.HTTPBody = try? NSJSONSerialization.dataWithJSONObject(httpBodyParams, options: [])
                 
                 let task = session.dataTaskWithRequest(request) { data, response, error in
                     if error != nil {
                         completionHandler(result: nil, error: error)
                         return
                     }
-                    self.parseJSONData(data, completionHandler: completionHandler)
+                    self.parseJSONData(data!, completionHandler: completionHandler)
                 }
                 task.resume()
             } else {
@@ -88,7 +93,7 @@ class CommonAPI {
     }
     
     func httpPut(urlString: String, httpBodyParams: [String:AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
-        if IJReachability.isConnectedToNetwork() == false {
+        if Reachability.isConnectedToNetwork() == false {
             completionHandler(result: nil, error: NSError(domain: "OnTheMap Error", code: 1, userInfo: [NSLocalizedDescriptionKey : ErrorMessages.noInternet]))
             return
         }
@@ -103,14 +108,14 @@ class CommonAPI {
                 }
                 request.HTTPMethod = "PUT"
                 request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-                request.HTTPBody = NSJSONSerialization.dataWithJSONObject(httpBodyParams, options: nil, error: nil)
+                request.HTTPBody = try? NSJSONSerialization.dataWithJSONObject(httpBodyParams, options: [])
                 
                 let task = session.dataTaskWithRequest(request) { data, response, error in
                     if error != nil {
                         completionHandler(result: nil, error: error)
                         return
                     }
-                    self.parseJSONData(data, completionHandler: completionHandler)
+                    self.parseJSONData(data!, completionHandler: completionHandler)
                 }
                 task.resume()
             } else {
@@ -122,7 +127,7 @@ class CommonAPI {
     }
     
     func httpDelete(urlString: String, cookieName: String?, completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
-        if IJReachability.isConnectedToNetwork() == false {
+        if Reachability.isConnectedToNetwork() == false {
             completionHandler(result: nil, error: NSError(domain: "OnTheMap Error", code: 1, userInfo: [NSLocalizedDescriptionKey : ErrorMessages.noInternet]))
             return
         }
@@ -140,11 +145,13 @@ class CommonAPI {
                 if let cookieName = cookieName {
                     var cookie: NSHTTPCookie? = nil
                     let sharedCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
-                    for sharedCookie in sharedCookieStorage.cookies as! [NSHTTPCookie] {
-                        if sharedCookie.name == cookieName { cookie = sharedCookie }
+                    if let sharedCookies = sharedCookieStorage.cookies {
+                        for sharedCookie in sharedCookies {
+                            if sharedCookie.name == cookieName { cookie = sharedCookie }
+                        }
                     }
                     if let cookie = cookie {
-                        request.addValue(cookie.value!, forHTTPHeaderField: cookieName)
+                        request.addValue(cookie.value, forHTTPHeaderField: cookieName)
                     }
                 }
                 
@@ -153,7 +160,7 @@ class CommonAPI {
                         completionHandler(result: nil, error: error)
                         return
                     }
-                    self.parseJSONData(data, completionHandler: completionHandler)
+                    self.parseJSONData(data!, completionHandler: completionHandler)
                 }
                 task.resume()
             } else {
@@ -186,7 +193,7 @@ class CommonAPI {
             /* Append it */
             urlVars += [key + "=" + "\(escapedValue!)"]
         }
-        return (!urlVars.isEmpty ? "?" : "") + join("&", urlVars)
+        return (!urlVars.isEmpty ? "?" : "") + urlVars.joinWithSeparator("&")
     }
     
     // Helpers for JSON parsing
@@ -200,7 +207,13 @@ class CommonAPI {
         }
         
         var parsingError: NSError? = nil
-        let parsedResult: AnyObject? = NSJSONSerialization.JSONObjectWithData(newData, options: NSJSONReadingOptions.AllowFragments, error: &parsingError)
+        let parsedResult: AnyObject?
+        do {
+            parsedResult = try NSJSONSerialization.JSONObjectWithData(newData, options: NSJSONReadingOptions.AllowFragments)
+        } catch let error as NSError {
+            parsingError = error
+            parsedResult = nil
+        }
         if let error = parsingError {
             completionHandler(result: nil, error: error)
         } else {

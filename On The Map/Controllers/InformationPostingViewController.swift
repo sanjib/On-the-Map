@@ -133,19 +133,19 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
             ErrorAlert.create("Empty Location", errorMessage: "Please type your location.", viewController: self)
         } else {
             findOnTheMapActivityIndicatorStart()
-            CLGeocoder().geocodeAddressString(locationTextField.text) { placemarks, error in
+            CLGeocoder().geocodeAddressString(locationTextField.text!) { placemarks, error in
                 if error != nil {
                     dispatch_async(dispatch_get_main_queue()) {
                         self.findOnTheMapActivityIndicatorStop()
-                        ErrorAlert.create("Location Not Found", errorMessage: error.localizedDescription, viewController: self)
+                        ErrorAlert.create("Location Not Found", errorMessage: error!.localizedDescription, viewController: self)
                     }
                 } else {
-                    if placemarks.count == 1 {
-                        for placemark in placemarks as! [CLPlacemark] {
+                    if placemarks!.count == 1 {
+                        for placemark in placemarks! {
                             dispatch_async(dispatch_get_main_queue()){
                                 self.findOnTheMapContainerView.hidden = true
                                 self.submitInformationContainerView.hidden = false
-                                self.showStudentLocation(placemark.location)
+                                self.showStudentLocation(placemark.location!)
                                 self.findOnTheMapActivityIndicatorStop()
                             }
                         }

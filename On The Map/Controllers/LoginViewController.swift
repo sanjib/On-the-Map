@@ -56,7 +56,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBAction func loginUdacity(sender: UIButton) {
         udacityLoginIndicatorLoggingIn()
         
-        UdacityClient.sharedInstance().createSessionWithUdacity(emailTextField.text, password: passwordTextField.text) { userId, errorString in
+        UdacityClient.sharedInstance().createSessionWithUdacity(emailTextField.text!, password: passwordTextField.text!) { userId, errorString in
             if errorString != nil {
                 dispatch_async(dispatch_get_main_queue()) {
                     self.udacityLoginIndicatorNormal()
@@ -71,13 +71,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func loginFacebook(sender: UIButton) {
-        if IJReachability.isConnectedToNetwork() == false {
+        if Reachability.isConnectedToNetwork() == false {
             ErrorAlert.create("Facebook Login Failed", errorMessage: CommonAPI.ErrorMessages.noInternet, viewController: self)
             return
         }
         
         if FBSDKAccessToken.currentAccessToken() == nil {
-            FBSDKLoginManager().logInWithReadPermissions(["public_profile"]) { result, error in
+            FBSDKLoginManager().logInWithReadPermissions(["public_profile"], fromViewController: self) { result, error in
                 if error != nil {
                     ErrorAlert.create("Facebook Login Failed", errorMessage: error.localizedDescription, viewController: self)
                 } else if result.isCancelled {

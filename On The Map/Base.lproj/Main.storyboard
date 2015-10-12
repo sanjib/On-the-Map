@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
@@ -36,7 +37,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" alpha="0.84999999999999987" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Wr-NK-oyf" customClass="RoundStyleButton" customModule="On_The_Map" customModuleProvider="target">
-                                <rect key="frame" x="24" y="548" width="552" height="36"/>
+                                <rect key="frame" x="28" y="548" width="544" height="36"/>
                                 <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="DD6-T5-mqi"/>
@@ -51,16 +52,16 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IJo-3C-tbA">
-                                <rect key="frame" x="16" y="196" width="568" height="207"/>
+                                <rect key="frame" x="20" y="196" width="560" height="207"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login to Udacity" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="10J-E5-cT5">
-                                        <rect key="frame" x="211" y="8" width="146.5" height="23.5"/>
+                                        <rect key="frame" x="207" y="8" width="146.5" height="23.5"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" alpha="0.74999999999999978" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="BEq-dN-pYB">
-                                        <rect key="frame" x="8" y="39" width="552" height="36"/>
+                                        <rect key="frame" x="8" y="39" width="544" height="36"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="36" id="GfY-RX-qlO"/>
                                         </constraints>
@@ -68,7 +69,7 @@
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" alpha="0.74999999999999978" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="m6h-1j-wGY">
-                                        <rect key="frame" x="8" y="83" width="552" height="36"/>
+                                        <rect key="frame" x="8" y="83" width="544" height="36"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="36" id="o2j-SK-TVM"/>
@@ -77,7 +78,7 @@
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <button opaque="NO" alpha="0.49999999999999961" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dxg-hT-hlJ" customClass="RoundStyleButton" customModule="On_The_Map" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="127" width="552" height="36"/>
+                                        <rect key="frame" x="8" y="127" width="544" height="36"/>
                                         <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="36" id="pkk-hW-NSk"/>
@@ -92,7 +93,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XrQ-6a-39X">
-                                        <rect key="frame" x="163" y="171" width="242" height="32"/>
+                                        <rect key="frame" x="159" y="171" width="242" height="32"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                         <state key="normal" title="Don't have an account? Sign Up">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -103,7 +104,7 @@
                                         </connections>
                                     </button>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="dWR-P9-A1l">
-                                        <rect key="frame" x="385" y="135" width="20" height="20"/>
+                                        <rect key="frame" x="381" y="135" width="20" height="20"/>
                                     </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -197,17 +198,21 @@
                         </activityIndicatorView>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="StudentCell" textLabel="XPs-5g-G89" imageView="G0q-32-rll" style="IBUITableViewCellStyleDefault" id="BEu-GF-22Z">
+                                <rect key="frame" x="0.0" y="86" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BEu-GF-22Z" id="HOK-QZ-Fb7">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XPs-5g-G89">
+                                            <rect key="frame" x="62" y="0.0" width="523" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="pin" id="G0q-32-rll">
+                                            <rect key="frame" x="15" y="5" width="32" height="32"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </imageView>
                                     </subviews>
@@ -243,22 +248,22 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <activityIndicatorView key="backgroundView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="ufu-vm-cKW">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            <rect key="frame" x="0.0" y="-64" width="600" height="600"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </activityIndicatorView>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="StudentCollectionViewCell" id="FXS-ZQ-ybj" customClass="StudentProfileCollectionViewCell" customModule="On_The_Map" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <rect key="frame" x="0.0" y="64" width="191" height="191"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="191" height="191"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gdp-z4-VND">
-                                            <rect key="frame" x="0.0" y="0.0" width="191" height="176.5"/>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gdp-z4-VND">
+                                            <rect key="frame" x="0.0" y="0.0" width="191" height="168.5"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q1A-Jm-L12">
-                                            <rect key="frame" x="8" y="176" width="175" height="14.5"/>
+                                            <rect key="frame" x="8" y="172.5" width="175" height="14.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -267,7 +272,7 @@
                                             <rect key="frame" x="85" y="86" width="20" height="20"/>
                                         </activityIndicatorView>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GXA-ih-wAC">
-                                            <rect key="frame" x="159" y="154" width="32" height="22"/>
+                                            <rect key="frame" x="159" y="147" width="32" height="22"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="32" id="0KU-Lc-RlV"/>
                                                 <constraint firstAttribute="height" constant="22" id="vhB-fs-H9x"/>
@@ -279,20 +284,22 @@
                                 <constraints>
                                     <constraint firstAttribute="trailingMargin" secondItem="gdp-z4-VND" secondAttribute="trailing" constant="-8" id="0ID-5H-4ne"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="GXA-ih-wAC" secondAttribute="trailing" constant="-8" id="2iA-A2-EQM"/>
-                                    <constraint firstItem="Q1A-Jm-L12" firstAttribute="bottom" secondItem="FXS-ZQ-ybj" secondAttribute="bottomMargin" constant="8" id="6Zr-FQ-RQU"/>
+                                    <constraint firstItem="Q1A-Jm-L12" firstAttribute="bottom" secondItem="FXS-ZQ-ybj" secondAttribute="bottomMargin" constant="4" id="6Zr-FQ-RQU"/>
                                     <constraint firstAttribute="centerX" secondItem="9cM-0n-npg" secondAttribute="centerX" constant="0.5" id="7Z5-vt-ZZi"/>
                                     <constraint firstItem="gdp-z4-VND" firstAttribute="top" secondItem="FXS-ZQ-ybj" secondAttribute="topMargin" constant="-8" id="8T5-mx-pfl"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="Q1A-Jm-L12" secondAttribute="trailing" id="8UQ-eg-DaC"/>
-                                    <constraint firstItem="GXA-ih-wAC" firstAttribute="bottom" secondItem="FXS-ZQ-ybj" secondAttribute="bottomMargin" constant="-7" id="JOt-aE-sK9"/>
-                                    <constraint firstAttribute="centerY" secondItem="9cM-0n-npg" secondAttribute="centerY" constant="-0.5" id="VKE-Xp-d45"/>
+                                    <constraint firstItem="GXA-ih-wAC" firstAttribute="bottom" secondItem="FXS-ZQ-ybj" secondAttribute="bottomMargin" constant="-14" id="JOt-aE-sK9"/>
+                                    <constraint firstAttribute="centerY" secondItem="9cM-0n-npg" secondAttribute="centerY" id="VKE-Xp-d45"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="gdp-z4-VND" secondAttribute="bottom" constant="14.5" id="Vh0-Nl-6H3"/>
                                     <constraint firstItem="Q1A-Jm-L12" firstAttribute="leading" secondItem="FXS-ZQ-ybj" secondAttribute="leadingMargin" id="Ypv-q2-qgj"/>
                                     <constraint firstItem="gdp-z4-VND" firstAttribute="leading" secondItem="FXS-ZQ-ybj" secondAttribute="leadingMargin" constant="-8" id="eZJ-1f-HH9"/>
                                     <constraint firstAttribute="centerX" secondItem="Q1A-Jm-L12" secondAttribute="centerX" constant="0.5" id="g3Q-c9-bRu"/>
-                                    <constraint firstItem="Q1A-Jm-L12" firstAttribute="top" secondItem="gdp-z4-VND" secondAttribute="bottom" id="rns-rA-EAa"/>
+                                    <constraint firstItem="Q1A-Jm-L12" firstAttribute="top" secondItem="gdp-z4-VND" secondAttribute="bottom" constant="4" id="rns-rA-EAa"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="g3Q-c9-bRu"/>
+                                        <exclude reference="rns-rA-EAa"/>
                                     </mask>
                                 </variation>
                                 <connections>
@@ -330,7 +337,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="hLy-8w-wek">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="4" y="0.0" width="592" height="600"/>
                             </mapView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Uk8-18-SpZ">
                                 <rect key="frame" x="282" y="281" width="37" height="37"/>
@@ -369,10 +376,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sjq-NI-H8Q" userLabel="findOnTheMapView">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="4" y="0.0" width="592" height="600"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ojj-tg-qyg">
-                                        <rect key="frame" x="224" y="94" width="153" height="84.5"/>
+                                        <rect key="frame" x="220" y="94" width="153" height="84.5"/>
                                         <string key="text">Where are you
 studying
 today?</string>
@@ -381,7 +388,7 @@ today?</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yhv-Qk-nXY">
-                                        <rect key="frame" x="562" y="20" width="30" height="36"/>
+                                        <rect key="frame" x="554" y="20" width="30" height="36"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="X">
                                             <color key="titleColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -392,7 +399,7 @@ today?</string>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FWD-q2-PgD" customClass="RoundStyleButton" customModule="On_The_Map" customModuleProvider="target">
-                                        <rect key="frame" x="213" y="478" width="175" height="36"/>
+                                        <rect key="frame" x="209" y="478" width="175" height="36"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="36" id="XZ1-TK-GVY"/>
@@ -407,10 +414,10 @@ today?</string>
                                         </connections>
                                     </button>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="ODA-9Z-Xgp">
-                                        <rect key="frame" x="358" y="486" width="20" height="20"/>
+                                        <rect key="frame" x="354" y="486" width="20" height="20"/>
                                     </activityIndicatorView>
                                     <textField opaque="NO" clipsSubviews="YES" alpha="0.79999999999999982" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Your Location" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qlm-Ci-kMp">
-                                        <rect key="frame" x="0.0" y="215" width="600" height="200"/>
+                                        <rect key="frame" x="0.0" y="215" width="592" height="200"/>
                                         <color key="backgroundColor" red="0.0" green="0.25098040699958801" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
@@ -435,17 +442,17 @@ today?</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bK5-hj-Tu3" userLabel="submitInformationView">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="4" y="0.0" width="592" height="600"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" alpha="0.79999999999999982" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Your Link" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XOx-1M-eiG">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="592" height="200"/>
                                         <color key="backgroundColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="orx-cs-j1I">
-                                        <rect key="frame" x="562" y="20" width="30" height="36"/>
+                                        <rect key="frame" x="554" y="20" width="30" height="36"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="X">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -456,10 +463,10 @@ today?</string>
                                         </connections>
                                     </button>
                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="bP4-gv-khR">
-                                        <rect key="frame" x="0.0" y="200" width="600" height="400"/>
+                                        <rect key="frame" x="0.0" y="200" width="592" height="400"/>
                                     </mapView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YcQ-co-2HJ" customClass="RoundStyleButton" customModule="On_The_Map" customModuleProvider="target">
-                                        <rect key="frame" x="213" y="485" width="175" height="36"/>
+                                        <rect key="frame" x="209" y="485" width="175" height="36"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="175" id="0lf-Ug-7Bl"/>
@@ -475,10 +482,10 @@ today?</string>
                                         </connections>
                                     </button>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="VbT-LP-UMx">
-                                        <rect key="frame" x="358" y="493" width="20" height="20"/>
+                                        <rect key="frame" x="354" y="493" width="20" height="20"/>
                                     </activityIndicatorView>
                                     <button opaque="NO" alpha="0.49999999999999961" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SKb-c6-LRF">
-                                        <rect key="frame" x="245" y="162" width="110" height="30"/>
+                                        <rect key="frame" x="241" y="162" width="110" height="30"/>
                                         <color key="backgroundColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="110" id="ZTn-2b-kmT"/>
